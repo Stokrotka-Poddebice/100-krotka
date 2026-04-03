@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produkt - Kwiaciarnia Stokrotka</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo"><img src="assets/logo.png" alt="Stokrotka"></div>
+            <ul class="tab-menu">
+                <li><a href="index.html#bukiety" class="tab-link">Powrót do sklepu</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="product-page-container">
+        <div class="product-image">
+            <img id="display-img" src="" alt="Produkt">
+        </div>
+        <div class="product-info">
+            <h1 id="display-name">Ładowanie...</h1>
+            <p class="product-price" id="display-price">0.00 PLN</p>
+            <p class="product-description" id="display-desc"></p>
+            <button class="btn-add-large" onclick="handleAddToCart()">Dodaj do koszyka</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        const productsDB = {
+            'letnie-harmonie': { name: 'Letnie Harmonie', price: 120, desc: 'Piękny bukiet...', img: 'assets/bukiet1.jpg' },
+            'romantyczny-wieczor': { name: 'Romantyczny Wieczór', price: 150, desc: 'Czerwone róże...', img: 'assets/bukiet2.jpg' },
+            'alokazja': { name: 'Alokazja', price: 110, desc: 'Egzotyczna roślina...', img: 'assets/bukiet3.jpg' }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const productId = params.get('id');
+        const product = productsDB[productId];
+
+        if (product) {
+            document.getElementById('display-name').innerText = product.name;
+            document.getElementById('display-price').innerText = product.price.toFixed(2) + ' PLN';
+            document.getElementById('display-desc').innerText = product.desc;
+            document.getElementById('display-img').src = product.img;
+            document.title = product.name + " - Kwiaciarnia Stokrotka";
+        } else {
+            window.location.href = 'index.html';
+        }
+
+        function handleAddToCart() {
+            if (product) {
+                // Wywołujemy funkcję z script.js
+                window.addToCartDirect(product.name, product.price);
+                alert('Dodano do koszyka!');
+            }
+        }
+    </script>
+</body>
+</html>
