@@ -4,6 +4,9 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    html {
+    scroll-behavior: smooth;
+}
 }
 
 :root {
@@ -27,7 +30,9 @@ body {
 
 /* Header & Nav */
 header {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.8); /* Biały z 80% widoczności */
+    backdrop-filter: blur(10px); /* Efekt rozmycia tła pod menu */
+    -webkit-backdrop-filter: blur(10px); /* Wsparcie dla Safari */
     box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     position: sticky;
     top: 0;
@@ -92,7 +97,8 @@ footer .container img {
     position: fixed;
     right: 0;
     top: 0;
-    width: 300px;
+    width: 100px;
+    max-width: 350px;
     height: 100vh;
     background: #fff;
     box-shadow: -2px 0 10px rgba(0,0,0,0.1);
@@ -121,12 +127,17 @@ footer .container img {
     color: #fff;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 25px; /* Bardziej obłe, nowoczesne kształty */
+    letter-spacing: 1px; /* Większe odstępy między literami - bardziej eleganckie */
+    transition: all 0.3s ease;
     cursor: pointer;
     transition: background 0.3s;
     font-weight: bold;
     width: 100%;
     margin-top: 10px;
+}
+.btn:active {
+    transform: scale(0.95); /* Przycisk lekko się "wciska" przy kliknięciu */
 }
 
 .btn:hover {
@@ -156,6 +167,12 @@ h2 {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px); /* Karta lekko unosi się do góry */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* Cień staje się wyraźniejszy */
 }
 
 .card img {
