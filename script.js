@@ -1,5 +1,16 @@
-// --- LOGIKA KOSZYKA ---
-let cart = [];
+// --- LOGIKA KOSZYKA Z LOCAL STORAGE ---
+// Pobieramy zapisany koszyk z pamięci przeglądarki, lub tworzymy pusty
+let cart = JSON.parse(localStorage.getItem('stokrotka_cart')) || [];
+
+// Inicjalizacja koszyka po załadowaniu strony
+document.addEventListener('DOMContentLoaded', () => {
+    updateCart();
+});
+
+// Funkcja zapisująca obecny stan koszyka do przeglądarki
+function saveCart() {
+    localStorage.setItem('stokrotka_cart', JSON.stringify(cart));
+}
 
 function toggleCart() {
     const sidebar = document.getElementById('cart-sidebar');
@@ -8,8 +19,9 @@ function toggleCart() {
 
 function addToCart(name, price) {
     cart.push({ name, price });
+    saveCart(); // Zapisujemy!
     updateCart();
-    alert(`Dodano: ${name} do koszyka!`);
+    showToast(`Dodano: ${name}`); // Ładne powiadomienie zamiast Alertu
 }
 
 function updateCart() {
@@ -17,13 +29,16 @@ function updateCart() {
     const cartCount = document.getElementById('cart-count');
     const cartTotal = document.getElementById('cart-total');
     
+    if(!cartItems || !cartCount || !cartTotal) return;
+
     cartItems.innerHTML = '';
     let total = 0;
 
     cart.forEach((item, index) => {
         total += item.price;
         const li = document.createElement('li');
-        li.innerHTML = `${item.name} - <b>${item.price} PLN</b> <button onclick="removeFromCart(${index})" style="color:red; background:none; border:none; cursor:pointer; margin-left:10px;">✖</button>`;
+        li.innerHTML = `${item.name} - <b>${item.price} PLN</b> 
+                        <button onclick="removeFromCart(${index})" style="color:red; background:none; border:none; cursor:pointer; margin-left:10px; font-size: 1rem;">✖</button>`;
         li.style.marginBottom = "10px";
         cartItems.appendChild(li);
     });
@@ -34,24 +49,24 @@ function updateCart() {
 
 function removeFromCart(index) {
     cart.splice(index, 1);
+    saveCart();
     updateCart();
+    showToast('Usunięto z koszyka');
 }
 
 function goToCheckout() {
     if (cart.length === 0) {
-        alert("Twój koszyk jest pusty!");
+        showToast("Twój koszyk jest pusty!");
         return;
     }
     
     toggleCart();
     
-    // Przejście do sekcji finalizacji
     document.getElementById('zamowienie').classList.remove('hidden');
     document.getElementById('produkty').classList.add('hidden');
     document.getElementById('galeria').classList.add('hidden');
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    // Aktualizacja podsumowania w kasie
     const checkoutItems = document.getElementById('checkout-items');
     const checkoutTotal = document.getElementById('checkout-total');
     
@@ -70,12 +85,67 @@ function goToCheckout() {
 
 function submitOrder(e) {
     e.preventDefault();
-    alert("Dziękujemy za zamówienie! Skontaktujemy się wkrótce w celu jego potwierdzenia.");
+    showToast("Dziękujemy za zamówienie!");
+    
+    // Czyszczenie koszyka po zamówieniu
     cart = [];
+    saveCart();
     updateCart();
-    document.getElementById('zamowienie').classList.add('hidden');
-    document.getElementById('produkty').classList.remove('hidden');
-    document.getElementById('galeria').classList.remove('hidden');
+    
+    setTimeout(() => {
+        document.getElementById('zamowienie').classList.add('hidden');
+        document.getElementById('produkty').classList.remove('hidden');
+        document.getElementById('galeria').classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 2000); // Wracamy do głównej strony po 2 sekundach
+}
+
+// --- SYSTEM POWIADOMIEŃ (TOAST) ---
+function showToast(message) {
+    let container = document.getElementById('toast-container');
+    if (!container) return; 
+    
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.innerText = message;
+    
+    container.appendChild(toast);
+    
+    // Usuń element z kodu HTML po zakończeniu animacji CSS (3 sekundy)
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+
+// --- OKNO MODALNE (SZCZEGÓŁY PRODUKTU) ---
+function openModal(name, price, imgSrc) {
+    const modal = document.getElementById('product-modal');
+    
+    // Wstawianie danych do okienka
+    document.getElementById('modal-title').innerText = name;
+    document.getElementById('modal-price').innerText = `${price} PLN`;
+    document.getElementById('modal-img').src = imgSrc;
+    
+    // Podpinanie akcji dodawania do koszyka pod przycisk
+    const addBtn = document.getElementById('modal-add-btn');
+    addBtn.onclick = () => {
+        addToCart(name, price);
+        closeModal();
+    };
+    
+    modal.classList.remove('hidden');
+}
+
+function closeModal() {
+    document.getElementById('product-modal').classList.add('hidden');
+}
+
+// Zamknięcie modala po kliknięciu poza niego (w ciemne tło)
+window.onclick = function(event) {
+    const modal = document.getElementById('product-modal');
+    if (event.target == modal) {
+        closeModal();
+    }
 }
 
 // --- FILTROWANIE GALERII ---
@@ -84,9 +154,7 @@ const galleryItems = document.querySelectorAll('.gallery-item');
 
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
-        // Usuń klasę active ze wszystkich przycisków
         filterButtons.forEach(btn => btn.classList.remove('active'));
-        // Dodaj active do klikniętego
         button.classList.add('active');
 
         const filterValue = button.getAttribute('data-filter');

@@ -43,19 +43,19 @@
                     <img src="assets/bukiet1.jpg" alt="Bukiet Letnie Harmonie">
                     <h3>Bukiet Letnie Harmonie</h3>
                     <p class="price">210 PLN</p>
-                    <button class="btn" onclick="addToCart('Bukiet Letnie Harmonie', 210)">DODAJ DO KOSZYKA</button>
+                    <button class="btn" onclick="openModal('Bukiet Letnie Harmonie', 210, 'assets/bukiet1.jpg')">ZOBACZ SZCZEGÓŁY</button>
                 </div>
                 <div class="card">
-                    <img src="assets/bukiet3.jpg" alt="Kompozycja Dziki Ogród">
+                    <img src="assets/bukiet2.jpg" alt="Kompozycja Dziki Ogród">
                     <h3>Kompozycja Dziki Ogród</h3>
                     <p class="price">180 PLN</p>
-                    <button class="btn" onclick="addToCart('Kompozycja Dziki Ogród', 180)">DODAJ DO KOSZYKA</button>
+                    <button class="btn" onclick="openModal('Kompozycja Dziki Ogród', 180, 'assets/bukiet2.jpg')">ZOBACZ SZCZEGÓŁY</button>
                 </div>
                 <div class="card">
                     <img src="assets/bukiet3.jpg" alt="Roślina Leokasja">
                     <h3>Roślina Leokasja</h3>
                     <p class="price">110 PLN</p>
-                    <button class="btn" onclick="addToCart('Roślina Leokasja', 110)">DODAJ DO KOSZYKA</button>
+                    <button class="btn" onclick="openModal('Roślina Leokasja', 110, 'assets/bukiet3.jpg')">ZOBACZ SZCZEGÓŁY</button>
                 </div>
             </div>
         </section>
@@ -140,5 +140,17 @@
     </footer>
 
     <script src="script.js"></script>
+    <div id="toast-container"></div>
+
+    <div id="product-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <img id="modal-img" src="" alt="Zdjęcie produktu">
+            <h3 id="modal-title">Nazwa Bukiety</h3>
+            <p id="modal-desc">Piękna kompozycja starannie wyselekcjonowanych kwiatów, układana przez naszych doświadczonych florystów. Idealny wybór na każdą okazję.</p>
+            <p class="price" id="modal-price">0 PLN</p>
+            <button class="btn" id="modal-add-btn">DODAJ DO KOSZYKA</button>
+        </div>
+    </div>
 </body>
 </html>
