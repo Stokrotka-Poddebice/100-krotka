@@ -287,3 +287,35 @@ function switchTab(event, tabId) {
     // 5. Płynne przewinięcie na start sekcji
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+function handleContactSubmit(event) {
+    event.preventDefault(); // Zatrzymuje przeładowanie strony
+
+    // Pobieramy dane (możesz je później wysłać np. przez EmailJS)
+    const name = document.getElementById('contact-name').value;
+    const subject = document.getElementById('contact-subject').value;
+
+    // Wyświetlamy potwierdzenie (używając Twojego Toasta!)
+    showToast(`Dziękujemy ${name}! Twoja wiadomość w sprawie "${subject}" została wysłana.`);
+
+    // Czyścimy formularz
+    event.target.reset();
+}
+
+function addAddon(name, price) {
+    // Sprawdzamy, czy dodatek już jest w koszyku
+    const existingAddon = cart.find(item => item.name === name);
+
+    if (existingAddon) {
+        existingAddon.quantity += 1;
+    } else {
+        // Dodajemy jako nowy przedmiot
+        cart.push({ name, price, quantity: 1 });
+    }
+
+    saveCart();
+    updateCart();
+    
+    // Specjalny efekt dla Toasta, żeby klient wiedział, że dodatek "wskoczył"
+    showToast(`Dodano dodatek: ${name}`);
+}

@@ -92,6 +92,23 @@
         <ul id="cart-items"></ul>
         <hr>
         <p>Suma: <span id="cart-total">0</span> PLN</p>
+        <div class="cross-sell-section">
+    <h4>Dopasuj piękny dodatek:</h4>
+    <div class="addon-grid">
+        <div class="addon-item" onclick="addAddon('Bilecik z dedykacją', 5)">
+            <span>💌 Bilecik</span>
+            <b>+5 PLN</b>
+        </div>
+        <div class="addon-item" onclick="addAddon('Czekoladki Merci', 25)">
+            <span>🍫 Merci</span>
+            <b>+30 PLN</b>
+        </div>
+        <div class="addon-item" onclick="addAddon('Odżywka do kwiatów', 3)">
+            <span>🌿 Odżywka</span>
+            <b>+3 PLN</b>
+        </div>
+    </div>
+</div>
         <button class="btn" onclick="goToCheckout()">PRZEJDŹ DO KASY</button>
     </div>
 
@@ -212,6 +229,29 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2449.6!2d18.9!3d51.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDU0JzAwLjAiTiAxOMKwNTQnMDAuMCJF!5e0!3m2!1spl!2spl!4v161234567890" width="100%" height="300" style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
+        <div class="contact-form-container">
+    <h4>Napisz do nas</h4>
+    <form id="contact-form" onsubmit="handleContactSubmit(event)">
+        <div class="input-group">
+            <input type="text" id="contact-name" placeholder="Twoje imię i nazwisko" required>
+        </div>
+        <div class="input-group">
+            <input type="email" id="contact-email" placeholder="Twój e-mail" required>
+        </div>
+        <div class="input-group">
+            <select id="contact-subject">
+                <option value="Zapytanie ogólne">Zapytanie ogólne</option>
+                <option value="Wesele / Ślub">Wesele / Ślub</option>
+                <option value="Zamówienie indywidualne">Zamówienie indywidualne</option>
+                <option value="Inne">Inne</option>
+            </select>
+        </div>
+        <div class="input-group">
+            <textarea id="contact-message" rows="5" placeholder="W czym możemy pomóc?" required></textarea>
+        </div>
+        <button type="submit" class="btn send-btn">WYŚLIJ WIADOMOŚĆ</button>
+    </form>
+</div>
     </div>
     </main>
 
