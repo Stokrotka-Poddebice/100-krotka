@@ -177,7 +177,7 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
         <h2>Finalizacja zamówienia</h2>
         
         <div class="checkout-grid">
-            <form id="order-form" onsubmit="handleOrderSubmit(event)">
+            <form action="https://formspree.io/f/xojpdrwz" method="POST" id="order-form">
                 <div class="form-section">
                     <h4><i class="icon">👤</i> Dane zamawiającego</h4>
                     <div class="input-row">
@@ -189,7 +189,9 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
 
                 <div class="form-section">
                     <h4><i class="icon">🚚</i> Szczegóły dostawy</h4>
-                    <input type="text" placeholder="Adres dostawy (ulica, numer, miasto)" required>
+                    <input type="text" placeholder="Imię i Nazwisko" required>
+                        <input type="tel" placeholder="Twój numer telefonu" required>
+                        <input type="text" placeholder="Adres dostawy (ulica, numer, miasto)" required>
                     <div class="input-row">
                         <input type="date" title="Data dostawy" required>
                         <select required>
@@ -251,7 +253,7 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
                 <span class="icon">📞</span>
                 <div>
                     <h4>Telefon</h4>
-                    <p><a href="tel:+48123456789">+48 123 456 789</a></p>
+                    <p><a href="tel:+48123456789">+48 43 678 86 10</a></p>
                 </div>
             </div>
             <div class="info-item">
@@ -270,15 +272,9 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
             </div>
         </div>
 
-        <div class="contact-map">
-            <div class="map-placeholder">
-                <p>Tutaj pojawi się mapa dojazdu</p>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2449.6!2d18.9!3d51.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDU0JzAwLjAiTiAxOMKwNTQnMDAuMCJF!5e0!3m2!1spl!2spl!4v161234567890" width="100%" height="300" style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-        </div>
         <div class="contact-form-container">
     <h4>Napisz do nas</h4>
-    <form id="contact-form" onsubmit="handleContactSubmit(event)">
+    <form action="https://formspree.io/f/xojpdrwz" method="POST" id="order-form">
         <div class="input-group">
             <input type="text" id="contact-name" placeholder="Twoje imię i nazwisko" required>
         </div>
@@ -299,6 +295,13 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
         <button type="submit" class="btn send-btn">WYŚLIJ WIADOMOŚĆ</button>
     </form>
 </div>
+
+        <div class="contact-map">
+            <div class="map-placeholder">
+                <p>Tutaj pojawi się mapa dojazdu</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!3m2!1spl!2spl!4v1775943658492!5m2!1spl!2spl!6m8!1m7!1sVRVMBzkNdNWrXsXK-JeOdw!2m2!1d51.89163208820893!2d18.95816536068991!3f42.63518702794107!4f3.9737321928312355!5f1.469827646696979" width="100%" height="300" style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
     </div>
     </main>
 
@@ -311,9 +314,10 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
             <div>
                 <h4>MENU</h4>
                 <ul>
-                    <li><a href="#produkty">Oferta</a></li>
-                    <li><a href="#galeria">Galeria</a></li>
-                    <li><a href="#kontakt">Kontakt</a></li>
+                    <ul class="nav-tabs">
+                    <li><button class="nav-tab-btn" onclick="switchTab(event, 'produkty')">Oferta</button></li>
+                    <li><button class="nav-tab-btn" onclick="switchTab(event, 'galeria')">Galeria</button></li>
+                    <li><button class="nav-tab-btn" onclick="switchTab(event, 'kontakt')">Kontakt</button></li>
                 </ul>
             </div>
             <div>
@@ -335,6 +339,9 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
         </div>
         <div class="footer-bottom">
         <p>© <span id="current-year"></span> Kwiaciarnia Stokrotka. Wszystkie prawa zastrzeżone.</p>
+<script>
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
     </div>
     </footer>
 
