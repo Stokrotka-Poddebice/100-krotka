@@ -41,7 +41,7 @@ function updateCart() {
     cartItems.innerHTML = '';
     let total = 0;
     let totalQuantity = 0;
-    
+
     if (cart.length === 0) {
     cartItems.innerHTML = '<p style="color: #888; text-align: center;">Twój koszyk jest pusty.</p>';
     cartCount.innerText = '(0)';
@@ -54,14 +54,24 @@ function updateCart() {
         totalQuantity += item.quantity;
 
         const li = document.createElement('li');
-        li.innerHTML = `
-            <span>${item.name} (x${item.quantity}) - <b>${item.price * item.quantity} PLN</b></span>
-            <button onclick="removeFromCart(${index})" style="color:red; background:none; border:none; cursor:pointer; margin-left:10px;">✖</button>
-        `;
         li.style.display = "flex";
-        li.style.justifyContent = "between";
+        li.style.justifyContent = "space-between";
+        li.style.alignItems = "center";
         li.style.marginBottom = "10px";
-        cartItems.appendChild(li);
+
+        li.innerHTML = `
+            <div style="flex: 1;">
+                ${item.name}<br>
+                <small>${item.price * item.quantity} PLN</small>
+        </div>
+        <div style="display: flex; align-items: center; gap: 8px;">
+        <button onclick="zmienIlosc(${index}, -1)" style="width:25px; cursor:pointer;">-</button>
+        <span>${item.quantity}</span>
+        <button onclick="zmienIlosc(${index}, 1)" style="width:25px; cursor:pointer;">+</button>
+        <button onclick="removeFromCart(${index})" style="color:red; background:none; border:none; cursor:pointer; margin-left:10px;">✖</button>
+        </div>
+`;
+cartItems.appendChild(li);
     });
 
     cartCount.innerText = `(${totalQuantity})`; // Pokazuje sumę wszystkich kwiatów
@@ -215,3 +225,16 @@ const revealElements = () => {
 document.addEventListener('DOMContentLoaded', () => {
     revealElements();
 });
+
+function zmienIlosc(index, oIle) {
+    // Zmieniamy ilość produktu o podaną wartość (1 lub -1)
+    cart[index].quantity += oIle;
+
+    // Jeśli ilość spadnie do zera, usuwamy produkt całkiem
+    if (cart[index].quantity <= 0) {
+        cart.splice(index, 1);
+    }
+
+    saveCart();   // Zapisz zmianę w pamięci
+    updateCart(); // Odśwież wygląd koszyka
+}
