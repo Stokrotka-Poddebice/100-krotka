@@ -13,7 +13,7 @@
 <meta property="og:url" content="https://stokrotka-poddebice.github.io/100-krotka/">
 <meta property="og:type" content="website">
 
-<link rel="icon" type="image/png" href="assets/logo.png">
+<link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">/* ---POPRZEDNIO:<link rel="icon" type="image/png" href="assets/logo.png"> --- */
     <link rel="canonical" href="https://stokrotka-poddebice.github.io/100-krotka/">
     <link rel="stylesheet" href="style.css">
 <script type="application/ld+json">
@@ -126,20 +126,21 @@
             </div>
         </section>
 
-        <section id="galeria" class="container">
+        <section id="galeria" class="container tab-content">
             <h2>Nasze Realizacje</h2>
             <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="all">Wszystkie</button>
                 <button class="filter-btn" data-filter="bukiety">Bukiety</button>
-                <button class="filter-btn" data-filter="flowerboxy">Flower Boxy</button>
-                <button class="filter-btn" data-filter="slubne">Ślubne</button>
+                <button class="filter-btn" data-filter="flower-boxy">Flower Boxy</button>
+                <button class="filter-btn" data-filter="slubne">Bukiety Ślubne</button>
                 <button class="filter-btn" data-filter="samochody">Samochody</button>
+                <button class="filter-btn" data-filter="kondolencje">Kondolencje</button>
+                <button class="filter-btn active" data-filter="all">Wszystkie</button>
             </div>
             <div class="gallery-grid">
                 <img src="assets/img3.jpg" alt="Bukiet" class="gallery-item bukiety" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
                 <img src="assets/img5.jpg" alt="'Bukiet dla osoby, która uważa, że kolorowe wstążki są dla amatorów'.
-Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flowerboxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
-                <img src="assets/img4.jpg" alt="Różowy flower box z wiecznymi różami na prezent" class="gallery-item flowerboxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-boxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img4.jpg" alt="Różowy flower box z wiecznymi różami na prezent" class="gallery-item flower-boxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
                 <img src="assets/img11.jpg" alt="Dekoracja kwiatowa białego samochodu do ślubu" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
                 <img src="assets/img12.jpg" alt="Dekoracja kwiatowa samochodu BMW do ślubu Poddębice" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
                 <img src="assets/img13.jpg" alt="Ślubny" class="gallery-item slubne" loading="lazy">
@@ -155,13 +156,16 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flowerboxy
                     <p><strong>Do zapłaty: <span id="checkout-total">0</span> PLN</strong></p>
                 </div>
                 <form class="checkout-form" onsubmit="submitOrder(event)">
-                    <input type="text" placeholder="Imię i nazwisko" required>
-                    <input type="email" placeholder="Email" required>
-                    <input type="tel" placeholder="Telefon" required>
+                    <input type="text1" placeholder="Imię i Nazwisko Nadawcy" required>
+                    <input type="email1" placeholder="Email Nadawcy" required>
+                    <input type="tel1" placeholder="Telefon Nadawcy" required>
+                    <input type="text2" placeholder="Imię i Nazwisko Odbiorcy" required>
+                    <input type="email2" placeholder="Email Odbiorcy" required>
+                    <input type="tel2" placeholder="Telefon Odbiorcy" required>
                     <label for="delivery-date">Data dostawy:</label>
                     <input type="date" id="delivery-date" name="delivery-date" required>
                     <input type="text" placeholder="Adres dostawy" required>
-                    <textarea placeholder="Uwagi do zamówienia (np. data dostawy)"></textarea>
+                    <textarea placeholder="Uwagi do zamówienia - np. treść bileciku"></textarea>
                     <button type="submit" class="btn">WYŚLIJ ZAMÓWIENIE</button>
                 </form>
             </div>
@@ -169,7 +173,11 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flowerboxy
 
         <section id="kontakt" class="container">
             <h2>Kontakt</h2>
-            <p>📍 ul. Zielona 6, Poddębice | 📞 +48 123 456 789</p>
+            <p>📍 ul. Zielona 6, 99-200 Poddębice | 📞 +48 436788610 | 📞 +48 603 268 743</p>
+            <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2468.944243642738!2d19.4534!3d51.7688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDQ2JzA3LjciTiAxOcKwMjcnMTIuMiJF!5e0!3m2!1spl!2spl!4v1620000000000!5m2!1spl!2spl" 
+            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
         </section>
     </main>
 
@@ -177,7 +185,7 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flowerboxy
         <div class="container footer-grid">
             <div>
                 <img src="assets/logo.png" alt="Stokrotka" onerror="this.src='assets/logo.png'" style="margin-bottom: 15px;">
-                <p>Tworzymy emocje ubrane w kwiaty. Twoja kwiaciarnia od 1990 roku.</p>
+                <p>Tworzymy emocje ubrane w kwiaty. Kwiaciarnia od 1990 roku.</p>
             </div>
             <div>
                 <h4>MENU</h4>
@@ -191,7 +199,7 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flowerboxy
                 <h4>KONTAKT</h4>
                 <p>📍 ul. Zielona 6, Poddębice</p>
                 <p>📞 +48 123 456 789</p>
-                <p>✉️ kontakt@stokrotka.pl</p>
+                <p>✉️ stokrotka.poddebice@gmail.com</p>
                 <p>Pon - Pt: 9:00 - 17:00</p>
                 <p>Sob: 9:00 - 17:00</p>
                 <p>Niedz. handlowa: 11:00 - 15:00</p>
@@ -204,8 +212,8 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flowerboxy
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Kwiaciarnia Stokrotka. Wszystkie prawa zastrzeżone.</p>
-        </div>
+        <p>© <span id="current-year"></span> Kwiaciarnia Stokrotka. Wszystkie prawa zastrzeżone.</p>
+    </div>
     </footer>
 
     <script src="script.js"></script>
