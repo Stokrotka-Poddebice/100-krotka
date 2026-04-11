@@ -117,6 +117,12 @@
                     <p class="price"><span class="amount">110</span> PLN</p>
                     <button class="btn" onclick="openModal('Roślina Leokasja', 110, 'assets/bukiet3.jpg')">ZOBACZ SZCZEGÓŁY</button>
                 </div>
+                <div class="card">
+                    <img src="assets/bukiet5.jpg" alt="Flowerbox czerwone róże">
+                    <h3>Flower box czerwone róże</h3>
+                    <p class="price"><span class="amount">300</span> PLN</p>
+                    <button class="btn" onclick="openModal('Flowerbox czerwone róże', 300, 'assets/bukiet5.jpg')">ZOBACZ SZCZEGÓŁY</button>
+                </div>
             </div>
         </section>
 
@@ -130,10 +136,12 @@
                 <button class="filter-btn" data-filter="samochody">Samochody</button>
             </div>
             <div class="gallery-grid">
-                <img src="assets/img3.jpg" alt="Bukiet" class="gallery-item bukiety" loading="lazy">
-                <img src="assets/img4.jpg" alt="Różowy flower box z wiecznymi różami na prezent" class="gallery-item flowerboxy" loading="lazy">
-                <img src="assets/img11.jpg" alt="Dekoracja kwiatowa białego samochodu do ślubu" class="gallery-item samochody" loading="lazy">
-                <img src="assets/img12.jpg" alt="Dekoracja kwiatowa samochodu BMW do ślubu Poddębice" class="gallery-item samochody" loading="lazy">
+                <img src="assets/img3.jpg" alt="Bukiet" class="gallery-item bukiety" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img5.jpg" alt="'Bukiet dla osoby, która uważa, że kolorowe wstążki są dla amatorów'.
+Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flowerboxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img4.jpg" alt="Różowy flower box z wiecznymi różami na prezent" class="gallery-item flowerboxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img11.jpg" alt="Dekoracja kwiatowa białego samochodu do ślubu" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img12.jpg" alt="Dekoracja kwiatowa samochodu BMW do ślubu Poddębice" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
                 <img src="assets/img13.jpg" alt="Ślubny" class="gallery-item slubne" loading="lazy">
             </div>
         </section>
@@ -192,7 +200,6 @@
                 <h4>ŚLEDŹ NAS</h4>
                 <ul>
                     <li><a href="#">Facebook</a></li>
-                    <li><a href="#">Instagram</a></li>
                 </ul>
             </div>
         </div>

@@ -226,6 +226,8 @@ h2 {
     object-fit: cover;
     border-radius: 8px;
     transition: transform 0.3s;
+    cursor: pointer; /* Zmienia kursor na rączkę */
+    transition: transform 0.3s ease;
 }
 
 .gallery-item:hover {

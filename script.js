@@ -238,3 +238,26 @@ function zmienIlosc(index, oIle) {
     saveCart();   // Zapisz zmianę w pamięci
     updateCart(); // Odśwież wygląd koszyka
 }
+function openGalleryModal(imgSrc, altText) {
+    const modal = document.getElementById('product-modal');
+    
+    // Podmieniamy zawartość modala na potrzeby galerii
+    document.getElementById('modal-img').src = imgSrc;
+    document.getElementById('modal-title').innerText = altText;
+    document.getElementById('modal-desc').innerText = "Realizacja Kwiaciarni Stokrotka";
+    
+    // Ukrywamy przycisk "Dodaj do koszyka" i cenę, bo to tylko podgląd zdjęcia
+    document.getElementById('modal-add-btn').style.display = 'none';
+    document.getElementById('modal-price').style.display = 'none';
+    
+    modal.classList.remove('hidden');
+}
+
+// Musimy też zmodyfikować funkcję closeModal, aby przywracała widoczność przycisków
+const originalCloseModal = closeModal;
+closeModal = function() {
+    originalCloseModal();
+    // Przywracamy widoczność dla zwykłych produktów po zamknięciu
+    document.getElementById('modal-add-btn').style.display = 'block';
+    document.getElementById('modal-price').style.display = 'block';
+};
