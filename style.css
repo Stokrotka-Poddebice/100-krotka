@@ -493,3 +493,39 @@ footer ul {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
+/* Stylizacja przycisków-zakładek w menu */
+.nav-tabs {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+    align-items: center;
+}
+
+.nav-tab-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent; /* Miejsce na podkreślenie */
+}
+
+.nav-tab-btn:hover {
+    color: var(--primary-color);
+}
+
+.nav-tab-btn.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color); /* Podkreślenie aktywnej zakładki */
+}
+
+/* Styl dla zwykłego linku Kontakt, by pasował do reszty */
+.nav-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+    padding: 5px 10px;
+}

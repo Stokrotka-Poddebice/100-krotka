@@ -74,10 +74,10 @@
     </a>
 </div>
             <nav>
-                <ul>
-                    <li><a href="#produkty">Wyślij kwiaty</a></li>
-                    <li><a href="#galeria">Galeria</a></li>
-                    <li><a href="#kontakt">Kontakt</a></li>
+                <ul class="nav-tabs">
+                    <li><button class="nav-tab-btn active" onclick="switchTab(event, 'produkty')">Oferta</button></li>
+                    <li><button class="nav-tab-btn" onclick="switchTab(event, 'galeria')">Galeria</button></li>
+                    <li><a href="#kontakt" class="nav-link">Kontakt</a></li>
                 </ul>
             </nav>
             <div class="cart-icon" onclick="toggleCart()">
@@ -96,10 +96,7 @@
     </div>
 
     <main>
-        <div class="container tab-navigation">
-        <button class="tab-btn active" onclick="switchTab(event, 'produkty')">🌸 Nasza Oferta</button>
-        <button class="tab-btn" onclick="switchTab(event, 'galeria')">📸 Galeria Realizacji</button>
-    </div>
+        
         <section id="produkty" class="container tab-content active">
             <h2>Polecane Produkty</h2>
             <div class="grid">

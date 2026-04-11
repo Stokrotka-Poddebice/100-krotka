@@ -262,22 +262,27 @@ closeModal = function() {
     document.getElementById('modal-price').style.display = 'block';
 };
 function switchTab(event, tabId) {
-    // 1. Ukryj wszystkie sekcje zakładek
-    const contents = document.querySelectorAll('.tab-content');
-    contents.forEach(content => {
+    // 1. Ukrywamy sekcje zakładek
+    document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
     });
 
-    // 2. Usuń klasę active ze wszystkich przycisków zakładek
-    const buttons = document.querySelectorAll('.tab-btn');
-    buttons.forEach(btn => {
+    // 2. Ukrywamy formularz zamówienia (jeśli był otwarty)
+    document.getElementById('zamowienie').classList.add('hidden');
+
+    // 3. Pokazujemy wybraną zakładkę
+    const target = document.getElementById(tabId);
+    if(target) {
+        target.classList.remove('hidden'); // Na wypadek gdyby miała klasę hidden
+        target.classList.add('active');
+    }
+
+    // 4. Aktualizujemy wygląd przycisków w menu
+    document.querySelectorAll('.nav-tab-btn').forEach(btn => {
         btn.classList.remove('active');
     });
-
-    // 3. Pokaż wybraną sekcję i aktywuj przycisk
-    document.getElementById(tabId).classList.add('active');
     event.currentTarget.classList.add('active');
-    
-    // 4. Opcjonalne: Przewiń na górę sekcji, jeśli jesteś nisko
-    window.scrollTo({ top: 100, behavior: 'smooth' });
+
+    // 5. Płynne przewinięcie na start sekcji
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
