@@ -22,6 +22,9 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     font-size: 16px; /* Standard dla urządzeń mobilnych */
+    <button id="dark-mode-toggle" class="dark-mode-btn" onclick="toggleDarkMode()">
+    🌙
+</button>
 }
 
 .container {
@@ -739,4 +742,58 @@ body.dark-theme .contact-form-container {
 
 body.dark-theme header {
     background-color: rgba(18, 18, 18, 0.8); /* Półprzezroczyste ciemne tło */
+}
+/* --- POPRAWKA PRZYCISKÓW GALERII W TRYBIE CIEMNYM --- */
+body.dark-theme .filter-btn {
+    background-color: #2a2a2a; /* Ciemniejsze tło przycisku */
+    color: #e0e0e0;            /* Jasny tekst */
+    border: 1px solid #444;    /* Delikatna ramka */
+}
+
+body.dark-theme .filter-btn:hover {
+    background-color: #333;
+    border-color: var(--primary-color);
+}
+
+/* Styl dla AKTYWNEGO przycisku (ten, który jest wybrany) */
+body.dark-theme .filter-btn.active {
+    background-color: var(--primary-color); /* Twoja zieleń */
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Dodatkowo: poprawka czytelności tekstu w galerii */
+body.dark-theme #galeria h2 {
+    color: #fff;
+}
+/* --- POLA TEKSTOWE W TRYBIE CIEMNYM --- */
+body.dark-theme input, 
+body.dark-theme textarea, 
+body.dark-theme select {
+    background-color: #2a2a2a; /* Ciemne tło pola */
+    color: #ffffff;            /* Biały tekst wpisywany przez klienta */
+    border: 1px solid #444;    /* Ciemniejsza ramka */
+}
+
+/* Kolor tekstu pomocniczego (placeholder), np. "Twoje imię..." */
+body.dark-theme input::placeholder, 
+body.dark-theme textarea::placeholder {
+    color: #888;
+}
+
+/* Efekt po kliknięciu w pole (focus) */
+body.dark-theme input:focus, 
+body.dark-theme textarea:focus {
+    border-color: var(--primary-color);
+    background-color: #333; /* Delikatne rozjaśnienie przy pisaniu */
+}
+
+/* Naprawa kolorów w koszyku dla dodatków (cross-selling) */
+body.dark-theme .addon-item {
+    background-color: #2a2a2a;
+    border-color: #444;
+}
+
+body.dark-theme .addon-item:hover {
+    background-color: #333;
 }
