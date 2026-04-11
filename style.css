@@ -665,3 +665,78 @@ footer ul {
     color: var(--primary-color);
     margin-top: 3px;
 }
+
+.fomo-bar {
+    background-color: var(--accent-color); /* Twój różowy kolor */
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    position: relative;
+    z-index: 1001;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#fomo-timer {
+    font-family: monospace;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin: 0 5px;
+}
+
+/* Animacja pulsowania tekstu, aby przyciągnąć wzrok */
+.fomo-text b {
+    text-transform: uppercase;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Jeśli pasek ma znikać po czasie, dodamy klasę hidden */
+.fomo-bar.hidden {
+    display: none;
+}
+
+/* --- DARK MODE STYLES --- */
+body.dark-theme {
+    --bg-color: #121212;      /* Głęboka czerń/szarość tła */
+    --text-color: #e0e0e0;    /* Jasny tekst */
+    --primary-color: #4da36a; /* Nieco jaśniejsza zieleń, by była widoczna na czarnym */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Styl przycisku przełączania */
+.dark-mode-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: transform 0.3s;
+}
+
+.dark-mode-btn:hover {
+    transform: scale(1.2);
+}
+
+/* Dopasowanie kart i modali w trybie ciemnym */
+body.dark-theme .card, 
+body.dark-theme .modal-content,
+body.dark-theme #cart-sidebar,
+body.dark-theme .contact-info .info-item,
+body.dark-theme .contact-form-container {
+    background-color: #1e1e1e;
+    color: #fff;
+    border: 1px solid #333;
+}
+
+body.dark-theme header {
+    background-color: rgba(18, 18, 18, 0.8); /* Półprzezroczyste ciemne tło */
+}

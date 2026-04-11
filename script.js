@@ -319,3 +319,75 @@ function addAddon(name, price) {
     // Specjalny efekt dla Toasta, żeby klient wiedział, że dodatek "wskoczył"
     showToast(`Dodano dodatek: ${name}`);
 }
+
+function startFomoTimer() {
+    const timerElement = document.getElementById('fomo-timer');
+    const fomoBar = document.getElementById('fomo-bar');
+    const fomoText = document.querySelector('.fomo-text');
+
+    if (!timerElement) return;
+
+    function updateTimer() {
+        const now = new Date();
+        
+        // Ustawiamy godzinę graniczną na 14:00 dzisiejszego dnia
+        const deadline = new Date();
+        deadline.setHours(14, 0, 0, 0);
+
+        let diff = deadline - now;
+
+        if (diff > 0) {
+            // Obliczamy godziny, minuty i sekundy
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            // Formatowanie (dodawanie zera przed cyfrą)
+            const hDisplay = hours.toString().padStart(2, '0');
+            const mDisplay = minutes.toString().padStart(2, '0');
+            const sDisplay = seconds.toString().padStart(2, '0');
+
+            timerElement.innerText = `${hDisplay}:${mDisplay}:${sDisplay}`;
+        } else {
+            // Jeśli jest po 14:00, zmieniamy komunikat
+            fomoText.innerHTML = "🌿 Zamów teraz, a Twoje kwiaty dostarczymy <b>już jutro rano!</b>";
+            // Opcjonalnie: możesz ukryć pasek, odkomentowując linię poniżej
+            // fomoBar.classList.add('hidden'); 
+        }
+    }
+
+    // Odświeżaj licznik co sekundę
+    updateTimer();
+    setInterval(updateTimer, 1000);
+}
+
+// Uruchom funkcję po załadowaniu strony
+document.addEventListener('DOMContentLoaded', () => {
+    startFomoTimer();
+});
+
+function toggleDarkMode() {
+    const body = document.body;
+    const btn = document.getElementById('dark-mode-toggle');
+    
+    // Przełączamy klasę
+    body.classList.toggle('dark-theme');
+    
+    // Zmieniamy ikonkę w zależności od trybu
+    if (body.classList.contains('dark-theme')) {
+        btn.innerText = '☀️'; // Słońce, by wrócić do jasnego
+        localStorage.setItem('theme', 'dark');
+    } else {
+        btn.innerText = '🌙'; // Księżyc, by przejść w ciemny
+        localStorage.setItem('theme', 'light');
+    }
+}
+
+// Sprawdzamy zapisany motyw przy starcie strony
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-theme');
+        document.getElementById('dark-mode-toggle').innerText = '☀️';
+    }
+});
