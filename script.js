@@ -265,16 +265,17 @@ function switchTab(event, tabId) {
     // 1. Ukrywamy sekcje zakładek
     document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
+        content.style.display = 'none';
     });
 
     // 2. Ukrywamy formularz zamówienia (jeśli był otwarty)
     document.getElementById('zamowienie').classList.add('hidden');
 
     // 3. Pokazujemy wybraną zakładkę
-    const target = document.getElementById(tabId);
-    if(target) {
-        target.classList.remove('hidden'); // Na wypadek gdyby miała klasę hidden
-        target.classList.add('active');
+    const activeContent = document.getElementById(tabId);
+    if (activeContent) {
+        activeContent.classList.add('active');
+        activeContent.style.display = 'block';
     }
 
     // 4. Aktualizujemy wygląd przycisków w menu

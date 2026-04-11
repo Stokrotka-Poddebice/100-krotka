@@ -529,3 +529,50 @@ footer ul {
     font-weight: 600;
     padding: 5px 10px;
 }
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 30px;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+    padding: 15px;
+    background: #fff;
+    border-radius: 10px;
+    transition: transform 0.3s;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.info-item:hover {
+    transform: translateX(10px);
+}
+
+.info-item .icon {
+    font-size: 1.5rem;
+    background: var(--bg-color);
+    padding: 10px;
+    border-radius: 50%;
+}
+
+.info-item h4 {
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+.info-item a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+}
+
+.map-placeholder {
+    overflow: hidden;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
