@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://stokrotka-poddebice.github.io/100-krotka/sitemap.xml
