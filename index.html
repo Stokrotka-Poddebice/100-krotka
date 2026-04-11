@@ -4,209 +4,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kwiaciarnia Stokrotka</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css">
-<link rel="stylesheet" href="style.css">
-<link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="shortcut icon" href="favicon.ico">
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
-<link rel="manifest" href="site.webmanifest">
-    <style>
-        /* --- SYSTEM ZAKŁADEK --- */
-        .tab-content { display: none; padding: 20px 0; animation: fadeIn 0.4s; }
-        .tab-content.active-tab { display: block; }
-        
-        .tab-menu { display: flex; list-style: none; gap: 20px; padding: 0; margin: 0; align-items: center; }
-        .tab-link { 
-            background: none; border: none; cursor: pointer; padding: 10px; 
-            font-size: 1rem; border-bottom: 2px solid transparent; color: #555;
-            transition: 0.3s;
-        }
-        .tab-link.active { color: #27ae60; border-bottom: 2px solid #27ae60; font-weight: bold; }
-
-        /* UKRYTA ZAKŁADKA ZAMÓWIENIA W MENU */
-        #tab-header-zamowienie { display: none; } 
-
-        /* --- KOSZYK --- */
-        .cart-container { position: relative; }
-        #cart {
-            display: none; position: absolute; right: 0; top: 60px;
-            background: white; border: 1px solid #ccc; padding: 20px;
-            width: 300px; z-index: 1000; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            border-radius: 8px;
-        }
-        #cart.active { display: block !important; }
-
-        /* --- FORMULARZ ZAMÓWIENIA --- */
-        .order-wrapper { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 20px; }
-        #summary-box { background: #f0f9f4; padding: 20px; border-radius: 10px; border: 1px solid #c8e6c9; }
-        
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @media (max-width: 768px) { .order-wrapper { grid-template-columns: 1fr; } }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-    <nav>
-        <div class="logo"><img src="assets/logo.png" alt="Logo"></div>
-        <ul class="tab-menu" id="main-nav">
-            <li><button class="tab-link" onclick="openTab(event, 'sklep')">Wyślij kwiaty</button></li>
-            <li><button class="tab-link" onclick="openTab(event, 'galeria')">Galeria</button></li>
-            <li><button class="tab-link" onclick="openTab(event, 'kontakt')">Kontakt</button></li>
-            <li id="tab-header-zamowienie"><button class="tab-link" onclick="openTab(event, 'zamowienie')" style="color: #27ae60;">🛒 Twoje Zamówienie</button></li>
-        </ul>
-        <div class="cart-container">
-            <button id="cart-button" class="btn-cart">🛒 (<span id="cart-count">0</span>)</button>
-            <div id="cart">
-                <h3>Koszyk:</h3>
-                <ul id="cart-items" style="list-style:none; padding:0;"></ul>
-                <hr>
-                <p>Suma: <span id="cart-total">0</span> PLN</p>
-                <button onclick="goToCheckout()" class="btn-main" style="width:100%;">PRZEJDŹ DO KASY</button>
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="assets/logo.png" alt="Logo Kwiaciarni Stokrotka" onerror="this.src='assets/logo.png'">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#produkty">Wyślij kwiaty</a></li>
+                    <li><a href="#galeria">Galeria</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒 <span id="cart-count">(0)</span>
             </div>
         </div>
-    </nav>
-</header>
+    </header>
 
-<main class="container">
-    <section id="sklep" class="tab-content active-tab">
-        <div class="product-grid">
-            <div class="product-card">
-                <a href="produkt.html?id=letnie-harmonie"><img src="assets/bukiet1.jpg" alt="Bukiet"></a>
-                <h3>Bukiet Letnie Harmonie</h3>
-                <p class="price">210 PLN</p>
-                <button class="btn-add" onclick="addToCartDirect('Bukiet Letnie Harmonie', 210)">DODAJ DO KOSZYKA</button>
-            </div>
-            <div class="product-card">
-                <a href="produkt.html?id=dziki-ogrod"><img src="assets/bukiet2.jpg" alt="Bukiet"></a>
-                <h3>Kompozycja Dziki Ogród</h3>
-                <p class="price">180 PLN</p>
-                <button class="btn-add" onclick="addToCartDirect('Kompozycja Dziki Ogród', 180)">DODAJ DO KOSZYKA</button>
-            </div>
-            <div class="product-card">
-                <a href="produkt.html?id=rosina-leokasja"><img src="assets/bukiet3.jpg" alt="Bukiet"></a>
-                <h3>Roślina Leokasja</h3>
-                <p class="price">110 PLN</p>
-                <button class="btn-add" onclick="addToCartDirect('Roślina Leokasja', 110)">DODAJ DO KOSZYKA</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="galeria" class="tab-content">
-    <h2 class="section-title">Nasze Realizacje</h2>
-    
-    <div class="gallery-filters">
-        <button class="filter-btn active" onclick="filterGallery('all')">Wszystkie</button>
-        <button class="filter-btn" onclick="filterGallery('bukiety')">Bukiety</button>
-        <button class="filter-btn" onclick="filterGallery('boxy')">Flower Boxy</button>
-        <button class="filter-btn" onclick="filterGallery('slubne')">Ślubne</button>
-        <button class="filter-btn" onclick="filterGallery('cars')">Samochody</button>
+    <div id="cart-sidebar" class="hidden">
+        <button class="close-btn" onclick="toggleCart()">&times;</button>
+        <h3>Koszyk:</h3>
+        <ul id="cart-items"></ul>
+        <hr>
+        <p>Suma: <span id="cart-total">0</span> PLN</p>
+        <button class="btn" onclick="goToCheckout()">PRZEJDŹ DO KASY</button>
     </div>
-<div class="gallery-grid">
-        <div class="gallery-item" data-category="bukiety" onclick="openModal(this.querySelector('img'))">
-            <img src="assets/img3.jpg" alt="Piękny bukiet czerwonych róż na każdą okazję.">
-        </div>
-        <div class="gallery-item" data-category="boxy" onclick="openModal(this.querySelector('img'))">
-            <img src="assets/img4.jpg" alt="Eleganckie pudełko wypełnione sezonowymi kwiatami.">
-        </div>
-        <div class="gallery-item" data-category="cars" onclick="openModal(this.querySelector('img'))">
-            <img src="assets/img11.jpg" alt="Elegancki sportowy samochód BMW.">
-        </div>
-        <div class="gallery-item" data-category="cars" onclick="openModal(this.querySelector('img'))">
-            <img src="assets/img12.jpg" alt="Elegancki sportowy samochód VW">
-        </div>
-        <div class="gallery-item" data-category="cars" onclick="openModal(this.querySelector('img'))">
-            <img src="assets/img13.jpg" alt="Elegancki sportowy samochód Chrysler">
-        </div>
-        <div class="gallery-item" data-category="cars" onclick="openModal(this.querySelector('img'))">
-            <img src="assets/img14.jpg" alt="Elegancki sportowy samochód BMS">
-        </div>
-        <div class="gallery-item" data-category="cars" onclick="openModal(this.querySelector('img'))">
-            <img src="assets/img15.jpg" alt="Elegancki sportowy samochód.">
-        </div>
-        </div>
-</section>
 
-<div id="galleryModal" class="modal">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <button class="prev" onclick="changeImage(-1)">&#10094;</button>
-    <img class="modal-content" id="imgModal">
-    <button class="next" onclick="changeImage(1)">&#10095;</button>
-    <div id="caption" class="caption"></div>
-</div>
-</section>
-
-    <section id="kontakt" class="tab-content">
-        <h2>Kontakt</h2>
-        <p>📍 ul. Zielona 6, Łódź | 📞 +48 123 456 789</p>
-        <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2468.944243642738!2d19.4534!3d51.7688!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDQ2JzA3LjciTiAxOcKwMjcnMTIuMiJF!5e0!3m2!1spl!2spl!4v1620000000000!5m2!1spl!2spl" 
-            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-    </section>
-
-    <section id="zamowienie" class="tab-content">
-        <h2>Finalizacja Zamówienia</h2>
-        <div class="order-wrapper">
-            <div id="summary-box">
-                <h3>Podsumowanie koszyka:</h3>
-                <div id="order-list-preview"></div>
-                <p style="font-size: 1.2rem; margin-top: 10px;"><strong>Do zapłaty: <span id="order-total-preview">0</span> PLN</strong></p>
+    <main>
+        <section id="produkty" class="container">
+            <h2>Polecane Produkty</h2>
+            <div class="grid">
+                <div class="card">
+                    <img src="assets/bukiet1.jpg" alt="Bukiet Letnie Harmonie">
+                    <h3>Bukiet Letnie Harmonie</h3>
+                    <p class="price">210 PLN</p>
+                    <button class="btn" onclick="openModal('Bukiet Letnie Harmonie', 210, 'assets/bukiet1.jpg')">ZOBACZ SZCZEGÓŁY</button>
+                </div>
+                <div class="card">
+                    <img src="assets/bukiet2.jpg" alt="Kompozycja Dziki Ogród">
+                    <h3>Kompozycja Dziki Ogród</h3>
+                    <p class="price">180 PLN</p>
+                    <button class="btn" onclick="openModal('Kompozycja Dziki Ogród', 180, 'assets/bukiet2.jpg')">ZOBACZ SZCZEGÓŁY</button>
+                </div>
+                <div class="card">
+                    <img src="assets/bukiet3.jpg" alt="Roślina Leokasja">
+                    <h3>Roślina Leokasja</h3>
+                    <p class="price">110 PLN</p>
+                    <button class="btn" onclick="openModal('Roślina Leokasja', 110, 'assets/bukiet3.jpg')">ZOBACZ SZCZEGÓŁY</button>
+                </div>
             </div>
-            <form action="https://formspree.io/f/xojpdrwz" method="POST" id="order-form">
-                <input type="hidden" name="Produkty" id="hidden-cart-input">
-                <input type="text" name="name" placeholder="Imię i Nazwisko nadawcy" required style="width:100%; margin-bottom:10px; padding:10px;">
-                <input type="tel" name="phone" placeholder="Telefon do nadawcy" required style="width:100%; margin-bottom:10px; padding:10px;">
-                <input type="text2" name="name2" placeholder="Imię i Nazwisko odbiorcy" required style="width: 100%; margin-bottom:10px; padding:10px;">
-                <input type="tel2" name="phone2" placeholder="Telefon do odbiorcy" required style="width:100%; margin-bottom:10px; padding:10px;">
-                <textarea name="address1" placeholder="Adres dostawy" required style="width:100%; height:16px; resize: none; margin-bottom:10px; padding:10px;"></textarea>
-                <textarea name="postcode" placeholder="kod pocztowy" required style="width:100%; height:16px; resize: none; margin-bottom:10px; padding:10px;"></textarea>
-                <textarea name="bilecik" placeholder="Bilecik" required style="width:100%; height:40px; resize: none; margin-bottom:10px; padding:10px;"></textarea>
-                <textarea name="uwagi" placeholder="UWAGI" required style="width:100%; height:40px; resize: none; margin-bottom:10px; padding:10px;"></textarea>
-                <button type="submit" class="btn-main" style="width:100%; background:#27ae60; color:white; padding:15px; border:none; font-weight:bold;">WYŚLIJ ZAMÓWIENIE</button>
-            </form>
-        </div>
-    </section>
-</main>
+        </section>
 
-<footer class="kwiaciarnia-footer">
-    <div class="footer-container">
-        <div class="footer-col footer-logo-col">
-            <img src="assets/logo.png" alt="Stokrotka Logo" class="footer-logo-img">
-            <p class="footer-tagline">Tworzymy emocje ubrane w kwiaty. Twoja kwiaciarnia od 1990 roku.</p>
-        </div>
-        <div class="footer-col">
-            <h4 class="footer-header">MENU</h4>
-            <ul class="footer-links">
-                <li><button onclick="openTab(event, 'sklep')">Oferta</button></li>
-                <li><button onclick="openTab(event, 'galeria')">Galeria</button></li>
-                <li><button onclick="openTab(event, 'kontakt')">Kontakt</button></li>
-            </ul>
-        </div>
-        <div class="footer-col footer-contact-col">
-            <h4 class="footer-header">KONTAKT</h4>
-            <p>📍 ul. Zielona 6, Poddębice</p> <p>📞 +48 123 456 789</p>
-            <p>✉️ kontakt@stokrotka.pl</p>
-            <div class="opening-hours">
+        <section id="galeria" class="container">
+            <h2>Nasze Realizacje</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Wszystkie</button>
+                <button class="filter-btn" data-filter="bukiety">Bukiety</button>
+                <button class="filter-btn" data-filter="flowerboxy">Flower Boxy</button>
+                <button class="filter-btn" data-filter="slubne">Ślubne</button>
+                <button class="filter-btn" data-filter="samochody">Samochody</button>
+            </div>
+            <div class="gallery-grid">
+                <img src="assets/img3.jpg" alt="Bukiet" class="gallery-item bukiety" loading="lazy">
+                <img src="assets/img4.jpg" alt="Flower Box" class="gallery-item flowerboxy" loading="lazy">
+                <img src="assets/img11.jpg" alt="Auto" class="gallery-item samochody" loading="lazy">
+                <img src="assets/img12.jpg" alt="Auto" class="gallery-item samochody" loading="lazy">
+                <img src="assets/img13.jpg" alt="Ślubny" class="gallery-item slubne" loading="lazy">
+            </div>
+        </section>
+
+        <section id="zamowienie" class="container hidden">
+            <h2>Finalizacja Zamówienia</h2>
+            <div class="checkout-wrapper">
+                <div class="checkout-summary">
+                    <h3>Podsumowanie koszyka:</h3>
+                    <ul id="checkout-items"></ul>
+                    <p><strong>Do zapłaty: <span id="checkout-total">0</span> PLN</strong></p>
+                </div>
+                <form class="checkout-form" onsubmit="submitOrder(event)">
+                    <input type="text" placeholder="Imię i nazwisko" required>
+                    <input type="email" placeholder="Email" required>
+                    <input type="tel" placeholder="Telefon" required>
+                    <input type="text" placeholder="Adres dostawy" required>
+                    <textarea placeholder="Uwagi do zamówienia (np. data dostawy)"></textarea>
+                    <button type="submit" class="btn">WYŚLIJ ZAMÓWIENIE</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="kontakt" class="container">
+            <h2>Kontakt</h2>
+            <p>📍 ul. Zielona 6, Poddębice | 📞 +48 123 456 789</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-grid">
+            <div>
+                <img src="assets/logo.png" alt="Stokrotka" onerror="this.src='assets/logo.png'" style="margin-bottom: 15px;">
+                <p>Tworzymy emocje ubrane w kwiaty. Twoja kwiaciarnia od 1990 roku.</p>
+            </div>
+            <div>
+                <h4>MENU</h4>
+                <ul>
+                    <li><a href="#produkty">Oferta</a></li>
+                    <li><a href="#galeria">Galeria</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>KONTAKT</h4>
+                <p>📍 ul. Zielona 6, Poddębice</p>
+                <p>📞 +48 123 456 789</p>
+                <p>✉️ kontakt@stokrotka.pl</p>
                 <p>Pon - Pt: 9:00 - 17:00</p>
                 <p>Sob: 9:00 - 17:00</p>
                 <p>Niedz. handlowa: 11:00 - 15:00</p>
             </div>
+            <div>
+                <h4>ŚLEDŹ NAS</h4>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
         </div>
-        <div class="footer-col">
-            <h4 class="footer-header">ŚLEDŹ NAS</h4>
-            <ul class="footer-links">
-                <li><a href="https://facebook.com/TwojaStrona" target="_blank">Facebook</a></li>
-                <li><a href="https://instagram.com/TwojaStrona" target="_blank">Instagram</a></li>
-            </ul>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Kwiaciarnia Stokrotka. Wszystkie prawa zastrzeżone.</p>
         </div>
-    </div>
-    <div class="footer-bottom">
-        <p>© <span id="current-year"></span> Kwiaciarnia Stokrotka. Wszystkie prawa zastrzeżone.</p>
-    </div>
-</footer>
+    </footer>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
+    <div id="toast-container"></div>
+
+    <div id="product-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <img id="modal-img" src="" alt="Zdjęcie produktu">
+            <h3 id="modal-title">Nazwa Bukiety</h3>
+            <p id="modal-desc">Piękna kompozycja starannie wyselekcjonowanych kwiatów, układana przez naszych doświadczonych florystów. Idealny wybór na każdą okazję.</p>
+            <p class="price" id="modal-price">0 PLN</p>
+            <button class="btn" id="modal-add-btn">DODAJ DO KOSZYKA</button>
+        </div>
+    </div>
 </body>
 </html>
