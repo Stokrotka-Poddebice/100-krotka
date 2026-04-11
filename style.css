@@ -22,9 +22,6 @@ body {
     color: var(--text-color);
     line-height: 1.6;
     font-size: 16px; /* Standard dla urządzeń mobilnych */
-    <button id="dark-mode-toggle" class="dark-mode-btn" onclick="toggleDarkMode()">
-    🌙
-</button>
 }
 
 .container {
@@ -706,6 +703,78 @@ footer ul {
     display: none;
 }
 
+.checkout-container {
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.05);
+}
+
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr 350px;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+    .checkout-grid { grid-template-columns: 1fr; }
+}
+
+.form-section {
+    margin-bottom: 30px;
+}
+
+.form-section h4 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+/* Stylowanie opcji płatności */
+.payment-options {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.payment-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.payment-card:has(input:checked) {
+    border-color: var(--primary-color);
+    background: #eef5f0;
+}
+
+.order-summary-box {
+    background: #fdfdfd;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #eee;
+    align-self: start;
+}
+
+/* Tryb ciemny dla formularza zamówienia */
+body.dark-theme .checkout-container,
+body.dark-theme .order-summary-box {
+    background: #1e1e1e;
+    border-color: #333;
+}
+
 /* --- DARK MODE STYLES --- */
 body.dark-theme {
     --bg-color: #121212;      /* Głęboka czerń/szarość tła */
@@ -743,6 +812,7 @@ body.dark-theme .contact-form-container {
 body.dark-theme header {
     background-color: rgba(18, 18, 18, 0.8); /* Półprzezroczyste ciemne tło */
 }
+
 /* --- POPRAWKA PRZYCISKÓW GALERII W TRYBIE CIEMNYM --- */
 body.dark-theme .filter-btn {
     background-color: #2a2a2a; /* Ciemniejsze tło przycisku */
@@ -766,6 +836,7 @@ body.dark-theme .filter-btn.active {
 body.dark-theme #galeria h2 {
     color: #fff;
 }
+
 /* --- POLA TEKSTOWE W TRYBIE CIEMNYM --- */
 body.dark-theme input, 
 body.dark-theme textarea, 
@@ -796,4 +867,25 @@ body.dark-theme .addon-item {
 
 body.dark-theme .addon-item:hover {
     background-color: #333;
+}
+
+/* Poprawka tła kontenera sekcji dodatków w koszyku */
+body.dark-theme .cross-sell-section {
+    background-color: #1e1e1e; /* Ciemne tło pasujące do bocznego panelu */
+    border: 1px dashed #444;    /* Ciemniejsza ramka, by nie była zbyt jaskrawa */
+}
+
+body.dark-theme .cross-sell-section h4 {
+    color: var(--primary-color); /* Twoja zieleń dla nagłówka wewnątrz */
+}
+
+/* Poprawa samych kafelków z dodatkami, by nie były zbyt ciemne względem tła sekcji */
+body.dark-theme .addon-item {
+    background-color: #2a2a2a;
+    color: #fff;
+    border: 1px solid #333;
+}
+
+body.dark-theme .addon-item b {
+    color: var(--primary-color); /* Cena na zielono, by była czytelna */
 }

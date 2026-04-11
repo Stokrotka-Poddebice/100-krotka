@@ -86,32 +86,31 @@ function removeFromCart(index) {
 }
 
 function goToCheckout() {
-    if (cart.length === 0) {
-        showToast("Twój koszyk jest pusty!");
-        return;
-    }
+    // Ukrywamy inne zakładki, pokazujemy zamówienie
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('zamowienie').classList.add('active');
     
-    toggleCart();
-    
-    document.getElementById('zamowienie').classList.remove('hidden');
-    document.getElementById('produkty').classList.add('hidden');
-    document.getElementById('galeria').classList.add('hidden');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
     const checkoutItems = document.getElementById('checkout-items');
     const checkoutTotal = document.getElementById('checkout-total');
-    
-    checkoutItems.innerHTML = '';
     let total = 0;
-    
+
+    checkoutItems.innerHTML = '';
+
     cart.forEach(item => {
         total += item.price * item.quantity;
         const li = document.createElement('li');
-        li.innerText = `${item.name} - ${item.price} PLN`;
+        li.style.display = 'flex';
+        li.style.justifyContent = 'space-between';
+        li.style.marginBottom = '10px';
+        li.innerHTML = `
+            <span>${item.name} x${item.quantity}</span>
+            <span>${item.price * item.quantity} PLN</span>
+        `;
         checkoutItems.appendChild(li);
     });
-    
-    checkoutTotal.innerText = total;
+
+    checkoutTotal.innerText = `${total} PLN`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function submitOrder(e) {
@@ -330,9 +329,9 @@ function startFomoTimer() {
     function updateTimer() {
         const now = new Date();
         
-        // Ustawiamy godzinę graniczną na 14:00 dzisiejszego dnia
+        // Ustawiamy godzinę graniczną na 12:00 dzisiejszego dnia
         const deadline = new Date();
-        deadline.setHours(14, 0, 0, 0);
+        deadline.setHours(12, 0, 0, 0);
 
         let diff = deadline - now;
 
@@ -352,7 +351,7 @@ function startFomoTimer() {
             // Jeśli jest po 14:00, zmieniamy komunikat
             fomoText.innerHTML = "🌿 Zamów teraz, a Twoje kwiaty dostarczymy <b>już jutro rano!</b>";
             // Opcjonalnie: możesz ukryć pasek, odkomentowując linię poniżej
-            // fomoBar.classList.add('hidden'); 
+            fomoBar.classList.add('hidden'); 
         }
     }
 
