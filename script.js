@@ -105,7 +105,7 @@ function goToCheckout() {
     let total = 0;
     
     cart.forEach(item => {
-        total += item.price;
+        total += item.price * item.quantity;
         const li = document.createElement('li');
         li.innerText = `${item.name} - ${item.price} PLN`;
         checkoutItems.appendChild(li);

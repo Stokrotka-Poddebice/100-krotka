@@ -4,10 +4,11 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
     html {
     scroll-behavior: smooth;
 }
-}
+
 
 :root {
     --primary-color: #2c5e3b; /* Głęboka zieleń */
@@ -98,15 +99,16 @@ footer .container img {
     position: fixed;
     right: 0;
     top: 0;
-    width: 100px;
-    max-width: 750px;
+    width: 100%;
+    max-width: 450px;
     height: 100vh;
     background: #fff;
     box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-    padding: 20px;
+    padding: 25px;
     transform: translateX(0);
     transition: transform 0.3s ease-in-out;
     z-index: 200;
+    overflow-y: auto;
 }
 
 #cart-sidebar.hidden {
@@ -435,4 +437,16 @@ footer ul {
     margin-bottom: 5px;
     font-weight: bold;
     color: var(--primary-color);
+}
+
+@media (max-width: 480px) {
+    #cart-sidebar {
+        max-width: 100%;   /* Na telefonie koszyk zajmie 100% szerokości ekranu */
+        padding: 15px;      /* Nieco mniejsze marginesy, by zmieścić więcej tekstu */
+    }
+
+    /* Powiększamy napisy w koszyku na telefonie, by łatwiej było je czytać */
+    #cart-items li {
+        font-size: 1.1rem;
+    }
 }
