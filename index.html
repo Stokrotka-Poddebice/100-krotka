@@ -172,29 +172,69 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
             </div>
         </section>
 
-        <section id="zamowienie" class="container hidden">
-            <h2>Finalizacja Zamówienia</h2>
-            <div class="checkout-wrapper">
-                <div class="checkout-summary">
-                    <h3>Podsumowanie koszyka:</h3>
-                    <ul id="checkout-items"></ul>
-                    <p><strong>Do zapłaty: <span id="checkout-total">0</span> PLN</strong></p>
+        <section id="zamowienie" class="container tab-content">
+    <div class="checkout-container">
+        <h2>Finalizacja zamówienia</h2>
+        
+        <div class="checkout-grid">
+            <form id="order-form" onsubmit="handleOrderSubmit(event)">
+                <div class="form-section">
+                    <h4><i class="icon">👤</i> Dane zamawiającego</h4>
+                    <div class="input-row">
+                        <input type="text" placeholder="Imię i Nazwisko" required>
+                        <input type="tel" placeholder="Twój numer telefonu" required>
+                    </div>
+                    <input type="email" placeholder="Adres e-mail (do potwierdzenia)" required>
                 </div>
-                <form class="checkout-form" onsubmit="submitOrder(event)">
-                    <input type="text1" placeholder="Imię i Nazwisko Nadawcy" required>
-                    <input type="email1" placeholder="Email Nadawcy" required>
-                    <input type="tel1" placeholder="Telefon Nadawcy" required>
-                    <input type="text2" placeholder="Imię i Nazwisko Odbiorcy" required>
-                    <input type="email2" placeholder="Email Odbiorcy" required>
-                    <input type="tel2" placeholder="Telefon Odbiorcy" required>
-                    <label for="delivery-date">Data dostawy:</label>
-                    <input type="date" id="delivery-date" name="delivery-date" required>
-                    <input type="text" placeholder="Adres dostawy" required>
-                    <textarea placeholder="Uwagi do zamówienia - np. treść bileciku"></textarea>
-                    <button type="submit" class="btn">WYŚLIJ ZAMÓWIENIE</button>
-                </form>
+
+                <div class="form-section">
+                    <h4><i class="icon">🚚</i> Szczegóły dostawy</h4>
+                    <input type="text" placeholder="Adres dostawy (ulica, numer, miasto)" required>
+                    <div class="input-row">
+                        <input type="date" title="Data dostawy" required>
+                        <select required>
+                            <option value="" disabled selected>Preferowana godzina</option>
+                            <option>9:00 - 12:00</option>
+                            <option>12:00 - 15:00</option>
+                            <option>15:00 - 18:00</option>
+                        </select>
+                    </div>
+                    <textarea placeholder="Wiadomość do bileciku lub instrukcje dla kuriera" rows="3"></textarea>
+                </div>
+
+                <div class="form-section">
+                    <h4><i class="icon">💳</i> Metoda płatności</h4>
+                    <div class="payment-options">
+                        <label class="payment-card">
+                            <input type="radio" name="payment" value="blik" checked>
+                            <span>BLIK</span>
+                        </label>
+                        <label class="payment-card">
+                            <input type="radio" name="payment" value="card">
+                            <span>Karta / Przelew</span>
+                        </label>
+                        <label class="payment-card">
+                            <input type="radio" name="payment" value="cash">
+                            <span>Przy odbiorze</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn order-submit-btn">POTWIERDZAM I PŁACĘ</button>
+            </form>
+
+            <div class="order-summary-box">
+                <h4>Twoje zamówienie</h4>
+                <ul id="checkout-items">
+                    </ul>
+                <div class="summary-total">
+                    <span>Razem do zapłaty:</span>
+                    <strong id="checkout-total">0 PLN</strong>
+                </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
 
         <section id="kontakt" class="container tab-content">
     <h2>Skontaktuj się z nami</h2>
