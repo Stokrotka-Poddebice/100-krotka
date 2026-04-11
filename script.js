@@ -18,10 +18,17 @@ function toggleCart() {
 }
 
 function addToCart(name, price) {
-    cart.push({ name, price });
-    saveCart(); // Zapisujemy!
+    const existingItem = cart.find(item => item.name === name);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ name, price, quantity: 1 });
+    }
+
+    saveCart();
     updateCart();
-    showToast(`Dodano: ${name}`); // Ładne powiadomienie zamiast Alertu
+    showToast(`Dodano: ${name}`);
 }
 
 function updateCart() {
@@ -33,17 +40,31 @@ function updateCart() {
 
     cartItems.innerHTML = '';
     let total = 0;
+    let totalQuantity = 0;
+    
+    if (cart.length === 0) {
+    cartItems.innerHTML = '<p style="color: #888; text-align: center;">Twój koszyk jest pusty.</p>';
+    cartCount.innerText = '(0)';
+    cartTotal.innerText = '0';
+    return;
+}
 
     cart.forEach((item, index) => {
-        total += item.price;
+        total += item.price * item.quantity;
+        totalQuantity += item.quantity;
+
         const li = document.createElement('li');
-        li.innerHTML = `${item.name} - <b>${item.price} PLN</b> 
-                        <button onclick="removeFromCart(${index})" style="color:red; background:none; border:none; cursor:pointer; margin-left:10px; font-size: 1rem;">✖</button>`;
+        li.innerHTML = `
+            <span>${item.name} (x${item.quantity}) - <b>${item.price * item.quantity} PLN</b></span>
+            <button onclick="removeFromCart(${index})" style="color:red; background:none; border:none; cursor:pointer; margin-left:10px;">✖</button>
+        `;
+        li.style.display = "flex";
+        li.style.justifyContent = "between";
         li.style.marginBottom = "10px";
         cartItems.appendChild(li);
     });
 
-    cartCount.innerText = `(${cart.length})`;
+    cartCount.innerText = `(${totalQuantity})`; // Pokazuje sumę wszystkich kwiatów
     cartTotal.innerText = total;
 }
 
