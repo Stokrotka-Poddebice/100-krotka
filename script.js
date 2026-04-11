@@ -261,3 +261,23 @@ closeModal = function() {
     document.getElementById('modal-add-btn').style.display = 'block';
     document.getElementById('modal-price').style.display = 'block';
 };
+function switchTab(event, tabId) {
+    // 1. Ukryj wszystkie sekcje zakładek
+    const contents = document.querySelectorAll('.tab-content');
+    contents.forEach(content => {
+        content.classList.remove('active');
+    });
+
+    // 2. Usuń klasę active ze wszystkich przycisków zakładek
+    const buttons = document.querySelectorAll('.tab-btn');
+    buttons.forEach(btn => {
+        btn.classList.remove('active');
+    });
+
+    // 3. Pokaż wybraną sekcję i aktywuj przycisk
+    document.getElementById(tabId).classList.add('active');
+    event.currentTarget.classList.add('active');
+    
+    // 4. Opcjonalne: Przewiń na górę sekcji, jeśli jesteś nisko
+    window.scrollTo({ top: 100, behavior: 'smooth' });
+}
