@@ -15,6 +15,7 @@
     --accent-color: #d88c9a; /* Delikatny róż */
     --bg-color: #fcfcfc;
     --text-color: #333;
+    --card-bg: #ffffff; /* tło dla trybu jasnego */
 }
 
 body {
@@ -358,7 +359,7 @@ footer ul {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.6);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     z-index: 1000;
@@ -374,12 +375,17 @@ footer ul {
 }
 
 .modal:not(.hidden) {
+    display: flex; /* Pokazuje modal jako flexbox do centrowania */
+    align-items: center;
+    justify-content: center;
     opacity: 1;
     pointer-events: auto; /* Aktywuj kliknięcia po pokazaniu */
 }
 
 .modal-content {
     max-width: 500px; /* Aby opis nie rozciągał się na cały ekran */
+    background-color: var(--card-bg); /* Teraz zadziała w obu trybach */
+    color: var(--text-color);
     padding: 30px;
     border-radius: 15px;
     text-align: center;
