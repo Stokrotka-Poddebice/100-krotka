@@ -144,76 +144,52 @@
                 <img src="assets/img15.jpg" alt="Dekoracja kwiatowa samochodu do ślubu w kolorze białym" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
             </div>
         </section>
-
-        <section id="zamowienie" class="container tab-content" style="display: none;">
-    <div class="checkout-container">
-        <h2>Finalizacja zamówienia</h2>
-        
-        <div class="checkout-grid">
-            <form action="https://formspree.io/f/xojpdrwz" method="POST" id="order-form">
-                <input type="hidden" name="Lista_Produktów" id="hidden-cart-data">
-                <input type="hidden" name="Suma_Razem" id="hidden-total-data">
-
-                <div class="form-section">
-                    <h4><i class="icon"><i class="fa-solid fa-user-edit"></i></i> Dane zamawiającego</h4>
-                    <div class="input-row">
-                        <input type="text" name="Zamawiający_Imię" placeholder="Imię i Nazwisko" required>
-                        <input type="tel" name="Zamawiający_Tel" placeholder="Twój numer telefonu" required>
-                    </div>
-                    <input type="email" name="_replyto" placeholder="Adres e-mail (do potwierdzenia)" required>
-                </div>
-
-                <div class="form-section">
-                    <h4><i class="icon"><i class="fa-solid fa-shipping-fast"></i></i> Szczegóły dostawy</h4>
-                    <input type="text" name="Odbiorca_Imię" placeholder="Imię i Nazwisko Odbiorcy" required>
-                    <input type="tel" name="Odbiorca_Tel" placeholder="Numer telefonu Odbiorcy" required>
-                    <input type="text" name="Adres_Dostawy" placeholder="Adres dostawy (ulica, numer, miasto)" required>
+        <section id="zamowienie" class="container tab-content">
+            <h2>Twoje Zamówienie</h2>
+            <div class="order-container">
+                <form id="order-form" action="https://formspree.io/f/TWOJ_KOD" method="POST">
                     
-                    <div class="input-row">
-                        <input type="date" name="Data_Dostawy" title="Data dostawy" required>
-                        <select name="Godzina_Dostawy" required>
-                            <option value="" disabled selected>Preferowana godzina</option>
-                            <option value="9:00 - 12:00">9:00 - 12:00</option>
-                            <option value="12:00 - 15:00">12:00 - 15:00</option>
-                            <option value="15:00 - 18:00">15:00 - 18:00</option>
-                        </select>
+                    <div class="form-section">
+                        <h4><i class="fa-solid fa-user"></i> Twoje Dane</h4>
+                        <div class="form-grid">
+                            <input type="text" name="name" placeholder="Imię i Nazwisko" required>
+                            <input type="tel" name="phone" placeholder="Twój numer telefonu" required>
+                        </div>
+                        <input type="email" name="email" placeholder="Twój adres E-mail" required>
                     </div>
-                    <textarea name="Wiadomość_Bilecik" placeholder="Wiadomość do bileciku lub instrukcje dla kuriera" rows="3"></textarea>
-                </div>
 
-                <div class="form-section">
-                    <h4><i class="icon"><i class="fa-solid fa-credit-card"></i> Metoda płatności</h4>
-                    <div class="payment-options">
-                        <label class="payment-card">
-                            <input type="radio" name="Metoda_Płatności" value="BLIK" checked>
-                            <span>BLIK</span>
-                        </label>
-                        <label class="payment-card">
-                            <input type="radio" name="Metoda_Płatności" value="Karta_Przelew">
-                            <span>Przelew</span>
-                        </label>
-                        <label class="payment-card">
-                            <input type="radio" name="Metoda_Płatności" value="Gotówka">
-                            <span>Przy odbiorze</span>
-                        </label>
+                    <div class="form-section">
+                        <h4><i class="fa-solid fa-truck"></i> Szczegóły dostawy</h4>
+                        <div class="form-grid">
+                            <input type="text" name="recipient_name" placeholder="Imię i nazwisko odbiorcy" required>
+                            <input type="tel" name="recipient_phone" placeholder="Telefon do odbiorcy" required>
+                        </div>
+                        <input type="text" name="address" placeholder="Ulica, numer domu i mieszkania" required>
+                        <div class="form-grid">
+                            <input type="text" name="city" placeholder="Miejscowość" required>
+                            <input type="text" name="postal_code" placeholder="Kod pocztowy" required>
+                        </div>
                     </div>
-                </div>
 
-                <button type="submit" class="btn order-submit-btn">POTWIERDZAM I PŁACĘ</button>
-            </form>
+                    <div class="form-section">
+                        <h4><i class="fa-solid fa-envelope-open-text"></i> Bilecik i dodatki</h4>
+                        <textarea name="message" rows="3" placeholder="Treść bileciku (opcjonalnie)"></textarea>
+                        <div class="date-picker">
+                            <label for="delivery_date">Data dostawy:</label>
+                            <input type="date" id="delivery_date" name="delivery_date" required>
+                        </div>
+                    </div>
 
-            <div class="order-summary-box">
-                <h4>Twoje zamówienie</h4>
-                <ul id="checkout-items">
-                    </ul>
-                <div class="summary-total">
-                    <span>Razem do zapłaty:</span>
-                    <strong id="checkout-total">0 PLN</strong>
-                </div>
+                    <input type="hidden" name="cart_items" id="cart-items-input">
+
+                    <div class="order-summary">
+                        <p>Razem do zapłaty: <span id="order-total">0 PLN</span></p>
+                        <button type="submit" class="btn btn-order">POTWIERDZAM I PŁACĘ</button>
+                    </div>
+                </form>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
+       
 
         <section id="kontakt" class="container tab-content">
     <h2>Skontaktuj się z nami</h2>
@@ -315,7 +291,8 @@
     </div>
     
     <a href="https://wa.me/48436788610" class="whatsapp-btn" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Kontakt WhatsApp">    </a>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Kontakt WhatsApp">
+    </a>
 
     <div id="fomo-bar" class="fomo-bar">
         <a href="#zamowienie" class="fomo-link">

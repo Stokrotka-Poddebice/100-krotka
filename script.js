@@ -237,27 +237,30 @@ function showToast(message) {
 }
 
 // --- OKNO MODALNE (SZCZEGÓŁY PRODUKTU) ---
-function openProductModal(productId) {
+function openModal(productId) {
     const product = products.find(p => p.id === productId);
+    if (!product) return;
 
-    if (product) {
-        document.getElementById('modal-img').src = product.image;
-        document.getElementById('modal-title').innerText = product.name;
-        document.getElementById('modal-price').innerText = `${product.price} PLN`;
-        document.getElementById('modal-footer').innerText = `DOSTAWA`;
-        
-        const descElement = document.getElementById('modal-desc');
-        descElement.innerText = product.description || "Piękna kompozycja świeżych kwiatów.";
+    const modal = document.getElementById('product-modal');
+    document.getElementById('modal-img').src = product.image;
+    document.getElementById('modal-title').innerText = product.name;
+    document.getElementById('modal-desc').innerText = product.description;
+    document.getElementById('modal-price').innerText = `${product.price} PLN`;
 
-        const addBtn = document.getElementById('modal-add-btn');
-        // Zmieniamy logikę dodawania: teraz używamy nazwy i ceny z obiektu product
-        addBtn.onclick = () => {
-            addToCart(product.name, product.price);
-            closeModal();
-        };
-
-        document.getElementById('product-modal').classList.remove('hidden');
+    const features = modal.querySelector('.modal-footer');
+    if (features) {
+        features.style.display = 'flex';
     }
+
+    // Obsługa przycisku
+    const addBtn = document.getElementById('modal-add-btn');
+    addBtn.onclick = () => {
+        addToCart(product.id);
+        closeModal();
+    };
+
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Blokada przewijania tła
 }
 
 function closeModal() {
