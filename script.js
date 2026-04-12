@@ -148,24 +148,25 @@ function goToCheckout() {
 
     // 2. Pokazujemy sekcję zamówienia (używamy Twojej funkcji showSection lub klas)
     // Jeśli showSection zajmuje się ukrywaniem reszty, to wystarczy:
-    if (typeof showSection === "function") {
-        showSection('zamowienie');
-    } else {
-        document.querySelectorAll('.tab-content').forEach(c => {
-            c.classList.remove('active');
-            c.style.display = 'none';
-        });
-        const orderSec = document.getElementById('zamowienie');
-        orderSec.classList.add('active');
-        orderSec.style.display = 'block';
-    }
+    //if (typeof showSection === "function") {
+    //    showSection('zamowienie');
+    //} else {
+    //    document.querySelectorAll('.tab-content').forEach(c => {
+    //        c.classList.remove('active');
+    //        c.style.display = 'none';
+    //   });
+    //    const orderSec = document.getElementById('zamowienie');
+    //    orderSec.classList.add('active');
+    //    orderSec.style.display = 'block';
+    //}
+    switchTab(null, 'zamowienie');
 
     // 3. Pobieramy elementy podsumowania widocznego na stronie
     const checkoutItems = document.getElementById('checkout-items');
-    const checkoutTotal = document.getElementById('checkout-total');
+    const checkoutTotal = document.getElementById('order-total');
     
     // 4. Pobieramy ukryte pola dla Formspree
-    const hiddenCartInput = document.getElementById('hidden-cart-data');
+    const hiddenCartInput = document.getElementById('cart-items-input');
     const hiddenTotalInput = document.getElementById('hidden-total-data');
 
     // --- OBLICZENIA (Deklarujemy 'currentTotal' tylko raz!) ---
@@ -237,7 +238,7 @@ function showToast(message) {
 }
 
 // --- OKNO MODALNE (SZCZEGÓŁY PRODUKTU) ---
-function openModal(productId) {
+function openProductModal(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
 
