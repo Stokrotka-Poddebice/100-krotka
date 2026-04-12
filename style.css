@@ -889,3 +889,24 @@ body.dark-theme .addon-item {
 body.dark-theme .addon-item b {
     color: var(--primary-color); /* Cena na zielono, by była czytelna */
 }
+.footer-tab-btn {
+    background: none;
+    border: none;
+    color: white; /* lub inny kolor Twojej stopki */
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 5px 0;
+    transition: color 0.3s;
+    text-align: left;
+    width: 100%;
+}
+
+.footer-tab-btn:hover {
+    color: var(--accent-color); /* Twój różowy kolor */
+    text-decoration: underline;
+}
+
+/* W trybie ciemnym */
+body.dark-theme .footer-tab-btn {
+    color: #ccc;
+}

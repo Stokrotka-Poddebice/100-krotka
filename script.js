@@ -86,31 +86,66 @@ function removeFromCart(index) {
 }
 
 function goToCheckout() {
-    // Ukrywamy inne zakładki, pokazujemy zamówienie
-    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    document.getElementById('zamowienie').classList.add('active');
-    
+    // 1. Sprawdzamy, czy koszyk nie jest pusty
+    if (cart.length === 0) {
+        showToast("Twój koszyk jest pusty!");
+        return;
+    }
+
+    // 2. Pokazujemy sekcję zamówienia (używamy Twojej funkcji showSection lub klas)
+    // Jeśli showSection zajmuje się ukrywaniem reszty, to wystarczy:
+    if (typeof showSection === "function") {
+        showSection('zamowienie');
+    } else {
+        document.querySelectorAll('.tab-content').forEach(c => {
+            c.classList.remove('active');
+            c.style.display = 'none';
+        });
+        const orderSec = document.getElementById('zamowienie');
+        orderSec.classList.add('active');
+        orderSec.style.display = 'block';
+    }
+
+    // 3. Pobieramy elementy podsumowania widocznego na stronie
     const checkoutItems = document.getElementById('checkout-items');
     const checkoutTotal = document.getElementById('checkout-total');
-    let total = 0;
+    
+    // 4. Pobieramy ukryte pola dla Formspree
+    const hiddenCartInput = document.getElementById('hidden-cart-data');
+    const hiddenTotalInput = document.getElementById('hidden-total-data');
 
+    // --- OBLICZENIA (Deklarujemy 'currentTotal' tylko raz!) ---
+    let currentTotal = 0;
     checkoutItems.innerHTML = '';
 
     cart.forEach(item => {
-        total += item.price * item.quantity;
+        const itemSum = item.price * item.quantity;
+        currentTotal += itemSum;
+
+        // Tworzymy element listy do podsumowania na ekranie
         const li = document.createElement('li');
         li.style.display = 'flex';
         li.style.justifyContent = 'space-between';
         li.style.marginBottom = '10px';
         li.innerHTML = `
             <span>${item.name} x${item.quantity}</span>
-            <span>${item.price * item.quantity} PLN</span>
+            <span>${itemSum} PLN</span>
         `;
         checkoutItems.appendChild(li);
     });
 
-    checkoutTotal.innerText = `${total} PLN`;
+    // 5. Wpisujemy dane do widoku użytkownika
+    if (checkoutTotal) checkoutTotal.innerText = `${currentTotal} PLN`;
+
+    // 6. Przygotowujemy tekst dla Formspree (do ukrytych pól)
+    const cartText = cart.map(item => `${item.name} x${item.quantity} (${item.price * item.quantity} PLN)`).join(', ');
+
+    if (hiddenCartInput) hiddenCartInput.value = cartText;
+    if (hiddenTotalInput) hiddenTotalInput.value = currentTotal + " PLN";
+
+    // 7. Finalne szlify
     window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (typeof closeCart === "function") closeCart(); // Zamyka boczny panel koszyka
 }
 
 function submitOrder(e) {
@@ -261,14 +296,15 @@ closeModal = function() {
     document.getElementById('modal-price').style.display = 'block';
 };
 function switchTab(event, tabId) {
-    // 1. Ukrywamy sekcje zakładek
+    // 1. Zapobiegamy przeładowaniu strony (jeśli to link lub button w form)
+    if (event) event.preventDefault();
+
+    // 2. Ukrywamy WSZYSTKIE sekcje (zakładki + zamówienie)
+    // Zakładamy, że każda sekcja (oferta, galeria, kontakt, zamówienie) ma klasę .tab-content
     document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
         content.style.display = 'none';
     });
-
-    // 2. Ukrywamy formularz zamówienia (jeśli był otwarty)
-    document.getElementById('zamowienie').classList.add('hidden');
 
     // 3. Pokazujemy wybraną zakładkę
     const activeContent = document.getElementById(tabId);
@@ -277,13 +313,17 @@ function switchTab(event, tabId) {
         activeContent.style.display = 'block';
     }
 
-    // 4. Aktualizujemy wygląd przycisków w menu
+    // 4. Aktualizujemy wygląd przycisków w menu GÓRNYM
+    // Szukamy przycisku w nagłówku, który odpowiada wybranemu tabId
     document.querySelectorAll('.nav-tab-btn').forEach(btn => {
         btn.classList.remove('active');
+        // Jeśli przycisk ma onclick z tym samym tabId, dajemy mu klasę active
+        if (btn.getAttribute('onclick').includes(`'${tabId}'`)) {
+            btn.classList.add('active');
+        }
     });
-    event.currentTarget.classList.add('active');
 
-    // 5. Płynne przewinięcie na start sekcji
+    // 5. Płynne przewinięcie na samą górę strony
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 

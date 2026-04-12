@@ -24,12 +24,12 @@
   "image": "https://stokrotka-poddebice.github.io/100-krotka/assets/logo.png",
   "@id": "https://stokrotka-poddebice.github.io/100-krotka/",
   "url": "https://stokrotka-poddebice.github.io/100-krotka/",
-  "telephone": "+48123456789",
+  "telephone": "+48436788610",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "ul. Zielona 6",
-    "addressLocality": "Łódź",
-    "postalCode": "91-128",
+    "addressLocality": "Poddębice",
+    "postalCode": "99-200",
     "addressCountry": "PL"
   },
   "geo": {
@@ -65,18 +65,16 @@
 </script>
 </head>
 <body>
-    <div id="fomo-bar" class="fomo-bar">
-         <span class="fomo-text">
-            🌸 Zamów w ciągu <span id="fomo-timer">--:--:--</span>, a Twoje kwiaty dostarczymy <b>jeszcze dzisiaj!</b>
-         </span>
-    </div>
     <header>
         <div class="container nav-container">
             <div class="logo">
-    <a href="index.html">
-        <img src="assets/logo.png" alt="Logo Kwiaciarni Stokrotka">
-    </a>
-</div>
+                 <a href="index.html">
+                 <img src="assets/logo.png" alt="Logo Kwiaciarni Stokrotka">
+                 </a>
+            </div>
+            <button id="dark-mode-toggle" class="dark-mode-btn" onclick="toggleDarkMode()">
+                🌙
+            </button>
             <nav>
                 <ul class="nav-tabs">
                     <li><button class="nav-tab-btn active" onclick="switchTab(event, 'produkty')">Oferta</button></li>
@@ -84,10 +82,7 @@
                     <li><button class="nav-tab-btn" onclick="switchTab(event, 'kontakt')">Kontakt</button></li>
                 </ul>
             </nav>
-            <button id="dark-mode-toggle" class="dark-mode-btn" onclick="toggleDarkMode()">
-                🌙
-            </button>
-            <div class="cart-icon" onclick="toggleCart()">
+             <div class="cart-icon" onclick="toggleCart()">
                 🛒 <span id="cart-count">(0)</span>
             </div>
         </div>
@@ -172,51 +167,55 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
             </div>
         </section>
 
-        <section id="zamowienie" class="container tab-content">
+        <section id="zamowienie" class="container tab-content" style="display: none;">
     <div class="checkout-container">
         <h2>Finalizacja zamówienia</h2>
         
         <div class="checkout-grid">
             <form action="https://formspree.io/f/xojpdrwz" method="POST" id="order-form">
+                <input type="hidden" name="Lista_Produktów" id="hidden-cart-data">
+                <input type="hidden" name="Suma_Razem" id="hidden-total-data">
+
                 <div class="form-section">
                     <h4><i class="icon">👤</i> Dane zamawiającego</h4>
                     <div class="input-row">
-                        <input type="text" placeholder="Imię i Nazwisko" required>
-                        <input type="tel" placeholder="Twój numer telefonu" required>
+                        <input type="text" name="Zamawiający_Imię" placeholder="Imię i Nazwisko" required>
+                        <input type="tel" name="Zamawiający_Tel" placeholder="Twój numer telefonu" required>
                     </div>
-                    <input type="email" placeholder="Adres e-mail (do potwierdzenia)" required>
+                    <input type="email" name="_replyto" placeholder="Adres e-mail (do potwierdzenia)" required>
                 </div>
 
                 <div class="form-section">
                     <h4><i class="icon">🚚</i> Szczegóły dostawy</h4>
-                    <input type="text" placeholder="Imię i Nazwisko" required>
-                        <input type="tel" placeholder="Twój numer telefonu" required>
-                        <input type="text" placeholder="Adres dostawy (ulica, numer, miasto)" required>
+                    <input type="text" name="Odbiorca_Imię" placeholder="Imię i Nazwisko Odbiorcy" required>
+                    <input type="tel" name="Odbiorca_Tel" placeholder="Numer telefonu Odbiorcy" required>
+                    <input type="text" name="Adres_Dostawy" placeholder="Adres dostawy (ulica, numer, miasto)" required>
+                    
                     <div class="input-row">
-                        <input type="date" title="Data dostawy" required>
-                        <select required>
+                        <input type="date" name="Data_Dostawy" title="Data dostawy" required>
+                        <select name="Godzina_Dostawy" required>
                             <option value="" disabled selected>Preferowana godzina</option>
-                            <option>9:00 - 12:00</option>
-                            <option>12:00 - 15:00</option>
-                            <option>15:00 - 18:00</option>
+                            <option value="9:00 - 12:00">9:00 - 12:00</option>
+                            <option value="12:00 - 15:00">12:00 - 15:00</option>
+                            <option value="15:00 - 18:00">15:00 - 18:00</option>
                         </select>
                     </div>
-                    <textarea placeholder="Wiadomość do bileciku lub instrukcje dla kuriera" rows="3"></textarea>
+                    <textarea name="Wiadomość_Bilecik" placeholder="Wiadomość do bileciku lub instrukcje dla kuriera" rows="3"></textarea>
                 </div>
 
                 <div class="form-section">
                     <h4><i class="icon">💳</i> Metoda płatności</h4>
                     <div class="payment-options">
                         <label class="payment-card">
-                            <input type="radio" name="payment" value="blik" checked>
+                            <input type="radio" name="Metoda_Płatności" value="BLIK" checked>
                             <span>BLIK</span>
                         </label>
                         <label class="payment-card">
-                            <input type="radio" name="payment" value="card">
+                            <input type="radio" name="Metoda_Płatności" value="Karta_Przelew">
                             <span>Karta / Przelew</span>
                         </label>
                         <label class="payment-card">
-                            <input type="radio" name="payment" value="cash">
+                            <input type="radio" name="Metoda_Płatności" value="Gotówka">
                             <span>Przy odbiorze</span>
                         </label>
                     </div>
@@ -274,15 +273,15 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
 
         <div class="contact-form-container">
     <h4>Napisz do nas</h4>
-    <form action="https://formspree.io/f/xojpdrwz" method="POST" id="order-form">
+    <form action="https://formspree.io/f/xojpdrwz" method="POST" id="contact-form">
         <div class="input-group">
-            <input type="text" id="contact-name" placeholder="Twoje imię i nazwisko" required>
+            <input type="text" name="Imię_Nazwisko" placeholder="Twoje imię i nazwisko" required>
         </div>
         <div class="input-group">
-            <input type="email" id="contact-email" placeholder="Twój e-mail" required>
+            <input type="email" name="_replyto" placeholder="Twój e-mail" required>
         </div>
         <div class="input-group">
-            <select id="contact-subject">
+            <select name="Temat" id="contact-subject">
                 <option value="Zapytanie ogólne">Zapytanie ogólne</option>
                 <option value="Wesele / Ślub">Wesele / Ślub</option>
                 <option value="Zamówienie indywidualne">Zamówienie indywidualne</option>
@@ -290,7 +289,7 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
             </select>
         </div>
         <div class="input-group">
-            <textarea id="contact-message" rows="5" placeholder="W czym możemy pomóc?" required></textarea>
+            <textarea name="Wiadomość" id="contact-message" rows="5" placeholder="W czym możemy pomóc?" required></textarea>
         </div>
         <button type="submit" class="btn send-btn">WYŚLIJ WIADOMOŚĆ</button>
     </form>
@@ -313,18 +312,16 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
             </div>
             <div>
                 <h4>MENU</h4>
-                <ul>
-                    <ul class="nav-tabs">
-                    <li><button class="nav-tab-btn" onclick="switchTab(event, 'produkty')">Oferta</button></li>
-                    <li><button class="nav-tab-btn" onclick="switchTab(event, 'galeria')">Galeria</button></li>
-                    <li><button class="nav-tab-btn" onclick="switchTab(event, 'kontakt')">Kontakt</button></li>
-                </ul>
+                    <ul class="footer-nav">
+                        <li><button class="footer-tab-btn" onclick="switchTab(event, 'produkty')">Oferta</button></li>
+                        <li><button class="footer-tab-btn" onclick="switchTab(event, 'galeria')">Galeria</button></li>
+                        <li><button class="footer-tab-btn" onclick="switchTab(event, 'kontakt')">Kontakt</button></li>
+                    </ul>
             </div>
             <div>
                 <h4>KONTAKT</h4>
                 <p>📍 ul. Zielona 6, 99-200 Poddębice</p>
-                <p>📞 +48 43 678 86 10</p>
-                <p>📞 +48 603 268 743</p>
+                <p>📞 +48 43 678 86 10 , &#128241; +48 603 268 743</p>
                 <p>✉️ stokrotka.poddebice@gmail.com</p>
                 <p>Pon - Pt: 9:00 - 17:00</p>
                 <p>Sob: 9:00 - 17:00</p>
@@ -342,6 +339,11 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
 <script>
     document.getElementById('current-year').textContent = new Date().getFullYear();
 </script>
+    </div>
+    <div id="fomo-bar" class="fomo-bar">
+         <span class="fomo-text">
+            🌸 Zamów w ciągu <span id="fomo-timer">--:--:--</span>, a Twoje kwiaty dostarczymy <b>jeszcze dzisiaj!</b>
+         </span>
     </div>
     </footer>
 
