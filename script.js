@@ -2,37 +2,51 @@
 const products = [
     {
         id: 1,
-        name: "Bukiet Słoneczny",
-        price: 120,
-        image: "img/bukiet1.jpg",
+        name: "Bukiet Letnie Harmonie",
+        price: 210,
+        image: "assets/bukiet1.jpg",
         description: "Radosna kompozycja żółtych róż i słoneczników, która rozświetli każdy dzień. Idealny na urodziny!"
     },
     {
         id: 2,
-        name: "Czerwona Pasja",
-        price: 150,
-        image: "img/bukiet2.jpg",
+        name: "Kompozycja Dziki Ogród",
+        price: 180,
+        image: "assets/bukiet2.jpg",
         description: "Klasyczny bukiet 15 głębokich, czerwonych róż. Wyraź swoje uczucia w najbardziej elegancki sposób."
     },
     {
         id: 3,
-        name: "Czerwona Pasja",
-        price: 150,
-        image: "img/bukiet3.jpg",
+        name: "Roślina Leokasja",
+        price: 110,
+        image: "assets/bukiet3.jpg",
         description: "Klasyczny bukiet 15 głębokich, czerwonych róż. Wyraź swoje uczucia w najbardziej elegancki sposób."
     },
     {
         id: 4,
-        name: "Czerwona Pasja",
+        name: "Flowerbox letnia łąka",
         price: 150,
-        image: "img/bukiet4.jpg",
+        image: "assets/bukiet4.jpg",
         description: "Klasyczny bukiet 15 głębokich, czerwonych róż. Wyraź swoje uczucia w najbardziej elegancki sposób."
     },
     {
         id: 5,
+        name: "Flowerbox czerwone róże",
+        price: 300,
+        image: "assets/bukiet5.jpg",
+        description: "Klasyczny bukiet 15 głębokich, czerwonych róż. Wyraź swoje uczucia w najbardziej elegancki sposób."
+    },
+    {
+        id: 6,
+        name: "Bukiet Słoneczny",
+        price: 120,
+        image: "assets/bukiet6.jpg",
+        description: "Radosna kompozycja żółtych róż i słoneczników, która rozświetli każdy dzień. Idealny na urodziny!"
+    },
+    {
+        id: 7,
         name: "Czerwona Pasja",
         price: 150,
-        image: "img/bukiet5.jpg",
+        image: "assets/bukiet7.jpg",
         description: "Klasyczny bukiet 15 głębokich, czerwonych róż. Wyraź swoje uczucia w najbardziej elegancki sposób."
     },
     // Dodaj opisy do reszty produktów...
@@ -224,27 +238,23 @@ function showToast(message) {
 
 // --- OKNO MODALNE (SZCZEGÓŁY PRODUKTU) ---
 function openProductModal(productId) {
-    // 1. Znajdź produkt w tablicy po jego ID
     const product = products.find(p => p.id === productId);
 
     if (product) {
-        // 2. Wstaw dane do HTML modala
         document.getElementById('modal-img').src = product.image;
         document.getElementById('modal-title').innerText = product.name;
         document.getElementById('modal-price').innerText = `${product.price} PLN`;
         
-        // 3. Wstaw dedykowany opis (lub domyślny, jeśli opisu brakuje)
         const descElement = document.getElementById('modal-desc');
         descElement.innerText = product.description || "Piękna kompozycja świeżych kwiatów.";
 
-        // 4. Ustaw przycisk dodawania, żeby wiedział co dodaje
         const addBtn = document.getElementById('modal-add-btn');
+        // Zmieniamy logikę dodawania: teraz używamy nazwy i ceny z obiektu product
         addBtn.onclick = () => {
-            addToCart(product.id);
+            addToCart(product.name, product.price);
             closeModal();
         };
 
-        // 5. Pokaż modal
         document.getElementById('product-modal').classList.remove('hidden');
     }
 }
@@ -260,6 +270,30 @@ window.onclick = function(event) {
         closeModal();
     }
 }
+// Dodaj funkcję generującą Product
+function displayProducts() {
+    const container = document.getElementById('products-container');
+    if (!container) return; // Zabezpieczenie, jeśli nie ma kontenera
+
+    container.innerHTML = ""; // Czyścimy kontener
+
+    products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        
+        card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p class="price"><span class="amount">${product.price}</span> PLN</p>
+            <button class="btn" onclick="openProductModal(${product.id})">ZOBACZ SZCZEGÓŁY</button>
+        `;
+        
+        container.appendChild(card);
+    });
+}
+
+// Wywołaj funkcję po załadowaniu strony
+document.addEventListener('DOMContentLoaded', displayProducts);
 
 // --- FILTROWANIE GALERII ---
 const filterButtons = document.querySelectorAll('.filter-btn');

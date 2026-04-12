@@ -119,36 +119,8 @@
         <section id="produkty" class="container tab-content active">
             <h2>Polecane Produkty</h2>
             <div class="grid">
-                <div class="card">
-                    <img src="assets/bukiet1.jpg" alt="Bukiet Letnie Harmonie">
-                    <h3>Bukiet Letnie Harmonie</h3>
-                    <p class="price"><span class="amount">210</span> PLN</p>
-                    <button class="btn" onclick="openModal('Bukiet Letnie Harmonie', 210, 'assets/bukiet1.jpg')">ZOBACZ SZCZEGÓŁY</button>
-                </div>
-                <div class="card">
-                    <img src="assets/bukiet2.jpg" alt="Kompozycja Dziki Ogród">
-                    <h3>Kompozycja Dziki Ogród</h3>
-                    <p class="price"><span class="amount">180</span> PLN</p>
-                    <button class="btn" onclick="openModal('Kompozycja Dziki Ogród', 180, 'assets/bukiet2.jpg')">ZOBACZ SZCZEGÓŁY</button>
-                </div>
-                <div class="card">
-                    <img src="assets/bukiet3.jpg" alt="Roślina Leokasja">
-                    <h3>Roślina Leokasja</h3>
-                    <p class="price"><span class="amount">110</span> PLN</p>
-                    <button class="btn" onclick="openModal('Roślina Leokasja', 110, 'assets/bukiet3.jpg')">ZOBACZ SZCZEGÓŁY</button>
-                </div>
-                <div class="card">
-                    <img src="assets/bukiet4.jpg" alt="Flowerbox czerwone róże">
-                    <h3>Flower box czerwone róże</h3>
-                    <p class="price"><span class="amount">300</span> PLN</p>
-                    <button class="btn" onclick="openModal('Flowerbox czerwone róże', 300, 'assets/bukiet4.jpg')">ZOBACZ SZCZEGÓŁY</button>
-                </div>
-                <div class="card">
-                    <img src="assets/bukiet5.jpg" alt="Flowerbox letnia łąka">
-                    <h3>Flowerbox letnia łąka</h3>
-                    <p class="price"><span class="amount">250</span> PLN</p>
-                    <button class="btn" onclick="openModal('Flowerbox letnia łąka', 300, 'assets/bukiet5.jpg')">ZOBACZ SZCZEGÓŁY</button>
-                </div>
+                <div id="products-container" class="products-grid">
+                    </div>
             </div>
         </section>
 
@@ -357,14 +329,11 @@
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <img id="modal-img" src="" alt="Zdjęcie produktu">
             <h3 id="modal-title">Nazwa Bukiety</h3>
-            <p id="modal-desc">Piękna kompozycja starannie wyselekcjonowanych kwiatów, układana przez naszych doświadczonych florystów. Idealny wybór na każdą okazję.</p>
+            <p id="modal-desc">Opis...</p> <div class="product-features"> <span><i class="fas fa-leaf"></i> Zawsze świeże</span>
+                <span><i class="fas fa-truck"></i> Dostawa dzisiaj</span>
+            </div>
             <p class="price" id="modal-price">0 PLN</p>
             <button class="btn" id="modal-add-btn">DODAJ DO KOSZYKA</button>
-        </div>
-        <p id="modal-desc">Opis...</p>
-        <div class="product-features">
-        <span><i class="fas fa-leaf"></i> Zawsze świeże</span>
-        <span><i class="fas fa-truck"></i> Dostawa dzisiaj</span>
         </div>
     </div>
     <a href="https://wa.me/48436788610" class="whatsapp-btn" target="_blank">
