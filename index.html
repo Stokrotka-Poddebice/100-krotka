@@ -68,7 +68,7 @@
     <header>
         <div class="container nav-container">
             <button id="dark-mode-toggle" class="dark-mode-btn" onclick="toggleDarkMode()">
-                🌙
+                <i class="fa-solid fa-moon"></i>
             </button>
             <div class="logo">
                  <a href="index.html">
@@ -83,7 +83,7 @@
                 </ul>
             </nav>
              <div class="cart-icon" onclick="toggleCart()">
-                🛒 <span id="cart-count">(0)</span>
+                <i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">(0)</span>
             </div>
         </div>
     </header>
@@ -98,15 +98,15 @@
     <h4>Dopasuj piękny dodatek:</h4>
     <div class="addon-grid">
         <div class="addon-item" onclick="addAddon('Bilecik z dedykacją', 5)">
-            <span>💌 Bilecik</span>
+            <span><i class="fa-solid fa-envelope-open-text"></i> Bilecik</span>
             <b>+5 PLN</b>
         </div>
         <div class="addon-item" onclick="addAddon('Czekoladki Merci', 25)">
-            <span>🍫 Merci</span>
+            <span><i class="fa-solid fa-candy-cane"></i> Merci</span>
             <b>+30 PLN</b>
         </div>
         <div class="addon-item" onclick="addAddon('Odżywka do kwiatów', 3)">
-            <span>🌿 Odżywka</span>
+            <span><i class="fa-solid fa-seedling"></i> Odżywka</span>
             <b>+3 PLN</b>
         </div>
     </div>
@@ -138,10 +138,16 @@
                     <button class="btn" onclick="openModal('Roślina Leokasja', 110, 'assets/bukiet3.jpg')">ZOBACZ SZCZEGÓŁY</button>
                 </div>
                 <div class="card">
-                    <img src="assets/bukiet5.jpg" alt="Flowerbox czerwone róże">
+                    <img src="assets/bukiet4.jpg" alt="Flowerbox czerwone róże">
                     <h3>Flower box czerwone róże</h3>
                     <p class="price"><span class="amount">300</span> PLN</p>
-                    <button class="btn" onclick="openModal('Flowerbox czerwone róże', 300, 'assets/bukiet5.jpg')">ZOBACZ SZCZEGÓŁY</button>
+                    <button class="btn" onclick="openModal('Flowerbox czerwone róże', 300, 'assets/bukiet4.jpg')">ZOBACZ SZCZEGÓŁY</button>
+                </div>
+                <div class="card">
+                    <img src="assets/bukiet5.jpg" alt="Flowerbox letnia łąka">
+                    <h3>Flowerbox letnia łąka</h3>
+                    <p class="price"><span class="amount">250</span> PLN</p>
+                    <button class="btn" onclick="openModal('Flowerbox letnia łąka', 300, 'assets/bukiet5.jpg')">ZOBACZ SZCZEGÓŁY</button>
                 </div>
             </div>
         </section>
@@ -158,12 +164,11 @@
             </div>
             <div class="gallery-grid">
                 <img src="assets/img3.jpg" alt="Bukiet" class="gallery-item bukiety" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
-                <img src="assets/img5.jpg" alt="'Bukiet dla osoby, która uważa, że kolorowe wstążki są dla amatorów'.
-Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-boxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
                 <img src="assets/img4.jpg" alt="Różowy flower box z wiecznymi różami na prezent" class="gallery-item flower-boxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
-                <img src="assets/img11.jpg" alt="Dekoracja kwiatowa białego samochodu do ślubu" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
-                <img src="assets/img12.jpg" alt="Dekoracja kwiatowa samochodu BMW do ślubu Poddębice" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
-                <img src="assets/img13.jpg" alt="Ślubny" class="gallery-item slubne" loading="lazy">
+                <img src="assets/img5.jpg" alt="'Bukiet dla klasycznej osoby, Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-boxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img11.jpg" alt="Dekoracja kwiatowa samochodu do ślubu w kolorze białym" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img12.jpg" alt="Dekoracja kwiatowa samochodu do ślubu w kolorze białym" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img13.jpg" alt="Bukiet Ślubny w rustykalnym stylu" class="gallery-item slubne" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
             </div>
         </section>
 
@@ -177,7 +182,7 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
                 <input type="hidden" name="Suma_Razem" id="hidden-total-data">
 
                 <div class="form-section">
-                    <h4><i class="icon">👤</i> Dane zamawiającego</h4>
+                    <h4><i class="icon"><i class="fas fa-user-edit"></i></i> Dane zamawiającego</h4>
                     <div class="input-row">
                         <input type="text" name="Zamawiający_Imię" placeholder="Imię i Nazwisko" required>
                         <input type="tel" name="Zamawiający_Tel" placeholder="Twój numer telefonu" required>
@@ -186,7 +191,7 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
                 </div>
 
                 <div class="form-section">
-                    <h4><i class="icon">🚚</i> Szczegóły dostawy</h4>
+                    <h4><i class="icon"><i class="fas fa-shipping-fast"></i> Szczegóły dostawy</h4>
                     <input type="text" name="Odbiorca_Imię" placeholder="Imię i Nazwisko Odbiorcy" required>
                     <input type="tel" name="Odbiorca_Tel" placeholder="Numer telefonu Odbiorcy" required>
                     <input type="text" name="Adres_Dostawy" placeholder="Adres dostawy (ulica, numer, miasto)" required>
@@ -204,7 +209,7 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
                 </div>
 
                 <div class="form-section">
-                    <h4><i class="icon">💳</i> Metoda płatności</h4>
+                    <h4><i class="icon"><i class="fas fa-credit-card"></i> Metoda płatności</h4>
                     <div class="payment-options">
                         <label class="payment-card">
                             <input type="radio" name="Metoda_Płatności" value="BLIK" checked>
@@ -212,7 +217,7 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
                         </label>
                         <label class="payment-card">
                             <input type="radio" name="Metoda_Płatności" value="Karta_Przelew">
-                            <span>Karta / Przelew</span>
+                            <span>Przelew</span>
                         </label>
                         <label class="payment-card">
                             <input type="radio" name="Metoda_Płatności" value="Gotówka">
@@ -242,28 +247,28 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
     <div class="contact-grid">
         <div class="contact-info">
             <div class="info-item">
-                <span class="icon">📍</span>
+                <span class="icon"><i class="fas fa-map-marker-alt contact-icon"></i></span>
                 <div>
                     <h4>Adres</h4>
                     <p>ul. Zielona 6, 99-200 Poddębice</p>
                 </div>
             </div>
             <div class="info-item">
-                <span class="icon">📞</span>
+                <span class="icon"><i class="fas fa-phone contact-icon"></i></span>
                 <div>
                     <h4>Telefon</h4>
                     <p><a href="tel:+48 43-678-86-10">+48436788610</a></p>
                 </div>
             </div>
             <div class="info-item">
-                <span class="icon">✉️</span>
+                <span class="icon"><i class="fas fa-envelope contact-icon"></i></span>
                 <div>
                     <h4>E-mail</h4>
                     <p><a href="mailto:stokrotka.poddebice@gmail.com">stokrotka.poddebice@gmail.com</a></p>
                 </div>
             </div>
             <div class="info-item">
-                <span class="icon">🕒</span>
+                <span class="icon"><i class="far fa-clock"></i></span>
                 <div>
                     <h4>Godziny otwarcia</h4>
                     <p>Pon - Pt: 9:00 - 17:00<br>Sobota: 9:00 - 14:00</p>
@@ -318,29 +323,29 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
                         <li><button class="footer-tab-btn" onclick="switchTab(event, 'kontakt')">Kontakt</button></li>
                     </ul>
             </div>
-        </div>
-        <h4>KONTAKT</h4>
-                <p>📍 <a href="https://maps.app.goo.gl/MukrHk3VqsNeKH6u6"> ul. Zielona 6, 99-200 Poddębice</p>
-                <p>📞 <a href="tel:+48 43-678-86-10">+48436788610</a></p>
-                <p>✉️ <a href="mailto:stokrotka.poddebice@gmail.com">stokrotka.poddebice@gmail.com</a></p>
-        </div>
-        </div>
-        <h4>GODZINY OTWARCIA</h4>
-                <p>🕒    Pon - Sob   :  9:00 - 17:00</p>
-                <p>🕒 Niedz. handlowa: 11:00 - 15:00</p>
-        </div>
-        <div>
-        <h4>ŚLEDŹ NAS</h4>
-            <ul>
-                <li><a href="#">Facebook</a></li>
-            </ul>
-        </div>
+                <h4>KONTAKT</h4>
+                    <p><i class="fa-solid fa-map-location-dot"></i> <a href="https://maps.app.goo.gl/MukrHk3VqsNeKH6u6"> ul. Zielona 6, 99-200 Poddębice</p>
+                    <p><i class="fas fa-phone-alt"></i> <a href="tel:+48 43-678-86-10">+48436788610</a></p>
+                    <p><i class="fas fa-envelope contact-icon"></i> <a href="mailto:stokrotka.poddebice@gmail.com">stokrotka.poddebice@gmail.com</a></p>
+            </div>
+            <div>
+                 <h4>GODZINY OTWARCIA</h4>
+                    <p><i class="far fa-clock"></i> Pon - Sob      :  9:00 - 17:00</p>
+                    <p><i class="far fa-clock"></i> Niedz. handlowa: 11:00 - 15:00</p>
+            </div>
+            <div>
+                <h4>ŚLEDŹ NAS</h4>
+                <ul>
+                    <li><i class="fab fa-facebook"></i><a href="#">Facebook</a></li>
+                </ul>
+            </div>
         </div>
         <div class="footer-bottom">
         <p>© <span id="current-year"></span> Kwiaciarnia Stokrotka. Wszystkie prawa zastrzeżone.</p>
-<script>
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-</script>
+            <script>
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+            </script>
+        </div>
     </div>
     </footer>
 
@@ -356,17 +361,22 @@ Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-box
             <p class="price" id="modal-price">0 PLN</p>
             <button class="btn" id="modal-add-btn">DODAJ DO KOSZYKA</button>
         </div>
+        <p id="modal-desc">Opis...</p>
+        <div class="product-features">
+        <span><i class="fas fa-leaf"></i> Zawsze świeże</span>
+        <span><i class="fas fa-truck"></i> Dostawa dzisiaj</span>
+        </div>
     </div>
     <a href="https://wa.me/48436788610" class="whatsapp-btn" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Kontakt WhatsApp">
     </div>
     </a>
-    <a>
     <div id="fomo-bar" class="fomo-bar">
-         <span class="fomo-text">
-            🌸 Zamów w ciągu <span id="fomo-timer">--:--:--</span>, a Twoje kwiaty dostarczymy <b>jeszcze dzisiaj!</b>
-         </span>
+        <a href="#zamowienie" class="fomo-link">
+            <span class="fomo-text">
+                <i class="fa-solid fa-fan"></i> Zamów w ciągu <span id="fomo-timer">--:--:--</span>, a Twoje kwiaty dostarczymy <b>jeszcze dzisiaj!</b>
+            </span>
+         </a>
     </div>
-    </a>
 </body>
 </html>

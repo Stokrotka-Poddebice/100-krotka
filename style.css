@@ -367,9 +367,10 @@ footer ul {
     transition: opacity 0.3s;
 }
 #modal-img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
+    width: 100%;
+    max-height: 300px;
+    object-fit: cover; /* Zdjęcie nie będzie zniekształcone */
+    border-radius: 10px;
 }
 
 .modal:not(.hidden) {
@@ -378,16 +379,10 @@ footer ul {
 }
 
 .modal-content {
-    background: #fff;
+    max-width: 500px; /* Aby opis nie rozciągał się na cały ekran */
     padding: 30px;
-    border-radius: 12px;
-    max-width: 400px;
-    width: 90%;
+    border-radius: 15px;
     text-align: center;
-    position: relative;
-    transform: translateY(-30px);
-    transition: transform 0.3s;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
 }
 
 .modal:not(.hidden) .modal-content {
@@ -406,10 +401,19 @@ footer ul {
 .close-modal:hover { color: red; }
 
 #modal-desc {
-    margin: 15px 0;
     color: #666;
+    line-height: 1.6;
+    margin: 15px 0;
     font-size: 0.95rem;
 }
+.product-features {
+    display: flex;
+    justify-content: space-around;
+    margin: 15px 0;
+    font-size: 0.8rem;
+    color: var(--primary-color);
+}
+
 .whatsapp-btn {
     position: fixed;
     bottom: 20px;
@@ -667,35 +671,43 @@ footer ul {
 }
 
 .fomo-bar {
-    background-color: var(--accent-color); /* Twój różowy kolor */
+    position: fixed;      /* Klucz do "pływania" */
+    bottom: 0;            /* Przyklej do dołu */
+    left: 0;
+    width: 100%;          /* Pełna szerokość */
+    background: var(--primary-color); /* Twoja zieleń */
     color: white;
     text-align: center;
-    padding: 10px 20px;
+    padding: 12px 20px;
+    z-index: 9999;        /* Aby był nad wszystkimi innymi elementami */
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.fomo-link {
+    text-decoration: none;
+    color: inherit;       /* Dziedziczy biały kolor tekstu */
+    display: block;
+}
+
+.fomo-text {
     font-size: 0.95rem;
-    position: relative;
-    z-index: 1001;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    letter-spacing: 0.5px;
 }
 
 #fomo-timer {
-    font-family: monospace;
     font-weight: bold;
-    background: rgba(255, 255, 255, 0.2);
+    color: var(--accent-color); /* Twój różowy/złoty kolor na timerze */
+    background: rgba(255,255,255,0.1);
     padding: 2px 8px;
     border-radius: 4px;
     margin: 0 5px;
 }
 
-/* Animacja pulsowania tekstu, aby przyciągnąć wzrok */
-.fomo-text b {
-    text-transform: uppercase;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { opacity: 1; }
-    50% { opacity: 0.7; }
-    100% { opacity: 1; }
+/* Tryb Ciemny - poprawka kontrastu */
+body.dark-theme .fomo-bar {
+    background: #1a3a24; /* Nieco ciemniejsza zieleń */
+    border-top: 1px solid var(--primary-color);
 }
 
 /* Jeśli pasek ma znikać po czasie, dodamy klasę hidden */
@@ -909,4 +921,34 @@ body.dark-theme .addon-item b {
 /* W trybie ciemnym */
 body.dark-theme .footer-tab-btn {
     color: #ccc;
+}
+/* Styl ogólny dla ikon w treści */
+.fas, .far {
+    margin-right: 10px; /* Odstęp od tekstu */
+    color: var(--primary-color); /* Twoja zieleń jako kolor domyślny */
+    width: 20px; /* Stała szerokość, by tekst obok był równo w pionie */
+    text-align: center;
+}
+
+/* Specjalny kolor dla ikon w formularzu zamówienia */
+.form-section h4 i {
+    color: var(--accent-color); /* Różowy/Złoty akcent */
+    font-size: 1.2rem;
+}
+
+/* Ikony w stopce mogą być jaśniejsze */
+.footer i {
+    color: #fff;
+    opacity: 0.8;
+}
+
+/* Efekt najechania dla ikon kontaktowych (opcjonalnie) */
+.contact-item:hover i {
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+    color: var(--accent-color);
+}
+
+body {
+    padding-bottom: 50px; /* Tyle, ile mniej więcej ma wysokości Twój pasek */
 }
