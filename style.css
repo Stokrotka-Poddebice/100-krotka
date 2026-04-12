@@ -414,9 +414,24 @@ footer ul {
     color: var(--primary-color);
 }
 
+.products-grid {
+    display: grid;
+    /* Tworzy kolumny o szerokości min 280px, automatycznie wypełniając miejsce */
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px; /* Odstępy między bukietami */
+    padding: 20px 0;
+}
+
+/* Opcjonalnie: wyśrodkowanie napisu "Polecane Produkty" */
+#produkty h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: var(--primary-color);
+}
+
 .whatsapp-btn {
     position: fixed;
-    bottom: 20px;
+    bottom: 80px;
     left: 20px; /* Po lewej stronie, by nie zasłaniać koszyka */
     width: 60px;
     height: 60px;
@@ -426,7 +441,7 @@ footer ul {
     align-items: center;
     justify-content: center;
     box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
-    z-index: 1000;
+    z-index: 10001;
     transition: transform 0.3s;
 }
 
