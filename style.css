@@ -923,11 +923,12 @@ body.dark-theme .footer-tab-btn {
     color: #ccc;
 }
 /* Styl ogólny dla ikon w treści */
-.fas, .far {
+.fa-solid, .far {
     margin-right: 10px; /* Odstęp od tekstu */
     color: var(--primary-color); /* Twoja zieleń jako kolor domyślny */
-    width: 20px; /* Stała szerokość, by tekst obok był równo w pionie */
+    width: 25px; /* Stała szerokość, by tekst obok był równo w pionie */
     text-align: center;
+    display: inline-block; /* Ważne, by ikony trzymały wymiar */
 }
 
 /* Specjalny kolor dla ikon w formularzu zamówienia */

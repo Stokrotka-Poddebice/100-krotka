@@ -15,6 +15,7 @@
 
 <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
     <link rel="canonical" href="https://stokrotka-poddebice.github.io/100-krotka/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 <script type="application/ld+json">
 {
@@ -128,19 +129,23 @@
             <h2>Nasze Realizacje</h2>
             <div class="filter-buttons">
                 <button class="filter-btn active" data-filter="bukiety">Bukiety</button>
-                <button class="filter-btn" data-filter="flower-boxy">Flower Boxy</button>
+                <button class="filter-btn" data-filter="flowerboxy">Flower-Boxy</button>
                 <button class="filter-btn" data-filter="slubne">Bukiety Ślubne</button>
                 <button class="filter-btn" data-filter="samochody">Samochody</button>
                 <button class="filter-btn" data-filter="kondolencje">Kondolencje</button>
                 <button class="filter-btn" data-filter="all">Wszystkie</button>
             </div>
             <div class="gallery-grid">
-                <img src="assets/img3.jpg" alt="Bukiet" class="gallery-item bukiety" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
-                <img src="assets/img4.jpg" alt="Różowy flower box z wiecznymi różami na prezent" class="gallery-item flower-boxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
-                <img src="assets/img5.jpg" alt="'Bukiet dla klasycznej osoby, Czerń i czerwień - klasyka gatunku. 🖤❤️" class="gallery-item flower-boxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img1.jpg" alt="Rustykalny bukiet ślubny z lawendą i kłosami zbóż - styl boho." class="gallery-item bukiety" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img2.jpg" alt="Elegancki bukiet pełen pastelowych róż i sezonowych dodatków." class="gallery-item bukiety" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img3.jpg" alt="Subtelna dekoracja stołu z gipsówki i polnych kwiatów - lekkość i wdzięk." class="gallery-item bukiety" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img4.jpg" alt="Błękitna fantazja - kompozycja z ostróżką i margerytkami." class="gallery-item flower-boxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img5.jpg" alt="'Różowy flower box z wiecznymi różami na prezent" class="gallery-item flower-boxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
                 <img src="assets/img11.jpg" alt="Dekoracja kwiatowa samochodu do ślubu w kolorze białym" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
                 <img src="assets/img12.jpg" alt="Dekoracja kwiatowa samochodu do ślubu w kolorze białym" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
                 <img src="assets/img13.jpg" alt="Bukiet Ślubny w rustykalnym stylu" class="gallery-item slubne" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img14.jpg" alt="Bukiet Ślubny w rustykalnym stylu" class="gallery-item slubne" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img15.jpg" alt="Bukiet Ślubny w rustykalnym stylu" class="gallery-item slubne" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
             </div>
         </section>
 
@@ -154,7 +159,7 @@
                 <input type="hidden" name="Suma_Razem" id="hidden-total-data">
 
                 <div class="form-section">
-                    <h4><i class="icon"><i class="fas fa-user-edit"></i></i> Dane zamawiającego</h4>
+                    <h4><i class="icon"><i class="fa-solid fa-user-edit"></i></i> Dane zamawiającego</h4>
                     <div class="input-row">
                         <input type="text" name="Zamawiający_Imię" placeholder="Imię i Nazwisko" required>
                         <input type="tel" name="Zamawiający_Tel" placeholder="Twój numer telefonu" required>
@@ -163,7 +168,7 @@
                 </div>
 
                 <div class="form-section">
-                    <h4><i class="icon"><i class="fas fa-shipping-fast"></i> Szczegóły dostawy</h4>
+                    <h4><i class="icon"><i class="fa-solid fa-shipping-fast"></i> Szczegóły dostawy</h4>
                     <input type="text" name="Odbiorca_Imię" placeholder="Imię i Nazwisko Odbiorcy" required>
                     <input type="tel" name="Odbiorca_Tel" placeholder="Numer telefonu Odbiorcy" required>
                     <input type="text" name="Adres_Dostawy" placeholder="Adres dostawy (ulica, numer, miasto)" required>
@@ -181,7 +186,7 @@
                 </div>
 
                 <div class="form-section">
-                    <h4><i class="icon"><i class="fas fa-credit-card"></i> Metoda płatności</h4>
+                    <h4><i class="icon"><i class="fa-solid fa-credit-card"></i> Metoda płatności</h4>
                     <div class="payment-options">
                         <label class="payment-card">
                             <input type="radio" name="Metoda_Płatności" value="BLIK" checked>
@@ -219,21 +224,21 @@
     <div class="contact-grid">
         <div class="contact-info">
             <div class="info-item">
-                <span class="icon"><i class="fas fa-map-marker-alt contact-icon"></i></span>
+                <span class="icon"><i class="fa-solid fa-map-marker-alt contact-icon"></i></span>
                 <div>
                     <h4>Adres</h4>
                     <p>ul. Zielona 6, 99-200 Poddębice</p>
                 </div>
             </div>
             <div class="info-item">
-                <span class="icon"><i class="fas fa-phone contact-icon"></i></span>
+                <span class="icon"><i class="fa-solid fa-phone contact-icon"></i></span>
                 <div>
                     <h4>Telefon</h4>
                     <p><a href="tel:+48 43-678-86-10">+48436788610</a></p>
                 </div>
             </div>
             <div class="info-item">
-                <span class="icon"><i class="fas fa-envelope contact-icon"></i></span>
+                <span class="icon"><i class="fa-solid fa-envelope contact-icon"></i></span>
                 <div>
                     <h4>E-mail</h4>
                     <p><a href="mailto:stokrotka.poddebice@gmail.com">stokrotka.poddebice@gmail.com</a></p>
@@ -297,8 +302,8 @@
             </div>
                 <h4>KONTAKT</h4>
                     <p><i class="fa-solid fa-map-location-dot"></i> <a href="https://maps.app.goo.gl/MukrHk3VqsNeKH6u6"> ul. Zielona 6, 99-200 Poddębice</p>
-                    <p><i class="fas fa-phone-alt"></i> <a href="tel:+48 43-678-86-10">+48436788610</a></p>
-                    <p><i class="fas fa-envelope contact-icon"></i> <a href="mailto:stokrotka.poddebice@gmail.com">stokrotka.poddebice@gmail.com</a></p>
+                    <p><i class="fa-solid fa-phone-alt"></i> <a href="tel:+48 43-678-86-10">+48436788610</a></p>
+                    <p><i class="fa-solid fa-envelope contact-icon"></i> <a href="mailto:stokrotka.poddebice@gmail.com">stokrotka.poddebice@gmail.com</a></p>
             </div>
             <div>
                  <h4>GODZINY OTWARCIA</h4>
@@ -329,17 +334,15 @@
             <span class="close-modal" onclick="closeModal()">&times;</span>
             <img id="modal-img" src="" alt="Zdjęcie produktu">
             <h3 id="modal-title">Nazwa Bukiety</h3>
-            <p id="modal-desc">Opis...</p> <div class="product-features"> <span><i class="fas fa-leaf"></i> Zawsze świeże</span>
-                <span><i class="fas fa-truck"></i> Dostawa dzisiaj</span>
+            <p id="modal-desc">Opis...</p> <div class="product-features"> <span><i class="fa-solid fa-leaf"></i> Zawsze świeże</span>
+                <span><i class="fa-solid fa-truck"></i> Dostawa dzisiaj</span>
             </div>
             <p class="price" id="modal-price">0 PLN</p>
             <button class="btn" id="modal-add-btn">DODAJ DO KOSZYKA</button>
         </div>
     </div>
     <a href="https://wa.me/48436788610" class="whatsapp-btn" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Kontakt WhatsApp">
-    </div>
-    </a>
+    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Kontakt WhatsApp">    </a>
     <div id="fomo-bar" class="fomo-bar">
         <a href="#zamowienie" class="fomo-link">
             <span class="fomo-text">

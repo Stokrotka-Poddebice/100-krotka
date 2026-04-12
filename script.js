@@ -5,21 +5,21 @@ const products = [
         name: "Bukiet Letnie Harmonie",
         price: 210,
         image: "assets/bukiet1.jpg",
-        description: "Radosna kompozycja żółtych róż i słoneczników, która rozświetli każdy dzień. Idealny na urodziny!"
+        description: "Kompozycja pełna słońca i radości. Składa się z najświeższych kwiatów sezonowych w odcieniach żółci, pomarańczu i bieli. Idealny prezent na urodziny lub poprawę humoru."
     },
     {
         id: 2,
         name: "Kompozycja Dziki Ogród",
         price: 180,
         image: "assets/bukiet2.jpg",
-        description: "Klasyczny bukiet 15 głębokich, czerwonych róż. Wyraź swoje uczucia w najbardziej elegancki sposób."
+        description: "Naturalna, lekko niesforna kompozycja w stylu rustykalnym. Wykorzystujemy w niej kwiaty polne, eukaliptus oraz delikatne dodatki, które nadają jej unikalny, leśny charakter."
     },
     {
         id: 3,
         name: "Roślina Leokasja",
         price: 110,
         image: "assets/bukiet3.jpg",
-        description: "Klasyczny bukiet 15 głębokich, czerwonych róż. Wyraź swoje uczucia w najbardziej elegancki sposób."
+        description: "Egzotyczna roślina doniczkowa o spektakularnych liściach. Alokazja to symbol elegancji i nowoczesnego wnętrza. Wymaga jasnego stanowiska i regularnego zraszania"
     },
     {
         id: 4,
