@@ -135,11 +135,11 @@
                 <img src="assets/img2.jpg" alt="Elegancki bukiet pełen pastelowych róż i sezonowych dodatków." class="gallery-item slubne" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
                 <img src="assets/img3.jpg" alt="Subtelna dekoracja stołu z gipsówki i polnych kwiatów - lekkość i wdzięk." class="gallery-item bukiety" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
                 <img src="assets/img4.jpg" alt="Błękitna fantazja - kompozycja z ostróżką i margerytkami." class="gallery-item bukiety" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
-                <img src="assets/img5.jpg" alt="'Różowy flower box z wiecznymi różami na prezent" class="gallery-item flower-boxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
-                <img src="assets/img6.jpg" alt="'Różowy flower box z wiecznymi różami na prezent" class="gallery-item flower-boxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img5.jpg" alt="Klasyczny Flowerbox z czerwonymi różami na prezent" class="gallery-item flower-boxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img6.jpg" alt="Flower box z z kwiatami w opdcieniach różu" class="gallery-item flower-boxy" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
                 <img src="assets/img11.jpg" alt="Dekoracja kwiatowa samochodu do ślubu w kolorze białym" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
                 <img src="assets/img12.jpg" alt="Dekoracja kwiatowa samochodu do ślubu w kolorze białym" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
-                <img src="assets/img13.jpg" alt="Dekoracja kwiatowa samochodu do ślubu w kolorze herbacianym" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+                <img src="assets/img13.jpg" alt="Delikana kwiatowa dekoracja samochodu do ślubu " class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
                 <img src="assets/img14.jpg" alt="Dekoracja kwiatowa samochodu do ślubu w kolorze herbacianym" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
                 <img src="assets/img15.jpg" alt="Dekoracja kwiatowa samochodu do ślubu w kolorze białym" class="gallery-item samochody" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
             </div>
@@ -218,46 +218,12 @@
         <section id="kontakt" class="container tab-content">
     <h2>Skontaktuj się z nami</h2>
     <div class="contact-grid">
-        <div class="contact-info">
-            <div class="info-item">
-                <span class="icon"><i class="fa-solid fa-map-marker-alt contact-icon"></i></span>
-                <div>
-                    <h4>Adres</h4>
-                    <p>ul. Zielona 6, 99-200 Poddębice</p>
-                </div>
-            </div>
-            <div class="info-item">
-                <span class="icon"><i class="fa-solid fa-phone contact-icon"></i></span>
-                <div>
-                    <h4>Telefon</h4>
-                    <p><a href="tel:+48 43-678-86-10">+48436788610</a></p>
-                </div>
-            </div>
-            <div class="info-item">
-                <span class="icon"><i class="fa-solid fa-envelope contact-icon"></i></span>
-                <div>
-                    <h4>E-mail</h4>
-                    <p><a href="mailto:stokrotka.poddebice@gmail.com">stokrotka.poddebice@gmail.com</a></p>
-                </div>
-            </div>
-            <div class="info-item">
-                <span class="icon"><i class="far fa-clock"></i></span>
-                <div>
-                    <h4>Godziny otwarcia</h4>
-                    <p>Pon - Pt: 9:00 - 17:00<br>Sobota: 9:00 - 14:00</p>
-                </div>
-            </div>
+        
         </div>
 
         <div class="contact-form-container">
     <h4>Napisz do nas</h4>
     <form action="https://formspree.io/f/xojpdrwz" method="POST" id="contact-form">
-        <div class="input-group">
-            <input type="text" name="Imię_Nazwisko" placeholder="Twoje imię i nazwisko" required>
-        </div>
-        <div class="input-group">
-            <input type="email" name="_replyto" placeholder="Twój e-mail" required>
-        </div>
         <div class="input-group">
             <select name="Temat" id="contact-subject">
                 <option value="Zapytanie ogólne">Zapytanie ogólne</option>
@@ -265,6 +231,12 @@
                 <option value="Zamówienie indywidualne">Zamówienie indywidualne</option>
                 <option value="Inne">Inne</option>
             </select>
+        </div>
+        <div class="input-group">
+            <input type="text" name="Imię_Nazwisko" placeholder="Twoje imię i nazwisko" required>
+        </div>
+        <div class="input-group">
+            <input type="email" name="_replyto" placeholder="Twój e-mail" required>
         </div>
         <div class="input-group">
             <textarea name="Wiadomość" id="contact-message" rows="5" placeholder="W czym możemy pomóc?" required></textarea>
@@ -275,7 +247,13 @@
 
         <div class="contact-map">
             <div class="map-placeholder">
-                <p>Mapa dojazdu</p>
+                <div class="info-item">
+                <span class="icon"><i class="fa-solid fa-map-marker-alt contact-icon"></i></span>
+                <div>
+                    <h4>Mapa Dojazdu</h4>
+                </div>
+            </div>
+            <div class="info-item">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1231.1314536790258!2d18.957831052465423!3d51.89266607767898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471baa87bd3e13e3%3A0xebfbc8913c28c004!2sKWIACIARNIA%20STOKROTKA!5e0!3m2!1spl!2spl!4v1775976221857!5m2!1spl!2spl" width="100%" height="300" style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
@@ -340,6 +318,7 @@
     </div>
     <a href="https://wa.me/48436788610" class="whatsapp-btn" target="_blank">
     <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Kontakt WhatsApp">    </a>
+
     <div id="fomo-bar" class="fomo-bar">
         <a href="#zamowienie" class="fomo-link">
             <span class="fomo-text">
@@ -347,5 +326,6 @@
             </span>
          </a>
     </div>
+    
 </body>
 </html>

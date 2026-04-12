@@ -496,19 +496,25 @@ function toggleDarkMode() {
     
     // Zmieniamy ikonkę w zależności od trybu
     if (body.classList.contains('dark-theme')) {
-        btn.innerText = '<i class="fa-solid fa-soon"></i>'; // Słońce, by wrócić do jasnego
+        btn.innerHTML = '<i class="fa-solid fa-sun"></i>'; // Słońce, by wrócić do jasnego
         localStorage.setItem('theme', 'dark');
     } else {
-        btn.innerText = '<i class="fa-solid fa-moon"></i>'; // Księżyc, by przejść w ciemny
+        btn.innerHTML = '<i class="fa-solid fa-moon"></i>'; // Księżyc, by przejść w ciemny
         localStorage.setItem('theme', 'light');
     }
 }
 
 // Sprawdzamy zapisany motyw przy starcie strony
 document.addEventListener('DOMContentLoaded', () => {
+    startFomoTimer(); // Twoja funkcja licznika
+
     const savedTheme = localStorage.getItem('theme');
+    const btn = document.getElementById('dark-mode-toggle');
+    
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-theme');
-        document.getElementById('dark-mode-toggle').innerText = '☀️';
+        if (btn) btn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    } else {
+        if (btn) btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
     }
 });
