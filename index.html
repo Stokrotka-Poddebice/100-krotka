@@ -41,14 +41,7 @@
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
-      "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday",
-        "Saturday"
-      ],
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
       "opens": "09:00",
       "closes": "17:00"
     },
@@ -58,7 +51,7 @@
       "opens": "11:00",
       "closes": "15:00"
     }
-  ],
+  ]
 }
 </script>
 </head>
@@ -183,6 +176,7 @@
                     <input type="hidden" name="cart_items" id="cart-items-input">
 
                     <div class="order-summary">
+                        <ul id="order-items" style="list-style: none; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 10px; text-align: left;"></ul>
                         <p>Razem do zapłaty: <span id="order-total">0 PLN</span></p>
                         <button type="submit" class="btn btn-order">POTWIERDZAM I PŁACĘ</button>
                     </div>
@@ -207,7 +201,7 @@
             </select>
         </div>
         <div class="input-group">
-            <input type="text" name="Imię_Nazwisko" placeholder="Twoje imię i nazwisko" required>
+            <input type="text" name="Imię_Nazwisko" id="contact-name" placeholder="Twoje imię i nazwisko" required>
         </div>
         <div class="input-group">
             <input type="email" name="_replyto" placeholder="Twój e-mail" required>

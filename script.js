@@ -1,84 +1,51 @@
 // --- OPISY PRODUKTÓW ---
 const products = [
-    {
-        id: 1,
-        name: "Bukiet Letnie Harmonie",
-        price: 210,
-        image: "assets/bukiet1.jpg",
-        description: "Kompozycja pełna słońca i radości. Składa się z najświeższych kwiatów sezonowych w odcieniach żółci, pomarańczu i bieli. Idealny prezent na urodziny lub poprawę humoru."
-    },
-    {
-        id: 2,
-        name: "Kompozycja Dziki Ogród",
-        price: 180,
-        image: "assets/bukiet2.jpg",
-        description: "Naturalna, lekko niesforna kompozycja w stylu rustykalnym. Wykorzystujemy w niej kwiaty polne, eukaliptus oraz delikatne dodatki, które nadają jej unikalny, leśny charakter."
-    },
-    {
-        id: 3,
-        name: "Roślina Leokasja",
-        price: 110,
-        image: "assets/bukiet3.jpg",
-        description: "Egzotyczna roślina doniczkowa o spektakularnych liściach. Alokazja to symbol elegancji i nowoczesnego wnętrza. Wymaga jasnego stanowiska i regularnego zraszania"
-    },
-    {
-        id: 4,
-        name: "Flowerbox letnia łąka",
-        price: 150,
-        image: "assets/bukiet4.jpg",
-        description: "Klasyczny bukiet 15 głębokich, czerwonych róż. Wyraź swoje uczucia w najbardziej elegancki sposób."
-    },
-    {
-        id: 5,
-        name: "Flowerbox czerwone róże",
-        price: 300,
-        image: "assets/bukiet5.jpg",
-        description: "Klasyczny bukiet 15 głębokich, czerwonych róż. Wyraź swoje uczucia w najbardziej elegancki sposób."
-    },
-    {
-        id: 6,
-        name: "Bukiet Słoneczny",
-        price: 120,
-        image: "assets/bukiet6.jpg",
-        description: "Radosna kompozycja żółtych róż i słoneczników, która rozświetli każdy dzień. Idealny na urodziny!"
-    },
-    {
-        id: 7,
-        name: "Czerwona Pasja",
-        price: 150,
-        image: "assets/bukiet7.jpg",
-        description: "Klasyczny bukiet 15 głębokich, czerwonych róż. Wyraź swoje uczucia w najbardziej elegancki sposób."
-    },
-    // Dodaj opisy do reszty produktów...
+    { id: 1, name: "Bukiet Letnie Harmonie", price: 210, image: "assets/bukiet1.jpg", description: "Kompozycja pełna słońca i radości..." },
+    { id: 2, name: "Kompozycja Dziki Ogród", price: 180, image: "assets/bukiet2.jpg", description: "Naturalna, lekko niesforna kompozycja w stylu rustykalnym..." },
+    { id: 3, name: "Roślina Leokasja", price: 110, image: "assets/bukiet3.jpg", description: "Egzotyczna roślina doniczkowa o spektakularnych liściach..." },
+    { id: 4, name: "Flowerbox letnia łąka", price: 150, image: "assets/bukiet4.jpg", description: "Klasyczny bukiet 15 głębokich, czerwonych róż..." },
+    { id: 5, name: "Flowerbox czerwone róże", price: 300, image: "assets/bukiet5.jpg", description: "Klasyczny bukiet 15 głębokich, czerwonych róż..." },
+    { id: 6, name: "Bukiet Słoneczny", price: 120, image: "assets/bukiet6.jpg", description: "Radosna kompozycja żółtych róż i słoneczników..." },
+    { id: 7, name: "Czerwona Pasja", price: 150, image: "assets/bukiet7.jpg", description: "Klasyczny bukiet 15 głębokich, czerwonych róż..." }
 ];
 
-// --- LOGIKA KOSZYKA Z LOCAL STORAGE ---
-// Pobieramy zapisany koszyk z pamięci przeglądarki, lub tworzymy pusty
 let cart = JSON.parse(localStorage.getItem('stokrotka_cart')) || [];
 
-// Inicjalizacja koszyka po załadowaniu strony
 document.addEventListener('DOMContentLoaded', () => {
     updateCart();
+    displayProducts(); // Uruchamiamy generowanie produktów
+    startFomoTimer();
+    revealElements();
 });
 
-// Funkcja zapisująca obecny stan koszyka do przeglądarki
-function saveCart() {
-    localStorage.setItem('stokrotka_cart', JSON.stringify(cart));
+// --- GENEROWANIE PRODUKTÓW ---
+function displayProducts() {
+    const container = document.getElementById('products-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'card reveal';
+        card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p class="price">${product.price} PLN</p>
+            <button class="btn" onclick="openProductModal(${product.id})">Zobacz szczegóły</button>
+        `;
+        container.appendChild(card);
+    });
 }
 
-function toggleCart() {
-    const sidebar = document.getElementById('cart-sidebar');
-    sidebar.classList.toggle('hidden');
-}
+// --- LOGIKA KOSZYKA ---
+function saveCart() { localStorage.setItem('stokrotka_cart', JSON.stringify(cart)); }
+
+function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('hidden'); }
 
 function addToCart(name, price) {
     const existingItem = cart.find(item => item.name === name);
-
-    if (existingItem) {
-        existingItem.quantity += 1;
-    } else {
-        cart.push({ name, price, quantity: 1 });
-    }
+    if (existingItem) existingItem.quantity += 1;
+    else cart.push({ name, price, quantity: 1 });
 
     saveCart();
     updateCart();
@@ -91,448 +58,204 @@ function updateCart() {
     const cartTotal = document.getElementById('cart-total');
     
     if(!cartItems || !cartCount || !cartTotal) return;
-
     cartItems.innerHTML = '';
-    let total = 0;
-    let totalQuantity = 0;
+    let total = 0, totalQuantity = 0;
 
     if (cart.length === 0) {
-    cartItems.innerHTML = '<p style="color: #888; text-align: center;">Twój koszyk jest pusty.</p>';
-    cartCount.innerText = '(0)';
-    cartTotal.innerText = '0';
-    return;
-}
+        cartItems.innerHTML = '<p style="color: #888; text-align: center;">Twój koszyk jest pusty.</p>';
+        cartCount.innerText = '(0)';
+        cartTotal.innerText = '0';
+        return;
+    }
 
     cart.forEach((item, index) => {
         total += item.price * item.quantity;
         totalQuantity += item.quantity;
-
         const li = document.createElement('li');
-        li.style.display = "flex";
-        li.style.justifyContent = "space-between";
-        li.style.alignItems = "center";
-        li.style.marginBottom = "10px";
-
+        li.style.display = "flex"; li.style.justifyContent = "space-between"; li.style.alignItems = "center"; li.style.marginBottom = "10px";
         li.innerHTML = `
-            <div style="flex: 1;">
-                ${item.name}<br>
-                <small>${item.price * item.quantity} PLN</small>
-        </div>
-        <div style="display: flex; align-items: center; gap: 8px;">
-        <button onclick="zmienIlosc(${index}, -1)" style="width:25px; cursor:pointer;">-</button>
-        <span>${item.quantity}</span>
-        <button onclick="zmienIlosc(${index}, 1)" style="width:25px; cursor:pointer;">+</button>
-        <button onclick="removeFromCart(${index})" style="color:red; background:none; border:none; cursor:pointer; margin-left:10px;">✖</button>
-        </div>
-`;
-cartItems.appendChild(li);
+            <div style="flex: 1;">${item.name}<br><small>${item.price * item.quantity} PLN</small></div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <button onclick="zmienIlosc(${index}, -1)" style="width:25px; cursor:pointer;">-</button>
+                <span>${item.quantity}</span>
+                <button onclick="zmienIlosc(${index}, 1)" style="width:25px; cursor:pointer;">+</button>
+                <button onclick="removeFromCart(${index})" style="color:red; background:none; border:none; cursor:pointer; margin-left:10px;">✖</button>
+            </div>`;
+        cartItems.appendChild(li);
     });
-
-    cartCount.innerText = `(${totalQuantity})`; // Pokazuje sumę wszystkich kwiatów
+    cartCount.innerText = `(${totalQuantity})`;
     cartTotal.innerText = total;
+}
+
+function zmienIlosc(index, oIle) {
+    cart[index].quantity += oIle;
+    if (cart[index].quantity <= 0) cart.splice(index, 1);
+    saveCart(); updateCart();
 }
 
 function removeFromCart(index) {
     cart.splice(index, 1);
-    saveCart();
-    updateCart();
+    saveCart(); updateCart();
     showToast('Usunięto z koszyka');
 }
 
+function addAddon(name, price) {
+    addToCart(name, price);
+}
+
+// --- ZAMÓWIENIE (KASA) ---
 function goToCheckout() {
-    // 1. Sprawdzamy, czy koszyk nie jest pusty
     if (cart.length === 0) {
         showToast("Twój koszyk jest pusty!");
         return;
     }
 
-    // 2. Pokazujemy sekcję zamówienia (używamy Twojej funkcji showSection lub klas)
-    // Jeśli showSection zajmuje się ukrywaniem reszty, to wystarczy:
-    //if (typeof showSection === "function") {
-    //    showSection('zamowienie');
-    //} else {
-    //    document.querySelectorAll('.tab-content').forEach(c => {
-    //        c.classList.remove('active');
-    //        c.style.display = 'none';
-    //   });
-    //    const orderSec = document.getElementById('zamowienie');
-    //    orderSec.classList.add('active');
-    //    orderSec.style.display = 'block';
-    //}
     switchTab(null, 'zamowienie');
 
-    // 3. Pobieramy elementy podsumowania widocznego na stronie
-    const checkoutItems = document.getElementById('checkout-items');
-    const checkoutTotal = document.getElementById('order-total');
-    
-    // 4. Pobieramy ukryte pola dla Formspree
+    const orderItemsList = document.getElementById('order-items');
+    const orderTotalSpan = document.getElementById('order-total');
     const hiddenCartInput = document.getElementById('cart-items-input');
-    const hiddenTotalInput = document.getElementById('hidden-total-data');
 
-    // --- OBLICZENIA (Deklarujemy 'currentTotal' tylko raz!) ---
     let currentTotal = 0;
-    checkoutItems.innerHTML = '';
+    if (orderItemsList) orderItemsList.innerHTML = '';
 
     cart.forEach(item => {
         const itemSum = item.price * item.quantity;
         currentTotal += itemSum;
-
-        // Tworzymy element listy do podsumowania na ekranie
-        const li = document.createElement('li');
-        li.style.display = 'flex';
-        li.style.justifyContent = 'space-between';
-        li.style.marginBottom = '10px';
-        li.innerHTML = `
-            <span>${item.name} x${item.quantity}</span>
-            <span>${itemSum} PLN</span>
-        `;
-        checkoutItems.appendChild(li);
+        if (orderItemsList) {
+            const li = document.createElement('li');
+            li.style.display = 'flex'; li.style.justifyContent = 'space-between'; li.style.marginBottom = '5px';
+            li.innerHTML = `<span>${item.name} x${item.quantity}</span><span>${itemSum} PLN</span>`;
+            orderItemsList.appendChild(li);
+        }
     });
 
-    // 5. Wpisujemy dane do widoku użytkownika
-    if (checkoutTotal) checkoutTotal.innerText = `${currentTotal} PLN`;
+    if (orderTotalSpan) orderTotalSpan.innerText = `${currentTotal} PLN`;
+    if (hiddenCartInput) {
+        hiddenCartInput.value = cart.map(item => `${item.name} x${item.quantity}`).join(', ');
+    }
 
-    // 6. Przygotowujemy tekst dla Formspree (do ukrytych pól)
-    const cartText = cart.map(item => `${item.name} x${item.quantity} (${item.price * item.quantity} PLN)`).join(', ');
-
-    if (hiddenCartInput) hiddenCartInput.value = cartText;
-    if (hiddenTotalInput) hiddenTotalInput.value = currentTotal + " PLN";
-
-    // 7. Finalne szlify
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    if (typeof closeCart === "function") closeCart(); // Zamyka boczny panel koszyka
+    document.getElementById('cart-sidebar').classList.add('hidden');
 }
 
-function submitOrder(e) {
-    e.preventDefault();
-    showToast("Dziękujemy za zamówienie!");
-    
-    // Czyszczenie koszyka po zamówieniu
-    cart = [];
-    saveCart();
-    updateCart();
-    
-    setTimeout(() => {
-        document.getElementById('zamowienie').classList.add('hidden');
-        document.getElementById('produkty').classList.remove('hidden');
-        document.getElementById('galeria').classList.remove('hidden');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 2000); // Wracamy do głównej strony po 2 sekundach
-}
-
-// --- SYSTEM POWIADOMIEŃ (TOAST) ---
-function showToast(message) {
-    let container = document.getElementById('toast-container');
-    if (!container) return; 
-    
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerText = message;
-    
-    container.appendChild(toast);
-    
-    // Usuń element z kodu HTML po zakończeniu animacji CSS (3 sekundy)
-    setTimeout(() => {
-        toast.remove();
-    }, 3000);
-}
-
-// --- OKNO MODALNE (SZCZEGÓŁY PRODUKTU) ---
-// Zmieniono nazwę na openProductModal, aby pasowała do onclick w HTML
+// --- MODALE ---
 function openProductModal(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
 
-    const modal = document.getElementById('product-modal');
     document.getElementById('modal-img').src = product.image;
     document.getElementById('modal-title').innerText = product.name;
     document.getElementById('modal-desc').innerText = product.description;
     document.getElementById('modal-price').innerText = `${product.price} PLN`;
-
-    const addBtn = document.getElementById('modal-add-btn');
-    // Poprawka: przekazujemy nazwę i cenę do koszyka
-    addBtn.onclick = () => {
-        addToCart(product.name, product.price);
-        closeModal();
-    };
-
-    modal.classList.remove('hidden');
+    
+    document.getElementById('modal-add-btn').onclick = () => { addToCart(product.name, product.price); closeModal(); };
+    
+    document.getElementById('product-modal').classList.remove('hidden');
     document.body.style.overflow = 'hidden'; 
 }
 
-function goToCheckout() {
-    if (cart.length === 0) {
-        showToast("Twój koszyk jest pusty!");
-        return;
-    }
-
-    // Przełączamy zakładkę na 'zamowienie' używając istniejącej funkcji
-    switchTab(null, 'zamowienie');
-
-    // Dopasowane ID do Twojego pliku index.html
-    const orderItemsList = document.getElementById('order-items');
-    const orderTotalSpan = document.getElementById('order-total');
-    const hiddenCartInput = document.getElementById('cart-items-input');
-    const hiddenTotalInput = document.getElementById('total-price-input');
-
-    let currentTotal = 0;
-    orderItemsList.innerHTML = '';
-
-    cart.forEach(item => {
-        const itemSum = item.price * item.quantity;
-        currentTotal += itemSum;
-
-        const li = document.createElement('li');
-        li.style.display = 'flex';
-        li.style.justifyContent = 'space-between';
-        li.innerHTML = `<span>${item.name} x${item.quantity}</span><span>${itemSum} PLN</span>`;
-        orderItemsList.appendChild(li);
-    });
-
-    if (orderTotalSpan) orderTotalSpan.innerText = currentTotal;
-
-    // Przygotowanie danych do Formspree
-    const cartText = cart.map(item => `${item.name} x${item.quantity}`).join(', ');
-    if (hiddenCartInput) hiddenCartInput.value = cartText;
-    if (hiddenTotalInput) hiddenTotalInput.value = currentTotal + " PLN";
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    toggleCart(); // Zamyka boczny panel
-}
-
-// Nowa funkcja obsługi formularza kontaktowego
-function handleContactSubmit(event) {
-    event.preventDefault();
-    const name = document.getElementById('contact-name').value;
-    showToast(`Dziękujemy ${name}, wiadomość została wysłana!`);
-    event.target.reset();
-}
-
-// Wywołaj funkcję po załadowaniu strony
-document.addEventListener('DOMContentLoaded', displayProducts);
-
-// --- FILTROWANIE GALERII ---
-const filterButtons = document.querySelectorAll('.filter-btn');
-const galleryItems = document.querySelectorAll('.gallery-item');
-
-filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        filterButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
-
-        const filterValue = button.getAttribute('data-filter');
-
-        galleryItems.forEach(item => {
-    if (filterValue === 'all' || item.classList.contains(filterValue)) {
-        item.style.display = 'block';
-        setTimeout(() => item.style.opacity = '1', 10);
-    } else {
-        item.style.opacity = '0';
-        setTimeout(() => item.style.display = 'none', 400);
-    }
-});
-    });
-});
-// --- ANIMACJA POJAWIANIA SIĘ ELEMENTÓW (SCROLL REVEAL) ---
-const revealElements = () => {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, {
-        threshold: 0.1 // Element musi być widoczny w 10%, by odpalić animację
-    });
-
-    // Wskazujemy, co chcemy animować
-    const targets = document.querySelectorAll('.card, .gallery-item, h2, #kontakt p');
-    targets.forEach(target => {
-        target.classList.add('reveal'); // Dodajemy klasę ukrywającą na start
-        observer.observe(target);
-    });
-};
-
-// Uruchomienie po załadowaniu DOM
-document.addEventListener('DOMContentLoaded', () => {
-    revealElements();
-});
-
-function zmienIlosc(index, oIle) {
-    // Zmieniamy ilość produktu o podaną wartość (1 lub -1)
-    cart[index].quantity += oIle;
-
-    // Jeśli ilość spadnie do zera, usuwamy produkt całkiem
-    if (cart[index].quantity <= 0) {
-        cart.splice(index, 1);
-    }
-
-    saveCart();   // Zapisz zmianę w pamięci
-    updateCart(); // Odśwież wygląd koszyka
-}
 function openGalleryModal(imgSrc, altText) {
-    const modal = document.getElementById('product-modal');
-    
-    // Podmieniamy zawartość modala na potrzeby galerii
     document.getElementById('modal-img').src = imgSrc;
     document.getElementById('modal-title').innerText = altText;
     document.getElementById('modal-desc').innerText = "Realizacja Kwiaciarni Stokrotka";
     
-    // Ukrywamy przycisk "Dodaj do koszyka" i cenę, bo to tylko podgląd zdjęcia
     document.getElementById('modal-add-btn').style.display = 'none';
     document.getElementById('modal-price').style.display = 'none';
-    document.getElementById('modal-footer').style.display = 'none';
+    document.querySelector('.modal-footer').style.display = 'none';
     
-    modal.classList.remove('hidden');
+    document.getElementById('product-modal').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
 }
 
-// Musimy też zmodyfikować funkcję closeModal, aby przywracała widoczność przycisków
-const originalCloseModal = closeModal;
-closeModal = function() {
-    originalCloseModal();
-    // Przywracamy widoczność dla zwykłych produktów po zamknięciu
+function closeModal() {
+    document.getElementById('product-modal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+    
+    // Przywracanie widoczności elementów ukrytych przez galerię
     document.getElementById('modal-add-btn').style.display = 'block';
     document.getElementById('modal-price').style.display = 'block';
-    document.getElementById('modal-footer').style.display = 'block';
-};
+    document.querySelector('.modal-footer').style.display = 'flex';
+}
+
+// --- ZAKŁADKI, FILTRY, TOASTY, INNE ---
 function switchTab(event, tabId) {
-    // 1. Zapobiegamy przeładowaniu strony (jeśli to link lub button w form)
     if (event) event.preventDefault();
-
-    // 2. Ukrywamy WSZYSTKIE sekcje (zakładki + zamówienie)
-    // Zakładamy, że każda sekcja (oferta, galeria, kontakt, zamówienie) ma klasę .tab-content
-    document.querySelectorAll('.tab-content').forEach(content => {
-        content.classList.remove('active');
-        content.style.display = 'none';
-    });
-
-    // 3. Pokazujemy wybraną zakładkę
+    document.querySelectorAll('.tab-content').forEach(c => { c.classList.remove('active'); c.style.display = 'none'; });
+    
     const activeContent = document.getElementById(tabId);
-    if (activeContent) {
-        activeContent.classList.add('active');
-        activeContent.style.display = 'block';
-    }
+    if (activeContent) { activeContent.classList.add('active'); activeContent.style.display = 'block'; }
 
-    // 4. Aktualizujemy wygląd przycisków w menu GÓRNYM
-    // Szukamy przycisku w nagłówku, który odpowiada wybranemu tabId
     document.querySelectorAll('.nav-tab-btn').forEach(btn => {
         btn.classList.remove('active');
-        // Jeśli przycisk ma onclick z tym samym tabId, dajemy mu klasę active
-        if (btn.getAttribute('onclick').includes(`'${tabId}'`)) {
-            btn.classList.add('active');
-        }
+        if (btn.getAttribute('onclick').includes(`'${tabId}'`)) btn.classList.add('active');
     });
-
-    // 5. Płynne przewinięcie na samą górę strony
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function handleContactSubmit(event) {
-    event.preventDefault(); // Zatrzymuje przeładowanie strony
+const filterButtons = document.querySelectorAll('.filter-btn');
+const galleryItems = document.querySelectorAll('.gallery-item');
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        const filterValue = button.getAttribute('data-filter');
+        galleryItems.forEach(item => {
+            if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                item.style.display = 'block'; setTimeout(() => item.style.opacity = '1', 10);
+            } else {
+                item.style.opacity = '0'; setTimeout(() => item.style.display = 'none', 400);
+            }
+        });
+    });
+});
 
-    // Pobieramy dane (możesz je później wysłać np. przez EmailJS)
-    const name = document.getElementById('contact-name').value;
-    const subject = document.getElementById('contact-subject').value;
-
-    // Wyświetlamy potwierdzenie (używając Twojego Toasta!)
-    showToast(`Dziękujemy ${name}! Twoja wiadomość w sprawie "${subject}" została wysłana.`);
-
-    // Czyścimy formularz
-    event.target.reset();
+function showToast(message) {
+    let container = document.getElementById('toast-container');
+    if (!container) return; 
+    const toast = document.createElement('div');
+    toast.className = 'toast'; toast.innerText = message;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
 }
 
-function addAddon(name, price) {
-    // Sprawdzamy, czy dodatek już jest w koszyku
-    const existingAddon = cart.find(item => item.name === name);
-
-    if (existingAddon) {
-        existingAddon.quantity += 1;
-    } else {
-        // Dodajemy jako nowy przedmiot
-        cart.push({ name, price, quantity: 1 });
-    }
-
-    saveCart();
-    updateCart();
-    
-    // Specjalny efekt dla Toasta, żeby klient wiedział, że dodatek "wskoczył"
-    showToast(`Dodano dodatek: ${name}`);
-}
+const revealElements = () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.card, .gallery-item, h2, #kontakt p').forEach(target => {
+        target.classList.add('reveal'); observer.observe(target);
+    });
+};
 
 function startFomoTimer() {
     const timerElement = document.getElementById('fomo-timer');
-    const fomoBar = document.getElementById('fomo-bar');
-    const fomoText = document.querySelector('.fomo-text');
-
     if (!timerElement) return;
-
     function updateTimer() {
         const now = new Date();
-        
-        // Ustawiamy godzinę graniczną na 12:00 dzisiejszego dnia
         const deadline = new Date();
         deadline.setHours(12, 0, 0, 0);
-
         let diff = deadline - now;
-
         if (diff > 0) {
-            // Obliczamy godziny, minuty i sekundy
-            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-            const minutes = Math.floor((diff / (1000 * 60)) % 60);
-            const seconds = Math.floor((diff / 1000) % 60);
-
-            // Formatowanie (dodawanie zera przed cyfrą)
-            const hDisplay = hours.toString().padStart(2, '0');
-            const mDisplay = minutes.toString().padStart(2, '0');
-            const sDisplay = seconds.toString().padStart(2, '0');
-
-            timerElement.innerText = `${hDisplay}:${mDisplay}:${sDisplay}`;
+            timerElement.innerText = `${Math.floor((diff / (1000 * 60 * 60)) % 24).toString().padStart(2, '0')}:${Math.floor((diff / (1000 * 60)) % 60).toString().padStart(2, '0')}:${Math.floor((diff / 1000) % 60).toString().padStart(2, '0')}`;
         } else {
-            // Jeśli jest po 14:00, zmieniamy komunikat
-            fomoText.innerHTML = "🌿 Zamów teraz, a Twoje kwiaty dostarczymy <b>już jutro rano!</b>";
-            // Opcjonalnie: możesz ukryć pasek, odkomentowując linię poniżej
-            fomoBar.classList.add('hidden'); 
+            document.querySelector('.fomo-text').innerHTML = "🌿 Zamów teraz, a Twoje kwiaty dostarczymy <b>już jutro rano!</b>";
         }
     }
-
-    // Odświeżaj licznik co sekundę
-    updateTimer();
-    setInterval(updateTimer, 1000);
+    updateTimer(); setInterval(updateTimer, 1000);
 }
-
-// Uruchom funkcję po załadowaniu strony
-document.addEventListener('DOMContentLoaded', () => {
-    startFomoTimer();
-});
 
 function toggleDarkMode() {
-    const body = document.body;
+    document.body.classList.toggle('dark-theme');
     const btn = document.getElementById('dark-mode-toggle');
-    
-    // Przełączamy klasę
-    body.classList.toggle('dark-theme');
-    
-    // Zmieniamy ikonkę w zależności od trybu
-    if (body.classList.contains('dark-theme')) {
-        btn.innerHTML = '<i class="fa-solid fa-sun"></i>'; // Słońce, by wrócić do jasnego
-        localStorage.setItem('theme', 'dark');
-    } else {
-        btn.innerHTML = '<i class="fa-solid fa-moon"></i>'; // Księżyc, by przejść w ciemny
-        localStorage.setItem('theme', 'light');
-    }
+    const isDark = document.body.classList.contains('dark-theme');
+    btn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
 }
 
-// Sprawdzamy zapisany motyw przy starcie strony
 document.addEventListener('DOMContentLoaded', () => {
-    startFomoTimer(); // Twoja funkcja licznika
-
-    const savedTheme = localStorage.getItem('theme');
-    const btn = document.getElementById('dark-mode-toggle');
-    
-    if (savedTheme === 'dark') {
+    if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-theme');
-        if (btn) btn.innerHTML = '<i class="fa-solid fa-sun"></i>';
-    } else {
-        if (btn) btn.innerHTML = '<i class="fa-solid fa-moon"></i>';
+        document.getElementById('dark-mode-toggle').innerHTML = '<i class="fa-solid fa-sun"></i>';
     }
 });
