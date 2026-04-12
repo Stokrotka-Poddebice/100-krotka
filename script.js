@@ -496,10 +496,10 @@ function toggleDarkMode() {
     
     // Zmieniamy ikonkę w zależności od trybu
     if (body.classList.contains('dark-theme')) {
-        btn.innerText = '☀️'; // Słońce, by wrócić do jasnego
+        btn.innerText = '<i class="fa-solid fa-soon"></i>'; // Słońce, by wrócić do jasnego
         localStorage.setItem('theme', 'dark');
     } else {
-        btn.innerText = '🌙'; // Księżyc, by przejść w ciemny
+        btn.innerText = '<i class="fa-solid fa-moon"></i>'; // Księżyc, by przejść w ciemny
         localStorage.setItem('theme', 'light');
     }
 }
