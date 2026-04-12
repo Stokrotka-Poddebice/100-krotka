@@ -357,15 +357,18 @@ footer ul {
 /* --- OKNO MODALNE (POPUP) --- */
 .modal {
     position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6);
-    display: none;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: none; /* Domyślnie ukryty */
     align-items: center;
     justify-content: center;
     z-index: 1000;
     opacity: 0;
-    pointer-events: none; /* Kliknięcia przechodzą na wylot, gdy ukryte */
     transition: opacity 0.3s;
+    pointer-events: none;
 }
 #modal-img {
     width: 100%;
@@ -375,11 +378,9 @@ footer ul {
 }
 
 .modal:not(.hidden) {
-    display: flex; /* Pokazuje modal jako flexbox do centrowania */
-    align-items: center;
-    justify-content: center;
+    display: flex; 
     opacity: 1;
-    pointer-events: auto; /* Aktywuj kliknięcia po pokazaniu */
+    pointer-events: auto;
 }
 
 .modal-content {

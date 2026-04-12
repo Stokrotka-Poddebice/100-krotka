@@ -238,6 +238,7 @@ function showToast(message) {
 }
 
 // --- OKNO MODALNE (SZCZEGÓŁY PRODUKTU) ---
+// Zmieniono nazwę na openProductModal, aby pasowała do onclick w HTML
 function openProductModal(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
@@ -248,53 +249,63 @@ function openProductModal(productId) {
     document.getElementById('modal-desc').innerText = product.description;
     document.getElementById('modal-price').innerText = `${product.price} PLN`;
 
-    const features = modal.querySelector('.modal-footer');
-    if (features) {
-        features.style.display = 'flex';
-    }
-
-    // Obsługa przycisku
     const addBtn = document.getElementById('modal-add-btn');
+    // Poprawka: przekazujemy nazwę i cenę do koszyka
     addBtn.onclick = () => {
-        addToCart(product.id);
+        addToCart(product.name, product.price);
         closeModal();
     };
 
     modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; // Blokada przewijania tła
+    document.body.style.overflow = 'hidden'; 
 }
 
-function closeModal() {
-    document.getElementById('product-modal').classList.add('hidden');
-}
-
-// Zamknięcie modala po kliknięciu poza niego (w ciemne tło)
-window.onclick = function(event) {
-    const modal = document.getElementById('product-modal');
-    if (event.target == modal) {
-        closeModal();
+function goToCheckout() {
+    if (cart.length === 0) {
+        showToast("Twój koszyk jest pusty!");
+        return;
     }
-}
-// Dodaj funkcję generującą Product
-function displayProducts() {
-    const container = document.getElementById('products-container');
-    if (!container) return; // Zabezpieczenie, jeśli nie ma kontenera
 
-    container.innerHTML = ""; // Czyścimy kontener
+    // Przełączamy zakładkę na 'zamowienie' używając istniejącej funkcji
+    switchTab(null, 'zamowienie');
 
-    products.forEach(product => {
-        const card = document.createElement('div');
-        card.className = 'card';
-        
-        card.innerHTML = `
-            <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p class="price"><span class="amount">${product.price}</span> PLN</p>
-            <button class="btn" onclick="openProductModal(${product.id})">ZOBACZ SZCZEGÓŁY</button>
-        `;
-        
-        container.appendChild(card);
+    // Dopasowane ID do Twojego pliku index.html
+    const orderItemsList = document.getElementById('order-items');
+    const orderTotalSpan = document.getElementById('order-total');
+    const hiddenCartInput = document.getElementById('cart-items-input');
+    const hiddenTotalInput = document.getElementById('total-price-input');
+
+    let currentTotal = 0;
+    orderItemsList.innerHTML = '';
+
+    cart.forEach(item => {
+        const itemSum = item.price * item.quantity;
+        currentTotal += itemSum;
+
+        const li = document.createElement('li');
+        li.style.display = 'flex';
+        li.style.justifyContent = 'space-between';
+        li.innerHTML = `<span>${item.name} x${item.quantity}</span><span>${itemSum} PLN</span>`;
+        orderItemsList.appendChild(li);
     });
+
+    if (orderTotalSpan) orderTotalSpan.innerText = currentTotal;
+
+    // Przygotowanie danych do Formspree
+    const cartText = cart.map(item => `${item.name} x${item.quantity}`).join(', ');
+    if (hiddenCartInput) hiddenCartInput.value = cartText;
+    if (hiddenTotalInput) hiddenTotalInput.value = currentTotal + " PLN";
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    toggleCart(); // Zamyka boczny panel
+}
+
+// Nowa funkcja obsługi formularza kontaktowego
+function handleContactSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById('contact-name').value;
+    showToast(`Dziękujemy ${name}, wiadomość została wysłana!`);
+    event.target.reset();
 }
 
 // Wywołaj funkcję po załadowaniu strony
