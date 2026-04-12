@@ -244,6 +244,7 @@ function openProductModal(productId) {
         document.getElementById('modal-img').src = product.image;
         document.getElementById('modal-title').innerText = product.name;
         document.getElementById('modal-price').innerText = `${product.price} PLN`;
+        document.getElementById('modal-footer').innerText = `DOSTAWA`;
         
         const descElement = document.getElementById('modal-desc');
         descElement.innerText = product.description || "Piękna kompozycja świeżych kwiatów.";
@@ -365,6 +366,7 @@ function openGalleryModal(imgSrc, altText) {
     // Ukrywamy przycisk "Dodaj do koszyka" i cenę, bo to tylko podgląd zdjęcia
     document.getElementById('modal-add-btn').style.display = 'none';
     document.getElementById('modal-price').style.display = 'none';
+    document.getElementById('modal-footer').style.display = 'none';
     
     modal.classList.remove('hidden');
 }
@@ -376,6 +378,7 @@ closeModal = function() {
     // Przywracamy widoczność dla zwykłych produktów po zamknięciu
     document.getElementById('modal-add-btn').style.display = 'block';
     document.getElementById('modal-price').style.display = 'block';
+    document.getElementById('modal-footer').style.display = 'block';
 };
 function switchTab(event, tabId) {
     // 1. Zapobiegamy przeładowaniu strony (jeśli to link lub button w form)
