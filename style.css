@@ -383,12 +383,14 @@ footer ul {
 }
 
 .modal-content {
-    max-width: 500px; /* Aby opis nie rozciągał się na cały ekran */
-    background-color: var(--card-bg); /* Teraz zadziała w obu trybach */
+    background-color: var(--card-bg); /* To jest kluczowe! */
     color: var(--text-color);
     padding: 30px;
-    border-radius: 15px;
-    text-align: center;
+    border-radius: 20px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
 .modal:not(.hidden) .modal-content {
@@ -726,9 +728,10 @@ footer ul {
 }
 
 /* Tryb Ciemny - poprawka kontrastu */
-body.dark-theme .fomo-bar {
-    background: #1a3a24; /* Nieco ciemniejsza zieleń */
-    border-top: 1px solid var(--primary-color);
+body.dark-theme {
+    --bg-color: #121212;
+    --text-color: #f0f0f0;
+    --card-bg: #1e1e1e; /* Ciemne tło dla trybu ciemnego */
 }
 
 /* Jeśli pasek ma znikać po czasie, dodamy klasę hidden */
