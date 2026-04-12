@@ -968,3 +968,12 @@ body.dark-theme .footer-tab-btn {
 body {
     padding-bottom: 50px; /* Tyle, ile mniej więcej ma wysokości Twój pasek */
 }
+
+/* Wymuszenie kursora 'łapki' dla wszystkich interaktywnych przycisków */
+.nav-tab-btn,
+.footer-tab-btn,
+.dark-mode-btn,
+.close-modal,
+.cart-icon {
+    cursor: pointer;
+}

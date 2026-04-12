@@ -59,16 +59,13 @@
       "closes": "15:00"
     }
   ],
-  "sameAs": [
-    ,
-  ]
 }
 </script>
 </head>
 <body>
     <header>
         <div class="container nav-container">
-            <button id="dark-mode-toggle" class="dark-mode-btn" onclick="toggleDarkMode()">
+            <button id="dark-mode-toggle" class="dark-mode-btn" aria-label="Zmień motyw na ciemny lub jasny" onclick="toggleDarkMode()">
                 <i class="fa-solid fa-moon"></i>
             </button>
             <div class="logo">
@@ -83,7 +80,7 @@
                     <li><button class="nav-tab-btn" onclick="switchTab(event, 'kontakt')">Kontakt</button></li>
                 </ul>
             </nav>
-             <div class="cart-icon" onclick="toggleCart()">
+             <div class="cart-icon" role="button" aria-label="Otwórz koszyk" onclick="toggleCart()">
                 <i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">(0)</span>
             </div>
         </div>
@@ -166,7 +163,7 @@
                 </div>
 
                 <div class="form-section">
-                    <h4><i class="icon"><i class="fa-solid fa-shipping-fast"></i> Szczegóły dostawy</h4>
+                    <h4><i class="icon"><i class="fa-solid fa-shipping-fast"></i></i> Szczegóły dostawy</h4>
                     <input type="text" name="Odbiorca_Imię" placeholder="Imię i Nazwisko Odbiorcy" required>
                     <input type="tel" name="Odbiorca_Tel" placeholder="Numer telefonu Odbiorcy" required>
                     <input type="text" name="Adres_Dostawy" placeholder="Adres dostawy (ulica, numer, miasto)" required>
