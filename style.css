@@ -88,13 +88,6 @@ nav a:hover {
     transform: scale(1.05); 
 }
 
-/* Logo w stopce (footer) */
-footer .container img {
-    height: 60px;
-    width: auto;
-    margin-bottom: 15px;
-}
-
 /* Sidebar Koszyka */
 #cart-sidebar {
     position: fixed;
@@ -250,6 +243,98 @@ h2 {
     opacity: 1;
     transform: translateY(0);
 }
+/* GŁÓWNY UKŁAD STOPKI (GRID) */
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+    padding: 40px 20px;
+    align-items: start;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-column h4 {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #fff;
+    border-bottom: 2px solid #2d5a27; /* Twój zielony akcent */
+    padding-bottom: 5px;
+    display: inline-block;
+    width: fit-content;
+}
+
+/* LINIA: IKONA + TEKST (FLEXBOX) */
+.footer-row {
+    display: flex;
+    align-items: flex-start; /* Ikona na górze przy zawijaniu tekstu */
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+/* STYL IKON */
+.footer-row i {
+    width: 20px; /* Stała szerokość ikon wyrównuje tekst pod sobą */
+    text-align: center;
+    color: #4caf50; /* Kolor ikony */
+    margin-top: 4px; /* Centrowanie względem pierwszej linii tekstu */
+}
+
+/* BLOKADA ZAWIJANIA DLA KLUCZOWYCH DANYCH */
+.nowrap {
+    white-space: nowrap;
+}
+
+/* LOGO I SŁOGAN */
+.footer-logo {
+    max-width: 180px;
+    margin-bottom: 15px;
+}
+
+.slogan {
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* MENU I LINKI */
+.footer-nav {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-tab-btn {
+    background: none;
+    border: none;
+    color: inherit;
+    padding: 5px 0;
+    cursor: pointer;
+    text-align: left;
+    transition: color 0.3s;
+}
+
+.footer-tab-btn:hover, .footer-row a:hover {
+    color: #4caf50;
+    text-decoration: underline;
+}
+
+.footer-row a {
+    text-decoration: none;
+    color: inherit;
+    line-height: 1.4;
+    word-break: break-word; /* Bezpieczeństwo dla długich maili */
+}
+
+/* DOLNY PASEK */
+.footer-bottom {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 0.85rem;
+}
 
 /* Opcjonalne: lekkie opóźnienie dla kart w gridzie, by pojawiały się jedna po drugiej */
 .card:nth-child(2) { transition-delay: 0.2s; }
@@ -297,38 +382,9 @@ h2 {
     resize: none;
 }
 
-/* Stopka */
-footer {
-    background-color: #222;
-    color: #ddd;
-    padding: 40px 20px 20px;
-}
 
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-}
 
-footer a {
-    color: #ddd;
-    text-decoration: none;
-}
 
-footer a:hover {
-    color: var(--accent-color);
-}
-
-footer ul {
-    list-style: none;
-}
-
-.footer-bottom {
-    text-align: center;
-    margin-top: 30px;
-    padding-top: 10px;
-    border-top: 1px solid #444;
-}
 /* --- POWIADOMIENIA (TOAST) --- */
 #toast-container {
     position: fixed;
@@ -989,22 +1045,6 @@ body.dark-theme .addon-item {
 body.dark-theme .addon-item b {
     color: var(--primary-color); /* Cena na zielono, by była czytelna */
 }
-.footer-tab-btn {
-    background: none;
-    border: none;
-    color: white; /* lub inny kolor Twojej stopki */
-    font-size: 1rem;
-    cursor: pointer;
-    padding: 5px 0;
-    transition: color 0.3s;
-    text-align: left;
-    width: 100%;
-}
-
-.footer-tab-btn:hover {
-    color: var(--accent-color); /* Twój różowy kolor */
-    text-decoration: underline;
-}
 
 /* W trybie ciemnym */
 body.dark-theme .footer-tab-btn {
@@ -1023,12 +1063,6 @@ body.dark-theme .footer-tab-btn {
 .form-section h4 i {
     color: var(--accent-color); /* Różowy/Złoty akcent */
     font-size: 1.2rem;
-}
-
-/* Ikony w stopce mogą być jaśniejsze */
-.footer i {
-    color: #fff;
-    opacity: 0.8;
 }
 
 /* Efekt najechania dla ikon kontaktowych (opcjonalnie) */
