@@ -3,95 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kwiaciarnia Stokrotka | Poddębice</title>
-    <meta name="description" content="Kwiaciarnia Stokrotka w Poddębicach - piękne bukiety z dostawą.">
-    
-    <link rel="stylesheet" href="style.css">
+    <title>Kwiaciarnia Stokrotka</title>
+    <meta name="description" content="Kwiaciarnia Stokrotka w Poddębicach - piękne bukiety na każdą okazję, flower boxy i dekoracje ślubne. Zamów online z dostawą!">
+    <meta name="keywords" content="kwiaciarnia Poddębice, kwiaty z dostawą, bukiety ślubne, flower box, Stokrotka Poddębice">
+
+    <meta property="og:title" content="Kwiaciarnia Stokrotka | Twoje emocje ubrane w kwiaty">
+    <meta property="og:description" content="Wyjątkowe kompozycje kwiatowe w Poddębicach. Sprawdź naszą ofertę!">
+    <meta property="og:image" content="https://stokrotka-poddebice.github.io/100-krotka/assets/logo.png">
+    <meta property="og:url" content="https://stokrotka-poddebice.github.io/100-krotka/">
+    <meta property="og:type" content="website">
+
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FlowerShop",
+      "name": "Kwiaciarnia Stokrotka",
+      "image": "https://stokrotka-poddebice.github.io/100-krotka/assets/logo.png",
+      "telephone": "+48436788610",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "ul. Zielona 6",
+        "addressLocality": "Poddębice",
+        "postalCode": "99-200",
+        "addressCountry": "PL"
+      }
+    }
+    </script>
 </head>
 <body>
-
     <header>
-        <nav class="container nav-flex">
-            <div class="logo">Stokrotka</div>
-            <div class="nav-links">
-                <button class="nav-tab-btn active" data-tab="produkty">Produkty</button>
-                <button class="nav-tab-btn" data-tab="galeria">Galeria</button>
-                <button class="nav-tab-btn" data-tab="kontakt">Kontakt</button>
-                <button id="dark-mode-toggle" onclick="toggleDarkMode()"><i class="fa-solid fa-moon"></i></button>
+        <div class="container nav-container">
+            <button id="dark-mode-toggle" class="dark-mode-btn" onclick="toggleDarkMode()" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-color);">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+            <div class="logo">
+                 <a href="index.html">
+                    <img src="assets/logo.png" alt="Logo Kwiaciarni Stokrotka">
+                 </a>
             </div>
-            <div class="cart-icon" onclick="toggleCart()">
-                <i class="fa-solid fa-basket-shopping"></i>
-                <span id="cart-count">0</span>
+            <nav>
+                <ul class="nav-tabs">
+                    <li><button class="nav-tab-btn active" onclick="switchTab(event, 'produkty')">Oferta</button></li>
+                    <li><button class="nav-tab-btn" onclick="switchTab(event, 'galeria')">Galeria</button></li>
+                    <li><button class="nav-tab-btn" onclick="switchTab(event, 'kontakt')">Kontakt</button></li>
+                </ul>
+            </nav>
+             <div class="cart-icon" onclick="toggleCart()">
+                <i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">(0)</span>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <main class="container">
-        <section id="produkty" class="tab-content active">
-            <div class="products-grid" id="products-container">
+    <div id="cart-sidebar" class="hidden">
+        <button class="close-btn" onclick="toggleCart()">×</button>
+        <h3>Twój Koszyk</h3>
+        <ul id="cart-items"></ul>
+        <hr>
+        <p class="total-price" style="margin-top: 15px; font-size: 1.2rem; font-weight: bold;">Suma: <span id="cart-total">0</span> PLN</p>
+        
+        <div class="cross-sell-section">
+            <h4>Dopasuj piękny dodatek:</h4>
+            <div class="addon-grid">
+                <div class="addon-item" onclick="addAddon('Bilecik z dedykacją', 5)">
+                    <span><i class="fa-solid fa-envelope-open-text"></i> Bilecik</span>
+                    <b>+5 PLN</b>
                 </div>
-        </section>
-
-        <section id="galeria" class="tab-content">
-            <div class="gallery-grid">
-                <img src="assets/bukiet1.jpg" alt="Galeria 1">
-                <img src="assets/bukiet2.jpg" alt="Galeria 2">
-                <img src="assets/bukiet3.jpg" alt="Galeria 3">
+                <div class="addon-item" onclick="addAddon('Czekoladki Merci', 25)">
+                    <span><i class="fa-solid fa-candy-cane"></i> Merci</span>
+                    <b>+25 PLN</b>
+                </div>
+                <div class="addon-item" onclick="addAddon('Odżywka do kwiatów', 3)">
+                    <span><i class="fa-solid fa-seedling"></i> Odżywka</span>
+                    <b>+3 PLN</b>
+                </div>
             </div>
+        </div>
+        <button class="btn" onclick="goToCheckout()">ZAMÓW TERAZ</button>
+    </div>
+
+    <main>
+        <section id="produkty" class="container tab-content active">
+            <h2 style="margin-bottom: 20px; text-align: center;">Polecane Produkty</h2>
+            <div id="products-container" class="products-grid"></div>
         </section>
 
-        <section id="kontakt" class="tab-content">
+        <section id="galeria" class="container tab-content">
+            <h2 style="margin-bottom: 20px; text-align: center;">Nasze Realizacje</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="bukiety">Bukiety</button>
+                <button class="filter-btn" data-filter="flowerboxy">Flower-Boxy</button>
+                <button class="filter-btn" data-filter="slubne">Bukiety Ślubne</button>
+                <button class="filter-btn" data-filter="samochody">Samochody</button>
+                <button class="filter-btn" data-filter="kondolencje">Kondolencje</button>
+                <button class="filter-btn" data-filter="all">Wszystkie</button>
+            </div>
+            
+            <div class="gallery-grid"></div>
+        </section>
+
+        <section id="kontakt" class="container tab-content">
             <div class="contact-grid">
-                <div class="contact-info">
-                    <h2>Znajdź nas</h2>
-                    <p><i class="fa-solid fa-location-dot"></i> ul. Przykładowa 1, Poddębice</p>
-                    <p><i class="fa-solid fa-phone"></i> +48 123 456 789</p>
-                    <div class="map-container">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2463.3456!2d18.95!3d51.89!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNTHCsDUzJzI0LjAiTiAxOMKwNTcnMDAuMCJF!5e0!3m2!1spl!2spl!4v123456789" 
-                            width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy">
-                        </iframe>
+                <div class="contact-info" style="text-align: center;">
+                    <h2 style="margin-bottom: 20px;">Skontaktuj się z nami</h2>
+                    <p><i class="fa-solid fa-location-dot"></i> ul. Zielona 6, Poddębice</p>
+                    <p><i class="fa-solid fa-phone"></i> +48 43 678 86 10</p>
+                    <div class="map-placeholder" style="margin-top: 20px;">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2448.332357914442!2d18.955642477102626!3d51.89266947190458!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ac17088924b21%3A0x6d97c6d6693006a1!2sZielona%206%2C%2099-200%20Podd%C4%99bice!5e0!3m2!1spl!2spl!4v1711111111111!5m2!1spl!2spl" width="100%" height="300" style="border:0; border-radius: 10px;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
-    <div id="cart-sidebar" class="cart-sidebar">
-        <div class="cart-header">
-            <h3>Twój Koszyk</h3>
-            <button onclick="toggleCart()">&times;</button>
-        </div>
-        <div id="cart-items"></div>
-        
-        <div class="cart-addons">
-            <h4>Dodaj coś słodkiego:</h4>
-            <button onclick="addAddon('Czekoladki Merci', 25)" class="btn-addon">+ Merci (25 PLN)</button>
-        </div>
-
-        <div class="cart-footer">
-            <div class="total">Suma: <span id="cart-total">0</span> PLN</div>
-            <button class="btn btn-order" onclick="openOrderForm()">ZAMÓW TERAZ</button>
-        </div>
-    </div>
-
     <div id="fomo-bar" class="fomo-bar">
-        <div class="fomo-content">
-            <span class="fomo-text">🌿 Zamów w ciągu <b id="fomo-timer">00:00:00</b>, a dostarczymy kwiaty <b>jeszcze dzisiaj!</b></span>
-        </div>
+        <span class="fomo-text">🌿 Zamów w ciągu <b id="fomo-timer">00:00:00</b>, a dostarczymy kwiaty <b>dzisiaj!</b></span>
     </div>
 
     <div id="product-modal" class="modal hidden">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <span class="close-modal" onclick="closeModal()">×</span>
             <img id="modal-img" src="" alt="Produkt">
             <h3 id="modal-title"></h3>
-            <p id="modal-desc"></p>
-            <p class="price" id="modal-price"></p>
+            <p id="modal-desc" style="margin: 10px 0;"></p>
+            <p class="price" id="modal-price" style="font-weight: bold; font-size: 1.2rem; color: var(--primary-color);"></p>
             <button class="btn" id="modal-add-btn">DODAJ DO KOSZYKA</button>
         </div>
     </div>
+    
+    <div id="toast-container"></div>
+    <a href="https://wa.me/48436788610" class="whatsapp-btn" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+    </a>
 
     <script src="script.js"></script>
 </body>
