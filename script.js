@@ -11,9 +11,7 @@ const products = [
 
 let cart = JSON.parse(localStorage.getItem('stokrotka_cart')) || [];
 
-// Złączone i uporządkowane nasłuchiwanie zdarzeń na starcie
 document.addEventListener('DOMContentLoaded', () => {
-    // Ładowanie motywu
     if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-theme');
         const darkModeBtn = document.getElementById('dark-mode-toggle');
@@ -22,7 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Inicjalizacja funkcji sklepu
     updateCart();
     displayProducts();
     startFomoTimer();
@@ -51,7 +48,7 @@ function displayProducts() {
     });
 }
 
-// --- LOGIKA KOSZYKA ---
+// --- LOGIKA KOSZYKA I ZAMÓWIENIA ---
 function saveCart() { localStorage.setItem('stokrotka_cart', JSON.stringify(cart)); }
 
 function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('hidden'); }
@@ -71,45 +68,96 @@ function updateCart() {
     const cartCount = document.getElementById('cart-count');
     const cartTotal = document.getElementById('cart-total');
     
+    const orderItemsList = document.getElementById('order-items');
+    const orderTotalSpan = document.getElementById('order-total');
+    const hiddenCartInput = document.getElementById('cart-items-input');
+    
     if(!cartItems || !cartCount || !cartTotal) return;
+    
     cartItems.innerHTML = '';
+    if (orderItemsList) orderItemsList.innerHTML = '';
+
     let total = 0, totalQuantity = 0;
 
     if (cart.length === 0) {
         cartItems.innerHTML = '<p style="color: #888; text-align: center;">Twój koszyk jest pusty.</p>';
+        if (orderItemsList) orderItemsList.innerHTML = '<p style="color: #888; text-align: center;">Brak produktów w zamówieniu.</p>';
         cartCount.innerText = '(0)';
         cartTotal.innerText = '0';
+        if (orderTotalSpan) orderTotalSpan.innerText = '0 PLN';
+        if (hiddenCartInput) hiddenCartInput.value = '';
         return;
     }
 
     cart.forEach((item, index) => {
-        total += item.price * item.quantity;
+        const itemSum = item.price * item.quantity;
+        total += itemSum;
         totalQuantity += item.quantity;
-        const li = document.createElement('li');
-        li.style.display = "flex"; li.style.justifyContent = "space-between"; li.style.alignItems = "center"; li.style.marginBottom = "10px";
-        li.innerHTML = `
-            <div style="flex: 1;">${item.name}<br><small>${item.price * item.quantity} PLN</small></div>
+        
+        // 1. Renderowanie w bocznym panelu koszyka
+        const liSidebar = document.createElement('li');
+        liSidebar.style.display = "flex"; liSidebar.style.justifyContent = "space-between"; liSidebar.style.alignItems = "center"; liSidebar.style.marginBottom = "10px";
+        liSidebar.innerHTML = `
+            <div style="flex: 1;">${item.name}<br><small>${itemSum} PLN</small></div>
             <div style="display: flex; align-items: center; gap: 8px;">
-                <button onclick="zmienIlosc(${index}, -1)" style="width:25px; cursor:pointer;">-</button>
+                <button type="button" onclick="zmienIlosc(${index}, -1)" style="width:25px; cursor:pointer;">-</button>
                 <span>${item.quantity}</span>
-                <button onclick="zmienIlosc(${index}, 1)" style="width:25px; cursor:pointer;">+</button>
-                <button onclick="removeFromCart(${index})" style="color:red; background:none; border:none; cursor:pointer; margin-left:10px;">✖</button>
+                <button type="button" onclick="zmienIlosc(${index}, 1)" style="width:25px; cursor:pointer;">+</button>
+                <button type="button" onclick="removeFromCart(${index})" style="color:red; background:none; border:none; cursor:pointer; margin-left:10px;">✖</button>
             </div>`;
-        cartItems.appendChild(li);
+        cartItems.appendChild(liSidebar);
+
+        // 2. Renderowanie w podsumowaniu zamówienia (Kasa)
+        if (orderItemsList) {
+            const liCheckout = document.createElement('li');
+            liCheckout.style.display = 'flex'; 
+            liCheckout.style.justifyContent = 'space-between'; 
+            liCheckout.style.alignItems = 'center';
+            liCheckout.style.marginBottom = '10px';
+            liCheckout.style.borderBottom = '1px dashed rgba(128,128,128,0.2)';
+            liCheckout.style.paddingBottom = '10px';
+            
+            liCheckout.innerHTML = `
+                <div style="flex: 1;">
+                    <div style="font-weight: bold; color: var(--text-color);">${item.name}</div>
+                    <div style="font-size: 0.85rem; color: var(--text-color); opacity: 0.8;">Cena: ${item.price} PLN / szt.</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <button type="button" onclick="zmienIlosc(${index}, -1)" style="width:28px; height:28px; border-radius:4px; border:1px solid var(--text-color); cursor:pointer; background:transparent; color:var(--text-color); font-weight:bold;">-</button>
+                        <span style="min-width: 45px; text-align: center; color: var(--text-color); font-weight: bold;">${item.quantity} szt.</span>
+                        <button type="button" onclick="zmienIlosc(${index}, 1)" style="width:28px; height:28px; border-radius:4px; border:1px solid var(--text-color); cursor:pointer; background:transparent; color:var(--text-color); font-weight:bold;">+</button>
+                    </div>
+                    <div style="font-weight: bold; min-width: 75px; text-align: right; color: var(--text-color);">${itemSum} PLN</div>
+                    <button type="button" onclick="removeFromCart(${index})" style="color:var(--accent-color); font-size:1.2rem; background:none; border:none; cursor:pointer;" title="Usuń produkt">✖</button>
+                </div>
+            `;
+            orderItemsList.appendChild(liCheckout);
+        }
     });
+    
+    // Aktualizacja sum
     cartCount.innerText = `(${totalQuantity})`;
     cartTotal.innerText = total;
+    if (orderTotalSpan) orderTotalSpan.innerText = `${total} PLN`;
+    
+    // Zapis do inputa ukrytego dla formularza
+    if (hiddenCartInput) {
+        hiddenCartInput.value = cart.map(item => `${item.name} x${item.quantity} (${item.price * item.quantity} PLN)`).join(', ');
+    }
 }
 
 function zmienIlosc(index, oIle) {
     cart[index].quantity += oIle;
     if (cart[index].quantity <= 0) cart.splice(index, 1);
-    saveCart(); updateCart();
+    saveCart(); 
+    updateCart(); 
 }
 
 function removeFromCart(index) {
     cart.splice(index, 1);
-    saveCart(); updateCart();
+    saveCart(); 
+    updateCart();
     showToast('Usunięto z koszyka');
 }
 
@@ -117,7 +165,6 @@ function addAddon(name, price) {
     addToCart(name, price);
 }
 
-// --- ZAMÓWIENIE (KASA) ---
 function goToCheckout() {
     if (cart.length === 0) {
         showToast("Twój koszyk jest pusty!");
@@ -125,30 +172,6 @@ function goToCheckout() {
     }
 
     switchTab(null, 'zamowienie');
-
-    const orderItemsList = document.getElementById('order-items');
-    const orderTotalSpan = document.getElementById('order-total');
-    const hiddenCartInput = document.getElementById('cart-items-input');
-
-    let currentTotal = 0;
-    if (orderItemsList) orderItemsList.innerHTML = '';
-
-    cart.forEach(item => {
-        const itemSum = item.price * item.quantity;
-        currentTotal += itemSum;
-        if (orderItemsList) {
-            const li = document.createElement('li');
-            li.style.display = 'flex'; li.style.justifyContent = 'space-between'; li.style.marginBottom = '5px';
-            li.innerHTML = `<span>${item.name} x${item.quantity}</span><span>${itemSum} PLN</span>`;
-            orderItemsList.appendChild(li);
-        }
-    });
-
-    if (orderTotalSpan) orderTotalSpan.innerText = `${currentTotal} PLN`;
-    if (hiddenCartInput) {
-        hiddenCartInput.value = cart.map(item => `${item.name} x${item.quantity}`).join(', ');
-    }
-
     window.scrollTo({ top: 0, behavior: 'smooth' });
     document.getElementById('cart-sidebar').classList.add('hidden');
 }
