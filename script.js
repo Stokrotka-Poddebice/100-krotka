@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     displayProducts(); // Uruchamiamy generowanie produktów
     startFomoTimer();
     revealElements();
+    document.querySelector('.filter-btn.active').click();
 });
 
 // --- GENEROWANIE PRODUKTÓW ---
