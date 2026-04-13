@@ -243,104 +243,65 @@ h2 {
     opacity: 1;
     transform: translateY(0);
 }
-/* GŁÓWNY UKŁAD STOPKI (GRID) */
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 30px;
-    padding: 40px 20px;
-    align-items: start;
+
+/* GŁÓWNA SEKCJA STOPKI */
+footer {
+    background-color: #1a1a1a; /* Bardzo ciemny grafit / czerń */
+    color: #ffffff;            /* Biały tekst dla kontrastu */
+    padding-top: 40px;
+    border-top: 3px solid #2c5e3b; /* Zielony pasek na samej górze stopki */
 }
 
-.footer-column {
-    display: flex;
-    flex-direction: column;
-}
-
-.footer-column h4 {
-    margin-bottom: 20px;
+/* NAGŁÓWKI W STOPCE (np. KONTAKT, MENU) */
+footer h4 {
+    color: #ffffff;
     font-size: 1.1rem;
-    color: #fff;
-    border-bottom: 2px solid #2d5a27; /* Twój zielony akcent */
-    padding-bottom: 5px;
-    display: inline-block;
-    width: fit-content;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #333; /* Delikatna linia pod nagłówkiem */
+    padding-bottom: 10px;
+    display: block;
 }
-/* Wyśrodkowanie pierwszej kolumny z logo */
-.footer-column.footer-about {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+
+/* IKONY W STOPCE */
+footer .footer-row i, 
+footer .fa-solid, 
+footer .far, 
+footer .fab {
+    color: #4caf50 !important; /* Jasnozielony kolor ikon ze zdjęcia */
+    margin-right: 12px;
+    width: 20px;
     text-align: center;
 }
 
-/* LINIA: IKONA + TEKST (FLEXBOX) */
-.footer-row {
-    display: flex;
-    align-items: flex-start; /* Ikona na górze przy zawijaniu tekstu */
-    gap: 12px;
-    margin-bottom: 12px;
-}
-
-/* STYL IKON */
-.footer-row i {
-    width: 20px; /* Stała szerokość ikon wyrównuje tekst pod sobą */
-    text-align: center;
-    color: #4caf50; /* Kolor ikony */
-    margin-top: 4px; /* Centrowanie względem pierwszej linii tekstu */
-}
-
-/* BLOKADA ZAWIJANIA DLA KLUCZOWYCH DANYCH */
-.nowrap {
-    white-space: nowrap;
-}
-
-/* LOGO I SŁOGAN */
-.footer-logo {
-    max-width: 180px;
-    margin-bottom: 15px;
-}
-
-.slogan {
-    font-style: italic;
-    font-size: 0.9rem;
-    line-height: 1.5;
-}
-
-/* MENU I LINKI */
-.footer-nav {
-    list-style: none;
-    padding: 0;
-}
-
-.footer-tab-btn {
-    background: none;
-    border: none;
-    color: inherit;
-    padding: 5px 0;
-    cursor: pointer;
-    text-align: left;
-    transition: color 0.3s;
-}
-
-.footer-tab-btn:hover, .footer-row a:hover {
-    color: #4caf50;
-    text-decoration: underline;
-}
-
-.footer-row a {
+/* LINKI W STOPCE (E-mail, telefon, menu) */
+footer a, .footer-tab-btn {
+    color: #bbbbbb; /* Szary tekst linków */
     text-decoration: none;
-    color: inherit;
-    line-height: 1.4;
-    word-break: break-word; /* Bezpieczeństwo dla długich maili */
+    transition: color 0.3s ease;
 }
 
-/* DOLNY PASEK */
+footer a:hover, .footer-tab-btn:hover {
+    color: #4caf50; /* Zmiana na zielony po najechaniu */
+}
+
+/* DOLNY PASEK Z COPYRIGHT */
 .footer-bottom {
+    background-color: #111111; /* Jeszcze ciemniejszy dół */
+    padding: 20px 0;
+    margin-top: 40px;
+    border-top: 1px solid #222;
     text-align: center;
-    padding: 20px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    color: #666;
     font-size: 0.85rem;
+}
+
+/* SLOGAN POD LOGO */
+.slogan {
+    color: #888;
+    font-style: italic;
+    margin-top: 10px;
 }
 
 /* Opcjonalne: lekkie opóźnienie dla kart w gridzie, by pojawiały się jedna po drugiej */
