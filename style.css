@@ -266,6 +266,13 @@ h2 {
     display: inline-block;
     width: fit-content;
 }
+/* Wyśrodkowanie pierwszej kolumny z logo */
+.footer-column.footer-about {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
 
 /* LINIA: IKONA + TEKST (FLEXBOX) */
 .footer-row {
