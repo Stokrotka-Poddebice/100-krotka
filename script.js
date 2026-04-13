@@ -139,43 +139,47 @@ function goToCheckout() {
     document.getElementById('cart-sidebar').classList.add('hidden');
 }
 
-// --- MODALE ---
+// --- MODAL DLA PRODUKTÓW ---
 function openProductModal(productId) {
     const product = products.find(p => p.id === productId);
     if (!product) return;
+
+    const modal = document.getElementById('product-modal');
+    // Usuwamy tryb galerii, aby pokazać cenę i przycisk
+    modal.classList.remove('is-gallery');
 
     document.getElementById('modal-img').src = product.image;
     document.getElementById('modal-title').innerText = product.name;
     document.getElementById('modal-desc').innerText = product.description;
     document.getElementById('modal-price').innerText = `${product.price} PLN`;
-    
-    document.getElementById('modal-add-btn').onclick = () => { addToCart(product.name, product.price); closeModal(); };
-    
-    document.getElementById('product-modal').classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; 
-}
 
+    document.getElementById('modal-add-btn').onclick = () => {
+        addToCart(product.name, product.price);
+        closeModal();
+    };
+    modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden'; 
+    }
+
+// --- MODAL DLA GALERII ---
 function openGalleryModal(imgSrc, altText) {
+    const modal = document.getElementById('product-modal');
+    // Dodajemy tryb galerii - CSS sam ukryje zbędne elementy
+    modal.classList.add('is-gallery');
+
     document.getElementById('modal-img').src = imgSrc;
     document.getElementById('modal-title').innerText = altText;
     document.getElementById('modal-desc').innerText = "Realizacja Kwiaciarni Stokrotka";
-    
-    document.getElementById('modal-add-btn').style.display = 'none';
-    document.getElementById('modal-price').style.display = 'none';
-    document.querySelector('.modal-footer').style.display = 'none';
-    
-    document.getElementById('product-modal').classList.remove('hidden');
+
+    modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
 }
 
+// --- ZAMYKANIE MODALA ---
 function closeModal() {
-    document.getElementById('product-modal').classList.add('hidden');
+    const modal = document.getElementById('product-modal');
+    modal.classList.add('hidden');
     document.body.style.overflow = 'auto';
-    
-    // Przywracanie widoczności elementów ukrytych przez galerię
-    document.getElementById('modal-add-btn').style.display = 'block';
-    document.getElementById('modal-price').style.display = 'block';
-    document.querySelector('.modal-footer').style.display = 'flex';
 }
 
 // --- ZAKŁADKI, FILTRY, TOASTY, INNE ---

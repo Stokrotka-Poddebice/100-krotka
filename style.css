@@ -1044,3 +1044,15 @@ body {
 .cart-icon {
     cursor: pointer;
 }
+/* Specjalny tryb dla galerii */
+#product-modal.is-gallery .price,
+#product-modal.is-gallery #modal-add-btn,
+#product-modal.is-gallery .modal-footer {
+    display: none !important;
+}
+
+/* Styl dla samego zdjęcia w trybie galerii, by było większe */
+#product-modal.is-gallery #modal-img {
+    max-height: 80vh;
+    object-fit: contain;
+}
