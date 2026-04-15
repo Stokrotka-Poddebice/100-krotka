@@ -178,7 +178,8 @@ h2 {
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.05);
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Dodana płynna animacja opacity podczas filtrowania produktów */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.4s ease-in-out;
 }
 
 .card:hover {

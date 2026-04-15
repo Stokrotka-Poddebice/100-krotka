@@ -1,52 +1,71 @@
 // --- 1. DANE PRODUKTÓW (SKLEP) ---
+// Rozbudowana baza do 10 produktów z unikalnymi opisami
 const products = [
     { 
-        id: 1, name: "Bukiet Letnie Harmonie", image: "assets/bukiet1.jpg", price: 210, // price to tylko cena "wyświetlana" w siatce sklepu
-        description: "Kompozycja pełna słońca i radości...",
-        type: "size", 
-        variants: { "Mały": 168, "Średni": 210, "Duży": 260 } 
+        id: 1, name: "Bukiet Letnie Harmonie", image: "assets/bukiet1.png", price: 210,
+        description: "Radosna eksplozja kolorów lata! Kompozycja ze świeżych słoneczników, fioletowej eustomy i różowych róż. Idealny, by przynieść uśmiech i słońce do każdego domu.",
+        type: "size", variants: { "Mały": 168, "Średni": 210, "Duży": 260 },
+        category: "bukiety"
     },
     { 
-        id: 2, name: "Kompozycja Dziki Ogród", image: "assets/bukiet2.jpg", price: 180, 
-        description: "Naturalna, lekko niesforna kompozycja w stylu rustykalnym...",
-        type: "size", 
-        variants: { "Standard": 180, "Premium (Powiększony)": 240 } // Możesz używać dowolnych nazw!
+        id: 2, name: "Kompozycja Dziki Ogród", image: "assets/bukiet2.png", price: 180, 
+        description: "Stylowy, lekko niesforny bukiet w stylu rustykalnym. Łączy w sobie wdzięk polnych kwiatów z elegancją niszowych róż i dużą ilością eukaliptusa. Doskonały dla miłośników natury.",
+        type: "size", variants: { "Standard": 180, "Premium": 240 },
+        category: "bukiety"
     },
     { 
-        id: 3, name: "Roślina Leokasja", image: "assets/bukiet3.jpg", price: 110, 
-        description: "Egzotyczna roślina doniczkowa o spektakularnych liściach...",
-        type: "size", 
-        variants: { "Mniejsza": 85, "Standardowa": 110 } 
+        id: 3, name: "Roślina Leokasja", image: "assets/bukiet3.png", price: 110, 
+        description: "Egzotyczna piękność (Alokazja) o spektakularnych, ciemnych liściach z wyraźnym białym unerwieniem. Wyjątkowa ozdoba nowoczesnego salonu lub biura. Roślina w komplecie z ceramiczną osłonką.",
+        type: "size", variants: { "Mniejsza": 85, "Standardowa": 110 },
+        category: "doniczkowe"
     },
     { 
-        id: 4, name: "Flowerbox letnia łąka", image: "assets/bukiet4.jpg", price: 150, 
-        description: "Klasyczny bukiet w formie boxa...",
-        type: "size", 
-        variants: { "Średni": 150, "Duży": 200 } 
+        id: 4, name: "Flowerbox Letnia Łąka", image: "assets/bukiet4.png", price: 150, 
+        description: "Czarujące pastelowe pudełko wypełnione po brzegi sezonowymi kwiatami w odcieniach różu, bieli i fioletu. Piękna i trwała alternatywa dla tradycyjnego bukietu, nie wymaga wazonu.",
+        type: "size", variants: { "Średni": 150, "Duży": 200 },
+        category: "flowerboxy"
     },
     { 
-        id: 5, name: "Czerwone Róże (Na sztuki)", image: "assets/bukiet5.jpg", price: 300, 
-        description: "Klasyczne głębokie, czerwone róże. Skomponuj własną wielkość bukietu.",
-        type: "quantity", 
-        pricePerItem: 20, // Cena za JEDNĄ sztukę
-        defaultQty: 15    // Domyślna ilość pokazana po kliknięciu
+        id: 5, name: "Czerwone Róże (Na sztuki)", image: "assets/bukiet5.png", price: 300, 
+        description: "Ponadczasowa klasyka, która mówi więcej niż tysiąc słów. Oferujemy najwyższej jakości czerwone róże premium o długich łodygach i aksamitnych płatkach. Skomponuj własną wielkość bukietu.",
+        type: "quantity", pricePerItem: 20, defaultQty: 15,
+        category: "na-sztuki"
     },
     { 
-        id: 6, name: "Bukiet Słoneczny", image: "assets/bukiet6.jpg", price: 120, 
-        description: "Radosna kompozycja żółtych róż i słoneczników...",
-        type: "size", 
-        variants: { "Mały": 90, "Średni": 120, "Wielki": 180 } 
+        id: 6, name: "Bukiet Słoneczny", image: "assets/bukiet6.png", price: 120, 
+        description: "Energetyczna kompozycja żółtych miniaturowych róż, radosnych margerytek i świeżej zieleni. Ten bukiet to czysta radość i optymizm, idealny na urodziny lub podziękowanie.",
+        type: "size", variants: { "Mały": 90, "Średni": 120, "Wielki": 180 },
+        category: "bukiety"
     },
     { 
-        id: 7, name: "Różowe Tulipany (Na sztuki)", image: "assets/bukiet7.jpg", price: 150, 
-        description: "Delikatne tulipany idealne na prezent wiosenny.",
-        type: "quantity", 
-        pricePerItem: 6, // Cena za 1 tulipana
-        defaultQty: 25   // Startujemy od 25 szt.
+        id: 7, name: "Różowe Tulipany (Na sztuki)", image: "assets/bukiet7.png", price: 150, 
+        description: "Świeże, chrupiące i pełne wiosennego uroku różowe tulipany sprzedawane na sztuki. Stwórz subtelny, jednokolorowy bukiet, który wniesie lekkość do każdego wnętrza.",
+        type: "quantity", pricePerItem: 6, defaultQty: 25,
+        category: "na-sztuki"
+    },
+    // --- NOWE PRODUKTY ---
+    { 
+        id: 8, name: "Flowerbox Romantyczny Pastel", image: "assets/bukiet8.png", price: 230, 
+        description: "Luksusowe, welurowe pudełko w kolorze pudrowego różu, skrywające misterną kompozycję z pełnych jaskrów (ranunculus), kremowych róż premium i delikatnej gipsówki. Idealny wybór na zaręczyny, rocznicę lub jako wyrafinowany prezent.",
+        type: "size", variants: { "Mały": 180, "Średni": 230, "Duży": 290 },
+        category: "flowerboxy"
+    },
+    { 
+        id: 9, name: "Aksamitna Monstera Deliciosa", image: "assets/bukiet9.png", price: 120, 
+        description: "Kultowa roślina doniczkowa, której nie może zabraknąć w domu miłośnika roślin! Monstera Deliciosa o wielkich, błyszczących, 'dziurawych' liściach. Roślina jest łatwa w pielęgnacji i stanowi mocny akcent dekoracyjny. Sprzedawana w minimalistycznej, szarej osłonce betonowej.",
+        type: "size", variants: { "Standardowa": 120, "Powiększona": 160 },
+        category: "doniczkowe"
+    },
+    { 
+        id: 10, name: "Bukiet Awangarda", image: "assets/bukiet10.png", price: 220, 
+        description: "Nowoczesny, artystyczny bukiet dla osób szukających czegoś wyjątkowego. Główną rolę gra egzotyczna Protea, otoczona srebrzystym eukaliptusem, fioletowym ostropestem, pomarańczowymi różami i ozdobnymi trawami. Kompozycja dynamiczna, trwała i niezwykle efektowna.",
+        type: "size", variants: { "Standard": 220, "Premium": 300 },
+        category: "bukiety"
     }
 ];
 
 // --- 2. DANE GALERII (REALIZACJE) ---
+// Baza danych galerii pozostaje bez zmian
 const galleryItems = [
     { src: "assets/img1.jpg", alt: "Rustykalny bukiet ślubny z lawendą i kłosami zbóż - styl boho.", category: "slubne" },
     { src: "assets/img2.jpg", alt: "Elegancki bukiet pełen pastelowych róż i sezonowych dodatków.", category: "slubne" },
@@ -62,6 +81,9 @@ const galleryItems = [
     { src: "assets/img15.jpg", alt: "Dekoracja kwiatowa maski samochodu do ślubu w kolorze białym", category: "samochody" }
 ];
 
+// --- RESZTA KODU SCRIPT.JS ---
+// (Cała logika filtrowania, koszyka, modali, ciemnego motywu itp. pozostaje bez zmian)
+
 let cart = JSON.parse(localStorage.getItem('stokrotka_cart')) || [];
 let currentFlowerCount = 15;
 let currentProduct = null;
@@ -76,14 +98,20 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCart();
     displayProducts();
     displayGallery(); 
-    setupFilters();   
+    setupGalleryFilters();  
+    setupProductFilters();  
     startFomoTimer();
     revealElements();
     
-    const defaultFilterBtn = document.querySelector('.filter-btn.active');
-    if (defaultFilterBtn) defaultFilterBtn.click();
+    // Inicjalizacja domyślnego widoku przycisków
+    const defaultGalleryBtn = document.querySelector('.gallery-filter-btn.active');
+    if (defaultGalleryBtn) defaultGalleryBtn.click();
+    
+    const defaultProductBtn = document.querySelector('.product-filter-btn.active');
+    if (defaultProductBtn) defaultProductBtn.click();
 });
 
+// --- GENEROWANIE PRODUKTÓW I GALERII ---
 function displayProducts() {
     const container = document.getElementById('products-container');
     if (!container) return;
@@ -91,7 +119,8 @@ function displayProducts() {
 
     products.forEach(product => {
         const card = document.createElement('div');
-        card.className = 'card reveal';
+        // Do kafelka dopinamy też jego kategorię, żeby skrypt wiedział jak go ukryć
+        card.className = `card reveal ${product.category}`; 
         card.innerHTML = `
             <img src="${product.image}" alt="${product.name}" loading="lazy">
             <h3>${product.name}</h3>
@@ -110,14 +139,37 @@ function displayGallery() {
     `).join('');
 }
 
-function setupFilters() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
+// --- LOGIKA FILTROWANIA ---
+function setupGalleryFilters() {
+    const filterButtons = document.querySelectorAll('.gallery-filter-btn');
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
             const filterValue = button.getAttribute('data-filter');
             const items = document.querySelectorAll('.gallery-item'); 
+            
+            items.forEach(item => {
+                if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                    item.style.display = 'block'; 
+                    setTimeout(() => item.style.opacity = '1', 10);
+                } else {
+                    item.style.opacity = '0'; 
+                    setTimeout(() => item.style.display = 'none', 400);
+                }
+            });
+        });
+    });
+}
+
+function setupProductFilters() {
+    const filterButtons = document.querySelectorAll('.product-filter-btn');
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            const filterValue = button.getAttribute('data-filter');
+            const items = document.querySelectorAll('#products-container .card'); 
             
             items.forEach(item => {
                 if (filterValue === 'all' || item.classList.contains(filterValue)) {
@@ -226,7 +278,6 @@ function goToCheckout() {
     document.getElementById('cart-sidebar').classList.add('hidden');
 }
 
-// --- LOGIKA MODALA BAZUJĄCA NA TYPIE PRODUKTU ---
 function openProductModal(productId) {
     currentProduct = products.find(p => p.id === productId);
     if (!currentProduct) return;
@@ -242,11 +293,10 @@ function openProductModal(productId) {
     const methodQty = document.getElementById('method-qty');
     const variantContainer = document.getElementById('modal-variants');
 
-    // Obsługa produktów o stałych rozmiarach
     if (currentProduct.type === 'size') {
         methodSize.classList.remove('hidden');
         methodQty.classList.add('hidden');
-        variantContainer.innerHTML = ''; // Czyścimy stare warianty
+        variantContainer.innerHTML = ''; 
 
         const variantKeys = Object.keys(currentProduct.variants);
         
@@ -256,7 +306,6 @@ function openProductModal(productId) {
             btn.type = 'button';
             btn.innerText = vName;
             
-            // Domyślnie zaznacz 'Średni' lub środkowy element, jeśli nie ma 'Średniego'
             if (vName === 'Średni' || index === Math.floor(variantKeys.length / 2)) {
                 btn.classList.add('active');
                 document.getElementById('modal-price').innerText = `${currentProduct.variants[vName]} PLN`;
@@ -274,18 +323,16 @@ function openProductModal(productId) {
             variantContainer.appendChild(btn);
         });
 
-        // Jeżeli żaden przycisk nie został domyślnie zaznaczony (np. zła nazwa), klikamy pierwszy lepszy
         if(!variantContainer.querySelector('.active') && variantContainer.firstChild) {
             variantContainer.firstChild.click();
         }
     } 
-    // Obsługa produktów na sztuki
     else if (currentProduct.type === 'quantity') {
         methodQty.classList.remove('hidden');
         methodSize.classList.add('hidden');
         
         currentFlowerCount = currentProduct.defaultQty || 1;
-        updateFlowerCount(0); // Odświeżenie wyświetlanej ceny i ilości
+        updateFlowerCount(0); 
     }
 
     modal.classList.remove('hidden');
@@ -295,7 +342,7 @@ function openProductModal(productId) {
 function updateFlowerCount(delta) {
     if (!currentProduct || currentProduct.type !== 'quantity') return;
     
-    currentFlowerCount = Math.max(1, currentFlowerCount + delta); // minimum 1 sztuka
+    currentFlowerCount = Math.max(1, currentFlowerCount + delta); 
     document.getElementById('flower-count-display').innerText = `${currentFlowerCount} szt.`;
 
     const finalPrice = currentFlowerCount * currentProduct.pricePerItem;
@@ -304,7 +351,6 @@ function updateFlowerCount(delta) {
     setupAddToCartBtn(`${currentProduct.name} (${currentFlowerCount} szt.)`, finalPrice);
 }
 
-// Funkcja pomocnicza aktualizująca zachowanie przycisku "Dodaj do koszyka"
 function setupAddToCartBtn(finalName, finalPrice) {
     document.getElementById('modal-add-btn').onclick = () => {
         addToCart(finalName, finalPrice);

@@ -116,23 +116,32 @@
     </div>
 
     <main>
-        <section id="produkty" class="container tab-content active">
-            <h2>Polecane Produkty</h2>
-            <div id="products-container" class="products-grid"></div>
-        </section>
+            <section id="produkty" class="container tab-content active">
+                <h2>Polecane Produkty</h2>
+                
+                <div class="filter-buttons">
+                    <button class="filter-btn product-filter-btn active" data-filter="all">Wszystkie</button>
+                    <button class="filter-btn product-filter-btn" data-filter="bukiety">Bukiety</button>
+                    <button class="filter-btn product-filter-btn" data-filter="flowerboxy">Flower-Boxy</button>
+                    <button class="filter-btn product-filter-btn" data-filter="doniczkowe">Doniczkowe</button>
+                    <button class="filter-btn product-filter-btn" data-filter="na-sztuki">Na sztuki</button>
+                </div>
+                
+                <div id="products-container" class="products-grid"></div>
+            </section>
 
-        <section id="galeria" class="container tab-content">
-            <h2>Nasze Realizacje</h2>
-            <div class="filter-buttons">
-                <button class="filter-btn active" data-filter="bukiety">Bukiety</button>
-                <button class="filter-btn" data-filter="flowerboxy">Flower-Boxy</button>
-                <button class="filter-btn" data-filter="slubne">Bukiety Ślubne</button>
-                <button class="filter-btn" data-filter="samochody">Samochody</button>
-                <button class="filter-btn" data-filter="kondolencje">Kondolencje</button>
-                <button class="filter-btn" data-filter="all">Wszystkie</button>
-            </div>
-            <div class="gallery-grid" id="gallery-container"></div>
-        </section>
+            <section id="galeria" class="container tab-content">
+                <h2>Nasze Realizacje</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn gallery-filter-btn active" data-filter="bukiety">Bukiety</button>
+                    <button class="filter-btn gallery-filter-btn" data-filter="flowerboxy">Flower-Boxy</button>
+                    <button class="filter-btn gallery-filter-btn" data-filter="slubne">Bukiety Ślubne</button>
+                    <button class="filter-btn gallery-filter-btn" data-filter="samochody">Samochody</button>
+                    <button class="filter-btn gallery-filter-btn" data-filter="kondolencje">Kondolencje</button>
+                    <button class="filter-btn gallery-filter-btn" data-filter="all">Wszystkie</button>
+                </div>
+                <div class="gallery-grid" id="gallery-container"></div>
+            </section>
         
         <section id="zamowienie" class="container tab-content">
             <h2>Twoje Zamówienie</h2>
