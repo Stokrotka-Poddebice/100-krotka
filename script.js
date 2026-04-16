@@ -416,7 +416,7 @@ function startFomoTimer() {
         if (diff > 0) {
             timerElement.innerText = `${Math.floor((diff / (1000 * 60 * 60)) % 24).toString().padStart(2, '0')}:${Math.floor((diff / (1000 * 60)) % 60).toString().padStart(2, '0')}:${Math.floor((diff / 1000) % 60).toString().padStart(2, '0')}`;
         } else {
-            document.querySelector('.fomo-text').innerHTML = "<i class="fa-solid fa-fan"></i> Zamów teraz, a Twoje kwiaty dostarczymy <b>już jutro rano!</b>";
+            document.querySelector('.fomo-text').innerHTML = "🌿 Zamów teraz, a Twoje kwiaty dostarczymy <b>już jutro rano!</b>";
         }
     }
     updateTimer(); setInterval(updateTimer, 1000);
