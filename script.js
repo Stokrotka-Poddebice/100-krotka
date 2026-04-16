@@ -1,139 +1,431 @@
+// --- 1. DANE PRODUKTÓW (SKLEP) ---
 const products = [
-    { id: 1, name: "Bukiet Letnie Harmonie", image: "assets/bukiet1.webp", price: 210, description: "Eksplozja kolorów lata! Słoneczniki, eustoma i róże.", type: "size", variants: { "Mały": 168, "Średni": 210, "Duży": 260 }, category: ["Polecane", "bukiety"] },
-    { id: 2, name: "Kompozycja Dziki Ogród", image: "assets/bukiet2.webp", price: 180, description: "Rustykalny bukiet z polnymi kwiatami i eukaliptusem.", type: "size", variants: { "Standard": 180, "Premium": 240 }, category: ["bukiety"] },
-    { id: 3, name: "Roślina Leokasja", image: "assets/bukiet3.webp", price: 110, description: "Egzotyczna Alokazja w ceramicznej osłonce.", type: "size", variants: { "Mała": 85, "Standard": 110 }, category: ["doniczkowe"] },
-    { id: 4, name: "Flowerbox Letnia Łąka", image: "assets/bukiet4.webp", price: 150, description: "Pastelowe pudełko pełne sezonowych kwiatów.", type: "size", variants: { "Średni": 150, "Duży": 200 }, category: ["flowerboxy"] },
-    { id: 5, name: "Czerwone Róże", image: "assets/bukiet5.webp", price: 300, description: "Aksamitne róże premium. Wybierz własną ilość.", type: "quantity", pricePerItem: 20, defaultQty: 15, category: ["bukiety"] },
-    { id: 6, name: "Bukiet Słoneczny", image: "assets/bukiet6.webp", price: 120, description: "Żółte róże i margerytki - czysty optymizm.", type: "size", variants: { "Mały": 90, "Średni": 120, "Duży": 180 }, category: ["bukiety"] },
-    { id: 7, name: "Różowe Tulipany", image: "assets/bukiet7.webp", price: 150, description: "Wiosenne tulipany sprzedawane na sztuki.", type: "quantity", pricePerItem: 6, defaultQty: 25, category: ["bukiety"] },
-    { id: 8, name: "Flowerbox Romantyczny Pastel", image: "assets/bukiet8_new.webp", price: 230, description: "Welurowe pudełko z jaskrami i różami premium.", type: "size", variants: { "Mały": 180, "Średni": 230, "Duży": 290 }, category: ["flowerboxy"] },
-    { id: 9, name: "Monstera Deliciosa", image: "assets/bukiet9_new.webp", price: 120, description: "Kultowa roślina o wielkich liściach w betonowej osłonce.", type: "size", variants: { "Standard": 120, "Duża": 160 }, category: ["doniczkowe"] },
-    { id: 10, name: "Bukiet Awangarda", image: "assets/bukiet10_new.webp", price: 220, description: "Artystyczna Protea z eukaliptusem i trawami.", type: "size", variants: { "Standard": 220, "Premium": 300 }, category: ["Polecane", "bukiety"] }
+    { 
+        id: 1, name: "Bukiet Letnie Harmonie", image: "assets/bukiet1.webp", price: 210,
+        description: "Radosna eksplozja kolorów lata! Kompozycja ze świeżych słoneczników, fioletowej eustomy i różowych róż. Idealny, by przynieść uśmiech i słońce do każdego domu.",
+        type: "size", variants: { "Mały": 168, "Średni": 210, "Duży": 260 },
+        category: ["Polecane", "bukiety"] 
+    },
+    { 
+        id: 2, name: "Kompozycja Dziki Ogród", image: "assets/bukiet2.webp", price: 180, 
+        description: "Stylowa, lekko niesforna kompozycja w stylu rustykalnym. Łączy w sobie wdzięk polnych kwiatów z elegancją niszowych róż.",
+        type: "size", variants: { "Standard": 180, "Premium": 240 },
+        category: ["bukiety"]
+    },
+    { 
+        id: 3, name: "Roślina Leokasja", image: "assets/bukiet3.webp", price: 110, 
+        description: "Egzotyczna piękność (Alokazja) o spektakularnych ciemnych liściach. Roślina w komplecie z ceramiczną osłonką.",
+        type: "size", variants: { "Mniejsza": 85, "Standardowa": 110 },
+        category: ["doniczkowe"]
+    },
+    { 
+        id: 4, name: "Flowerbox Letnia Łąka", image: "assets/bukiet4.webp", price: 150, 
+        description: "Czarujące pastelowe pudełko wypełnione sezonowymi kwiatami. Piękna i trwała alternatywa dla tradycyjnego bukietu.",
+        type: "size", variants: { "Średni": 150, "Duży": 200 },
+        category: ["flowerboxy"]
+    },
+    { 
+        id: 5, name: "Czerwone Róże", image: "assets/bukiet5.webp", price: 300, 
+        description: "Ponadczasowa klasyka premium. Skomponuj własną wielkość bukietu wybierając odpowiednią ilość sztuk.",
+        type: "quantity", pricePerItem: 20, defaultQty: 15,
+        category: ["bukiety"] 
+    },
+    { 
+        id: 6, name: "Bukiet Słoneczny", image: "assets/bukiet6.webp", price: 120, 
+        description: "Energetyczna kompozycja żółtych róż i margerytek. Ten bukiet to czysta radość i optymizm.",
+        type: "size", variants: { "Mały": 90, "Średni": 120, "Wielki": 180 },
+        category: ["bukiety"]
+    },
+    { 
+        id: 7, name: "Różowe Tulipany", image: "assets/bukiet7.webp", price: 150, 
+        description: "Świeże i pełne wiosennego uroku różowe tulipany. Stwórz subtelny bukiet, który wniesie lekkość do wnętrza.",
+        type: "quantity", pricePerItem: 6, defaultQty: 25,
+        category: ["bukiety"] 
+    },
+    { 
+        id: 8, name: "Flowerbox Romantyczny Pastel", image: "assets/bukiet8_new.webp", price: 230, 
+        description: "Luksusowe welurowe pudełko z jaskrami, różami i gipsówką. Idealny wybór na zaręczyny lub rocznicę.",
+        type: "size", variants: { "Mały": 180, "Średni": 230, "Duży": 290 },
+        category: ["flowerboxy"]
+    },
+    { 
+        id: 9, name: "Monstera Deliciosa", image: "assets/bukiet9_new.webp", price: 120, 
+        description: "Kultowa roślina doniczkowa o wielkich, błyszczących liściach. Łatwa w pielęgnacji ozdoba salonu.",
+        type: "size", variants: { "Standardowa": 120, "Powiększona": 160 },
+        category: ["doniczkowe"]
+    },
+    { 
+        id: 10, name: "Bukiet Awangarda", image: "assets/bukiet10_new.webp", price: 220, 
+        description: "Artystyczny bukiet z egzotyczną Proteą w roli głównej. Kompozycja trwała i niezwykle efektowna.",
+        type: "size", variants: { "Standard": 220, "Premium": 300 },
+        category: ["Polecane", "bukiety"] 
+    }
 ];
 
+// --- 2. DANE GALERII (REALIZACJE) ---
 const galleryItems = [
-    { src: "assets/img1.jpg", category: "slubne" }, { src: "assets/img2.jpg", category: "slubne" },
-    { src: "assets/img3.jpg", category: "bukiety" }, { src: "assets/img4.jpg", category: "bukiety" },
-    { src: "assets/img6.jpg", category: "flowerboxy" }, { src: "assets/img11.jpg", category: "samochody" }
+    { src: "assets/img1.jpg", alt: "Rustykalny bukiet ślubny z lawendą i kłosami zbóż - styl boho.", category: "slubne" },
+    { src: "assets/img2.jpg", alt: "Elegancki bukiet pełen pastelowych róż i sezonowych dodatków.", category: "slubne" },
+    { src: "assets/img3.jpg", alt: "Subtelna dekoracja stołu z gipsówki i polnych kwiatów - lekkość i wdzięk.", category: "bukiety" },
+    { src: "assets/img4.jpg", alt: "Błękitna fantazja - kompozycja z ostróżką i margerytkami.", category: "bukiety" },
+    { src: "assets/img5.jpg", alt: "Klasyczny Flowerbox z czerwonymi różami na prezent", category: "bukiety" },
+    { src: "assets/img6.jpg", alt: "Klasyczny Flowerbox z różowymi różami na prezent", category: "flowerboxy" },
+    { src: "assets/img7.jpg", alt: "Flower box z kwiatami w odcieniach różu", category: "flowerboxy" },
+    { src: "assets/img11.jpg", alt: "Dekoracja kwiatowa samochodu do ślubu w kolorze białym", category: "samochody" },
+    { src: "assets/img12.jpg", alt: "Dekoracja kwiatowa samochodu do ślubu w kolorze białym", category: "samochody" },
+    { src: "assets/img13.jpg", alt: "Delikatna kwiatowa dekoracja samochodu do ślubu", category: "samochody" },
+    { src: "assets/img14.jpg", alt: "Dekoracja kwiatowa samochodu do ślubu w kolorze herbacianym", category: "samochody" },
+    { src: "assets/img15.jpg", alt: "Dekoracja kwiatowa maski samochodu do ślubu w kolorze białym", category: "samochody" }
 ];
 
 let cart = JSON.parse(localStorage.getItem('stokrotka_cart')) || [];
 let currentFlowerCount = 15;
 let currentProduct = null;
 
+// --- 3. INICJALIZACJA STRONY ---
 document.addEventListener('DOMContentLoaded', () => {
-    if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark-theme');
-    updateCart(); displayProducts(); displayGallery(); setupGalleryFilters(); setupProductFilters(); startFomoTimer();
-    document.querySelector('.product-filter-btn[data-filter="Polecane"]').click();
+    // Motyw
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-theme');
+        const darkModeBtn = document.getElementById('dark-mode-toggle');
+        if (darkModeBtn) darkModeBtn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    }
+
+    updateCart();
+    displayProducts();
+    displayGallery(); 
+    setupGalleryFilters();  
+    setupProductFilters();  
+    startFomoTimer();
+    revealElements();
+    
+    // Klikamy domyślne filtry po załadowaniu
+    const defaultGalleryBtn = document.querySelector('.gallery-filter-btn.active');
+    if (defaultGalleryBtn) defaultGalleryBtn.click();
+    
+    const defaultProductBtn = document.querySelector('.product-filter-btn.active');
+    if (defaultProductBtn) defaultProductBtn.click();
 });
 
+// --- 4. FUNKCJE GENERUJĄCE ---
 function displayProducts() {
-    const cont = document.getElementById('products-container');
-    if (!cont) return;
-    cont.innerHTML = products.map(p => `
-        <div class="card reveal ${Array.isArray(p.category) ? p.category.join(' ') : p.category}">
-            <img src="${p.image}" alt="${p.name}" loading="lazy">
-            <h3>${p.name}</h3>
-            <p class="price">od ${p.type === 'quantity' ? p.pricePerItem * p.defaultQty : p.price} PLN</p>
-            <button class="btn" onclick="openProductModal(${p.id})">Zobacz szczegóły</button>
-        </div>
-    `).join('');
+    const container = document.getElementById('products-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    products.forEach(product => {
+        const card = document.createElement('div');
+        // Bezpieczne przypisanie klas z tablicy "category"
+        const categoryClasses = Array.isArray(product.category) ? product.category.join(' ') : product.category;
+        card.className = `card reveal ${categoryClasses}`; 
+        
+        card.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" loading="lazy">
+            <h3>${product.name}</h3>
+            <p class="price">od ${product.type === 'quantity' ? (product.pricePerItem * product.defaultQty) : product.price} PLN</p>
+            <button class="btn" onclick="openProductModal(${product.id})">Zobacz szczegóły</button>
+        `;
+        container.appendChild(card);
+    });
 }
 
 function displayGallery() {
-    const cont = document.getElementById('gallery-container');
-    if (!cont) return;
-    cont.innerHTML = galleryItems.map(i => `<img src="${i.src}" class="gallery-item ${i.category} reveal" onclick="openGalleryModal(this.src)" loading="lazy">`).join('');
+    const container = document.getElementById('gallery-container');
+    if (!container) return;
+    container.innerHTML = galleryItems.map(item => `
+        <img src="${item.src}" alt="${item.alt}" class="gallery-item ${item.category} reveal" onclick="openGalleryModal(this.src, this.alt)" loading="lazy">
+    `).join('');
+}
+
+// --- 5. LOGIKA FILTROWANIA ---
+function setupGalleryFilters() {
+    const filterButtons = document.querySelectorAll('.gallery-filter-btn');
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            const filterValue = button.getAttribute('data-filter');
+            const items = document.querySelectorAll('.gallery-item'); 
+            
+            items.forEach(item => {
+                if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                    item.style.display = 'block'; 
+                    setTimeout(() => item.style.opacity = '1', 10);
+                } else {
+                    item.style.opacity = '0'; 
+                    setTimeout(() => item.style.display = 'none', 400);
+                }
+            });
+        });
+    });
 }
 
 function setupProductFilters() {
-    document.querySelectorAll('.product-filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.product-filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filter = btn.getAttribute('data-filter');
-            document.querySelectorAll('#products-container .card').forEach(card => {
-                card.style.display = (filter === 'all' || card.classList.contains(filter)) ? 'block' : 'none';
+    const filterButtons = document.querySelectorAll('.product-filter-btn');
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+            const filterValue = button.getAttribute('data-filter');
+            const items = document.querySelectorAll('#products-container .card'); 
+            
+            items.forEach(item => {
+                if (filterValue === 'all' || item.classList.contains(filterValue)) {
+                    item.style.display = 'block'; 
+                    setTimeout(() => item.style.opacity = '1', 10);
+                } else {
+                    item.style.opacity = '0'; 
+                    setTimeout(() => item.style.display = 'none', 400);
+                }
             });
         });
     });
 }
 
-function setupGalleryFilters() {
-    document.querySelectorAll('.gallery-filter-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            document.querySelectorAll('.gallery-filter-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            const filter = btn.getAttribute('data-filter');
-            document.querySelectorAll('.gallery-item').forEach(img => {
-                img.style.display = (filter === 'all' || img.classList.contains(filter)) ? 'block' : 'none';
-            });
-        });
-    });
+// --- 6. LOGIKA KOSZYKA I KASY ---
+function saveCart() { localStorage.setItem('stokrotka_cart', JSON.stringify(cart)); }
+function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('hidden'); }
+
+function addToCart(name, price) {
+    const existingItem = cart.find(item => item.name === name);
+    if (existingItem) existingItem.quantity += 1;
+    else cart.push({ name, price, quantity: 1 });
+    saveCart(); updateCart(); showToast(`Dodano: ${name}`);
 }
 
 function updateCart() {
-    const itemsList = document.getElementById('cart-items');
-    const orderList = document.getElementById('order-items');
-    let total = 0;
-    itemsList.innerHTML = ''; if (orderList) orderList.innerHTML = '';
+    const cartItems = document.getElementById('cart-items');
+    const cartCount = document.getElementById('cart-count');
+    const cartTotal = document.getElementById('cart-total');
+    const orderItemsList = document.getElementById('order-items');
+    const orderTotalSpan = document.getElementById('order-total');
+    const hiddenCartInput = document.getElementById('cart-items-input');
+    
+    if(!cartItems || !cartCount || !cartTotal) return;
+    
+    cartItems.innerHTML = '';
+    if (orderItemsList) orderItemsList.innerHTML = '';
+    let total = 0, totalQuantity = 0;
 
-    cart.forEach((item, idx) => {
-        const sum = item.price * item.quantity; total += sum;
-        itemsList.innerHTML += `<li style="display:flex; justify-content:space-between; margin-bottom:10px;">${item.name} x${item.quantity}<span>${sum} PLN</span></li>`;
-        if (orderList) orderList.innerHTML += `<li style="color:#fff; border-bottom:1px dashed rgba(255,255,255,0.3); padding:10px 0;">${item.name} x${item.quantity} <span style="font-weight:bold;">${sum} PLN</span></li>`;
+    if (cart.length === 0) {
+        cartItems.innerHTML = '<p style="color: #888; text-align: center;">Twój koszyk jest pusty.</p>';
+        if (orderItemsList) orderItemsList.innerHTML = '<p style="color: #fff; text-align: center; opacity: 0.8;">Brak produktów w zamówieniu.</p>';
+        cartCount.innerText = '(0)'; cartTotal.innerText = '0';
+        if (orderTotalSpan) orderTotalSpan.innerText = '0 PLN';
+        if (hiddenCartInput) hiddenCartInput.value = '';
+        return;
+    }
+
+    cart.forEach((item, index) => {
+        const itemSum = item.price * item.quantity;
+        total += itemSum; totalQuantity += item.quantity;
+        
+        // Pasek boczny
+        const liSidebar = document.createElement('li');
+        liSidebar.style.display = "flex"; liSidebar.style.justifyContent = "space-between"; liSidebar.style.alignItems = "center"; liSidebar.style.marginBottom = "10px";
+        liSidebar.innerHTML = `
+            <div style="flex: 1;">${item.name}<br><small>${itemSum} PLN</small></div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <button type="button" onclick="zmienIlosc(${index}, -1)" style="width:25px; cursor:pointer;">-</button>
+                <span>${item.quantity}</span>
+                <button type="button" onclick="zmienIlosc(${index}, 1)" style="width:25px; cursor:pointer;">+</button>
+                <button type="button" onclick="removeFromCart(${index})" style="color:red; background:none; border:none; cursor:pointer; margin-left:10px;">✖</button>
+            </div>`;
+        cartItems.appendChild(liSidebar);
+
+        // Formularz kasy
+        if (orderItemsList) {
+            const liCheckout = document.createElement('li');
+            liCheckout.style.display = 'flex'; liCheckout.style.justifyContent = 'space-between'; liCheckout.style.alignItems = 'center'; liCheckout.style.marginBottom = '10px'; liCheckout.style.borderBottom = '1px dashed rgba(255,255,255,0.3)'; liCheckout.style.paddingBottom = '10px';
+            liCheckout.innerHTML = `
+                <div style="flex: 1;">
+                    <div style="font-weight: bold; color: #fff;">${item.name}</div>
+                    <div style="font-size: 0.85rem; color: rgba(255,255,255,0.8);">Cena: ${item.price} PLN / szt.</div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <button type="button" onclick="zmienIlosc(${index}, -1)" style="width:28px; height:28px; border-radius:4px; border:1px solid rgba(255,255,255,0.6); cursor:pointer; background:transparent; color:#fff; font-weight:bold;">-</button>
+                        <span style="min-width: 45px; text-align: center; color: #fff; font-weight: bold;">${item.quantity} szt.</span>
+                        <button type="button" onclick="zmienIlosc(${index}, 1)" style="width:28px; height:28px; border-radius:4px; border:1px solid rgba(255,255,255,0.6); cursor:pointer; background:transparent; color:#fff; font-weight:bold;">+</button>
+                    </div>
+                    <div style="font-weight: bold; min-width: 75px; text-align: right; color: #fff;">${itemSum} PLN</div>
+                    <button type="button" onclick="removeFromCart(${index})" style="color:var(--accent-color); font-size:1.2rem; background:none; border:none; cursor:pointer;" title="Usuń produkt">✖</button>
+                </div>
+            `;
+            orderItemsList.appendChild(liCheckout);
+        }
     });
-    document.getElementById('cart-total').innerText = total;
-    if (document.getElementById('order-total')) document.getElementById('order-total').innerText = total + " PLN";
+    
+    cartCount.innerText = `(${totalQuantity})`; cartTotal.innerText = total;
+    if (orderTotalSpan) orderTotalSpan.innerText = `${total} PLN`;
+    if (hiddenCartInput) hiddenCartInput.value = cart.map(item => `${item.name} x${item.quantity} (${item.price * item.quantity} PLN)`).join(', ');
 }
 
-function addToCart(name, price) {
-    const existing = cart.find(i => i.name === name);
-    if (existing) existing.quantity++; else cart.push({ name, price, quantity: 1 });
-    localStorage.setItem('stokrotka_cart', JSON.stringify(cart)); updateCart(); showToast(`Dodano: ${name}`);
+function zmienIlosc(index, oIle) {
+    cart[index].quantity += oIle;
+    if (cart[index].quantity <= 0) cart.splice(index, 1);
+    saveCart(); updateCart(); 
 }
 
-function openProductModal(id) {
-    currentProduct = products.find(p => p.id === id);
+function removeFromCart(index) {
+    cart.splice(index, 1); saveCart(); updateCart(); showToast('Usunięto z koszyka');
+}
+
+function addAddon(name, price) { addToCart(name, price); }
+
+function goToCheckout() {
+    if (cart.length === 0) { showToast("Twój koszyk jest pusty!"); return; }
+    switchTab(null, 'zamowienie'); window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById('cart-sidebar').classList.add('hidden');
+}
+
+// --- 7. LOGIKA OKNA MODALNEGO ---
+function openProductModal(productId) {
+    currentProduct = products.find(p => p.id === productId);
+    if (!currentProduct) return;
+
     const modal = document.getElementById('product-modal');
-    modal.classList.remove('is-gallery', 'hidden');
+    modal.classList.remove('is-gallery');
+
     document.getElementById('modal-img').src = currentProduct.image;
     document.getElementById('modal-title').innerText = currentProduct.name;
     document.getElementById('modal-desc').innerText = currentProduct.description;
-
-    const mSize = document.getElementById('method-size');
-    const mQty = document.getElementById('method-qty');
-    const vCont = document.getElementById('modal-variants');
+    
+    const methodSize = document.getElementById('method-size');
+    const methodQty = document.getElementById('method-qty');
+    const variantContainer = document.getElementById('modal-variants');
 
     if (currentProduct.type === 'size') {
-        mSize.classList.remove('hidden'); mQty.classList.add('hidden'); vCont.innerHTML = '';
-        Object.keys(currentProduct.variants).forEach(v => {
-            const b = document.createElement('button'); b.className = 'variant-btn'; b.innerText = v;
-            b.onclick = () => {
-                vCont.querySelectorAll('.variant-btn').forEach(x => x.classList.remove('active')); b.classList.add('active');
-                document.getElementById('modal-price').innerText = currentProduct.variants[v] + " PLN";
-                document.getElementById('modal-add-btn').onclick = () => { addToCart(`${currentProduct.name} (${v})`, currentProduct.variants[v]); closeModal(); };
+        methodSize.classList.remove('hidden');
+        methodQty.classList.add('hidden');
+        variantContainer.innerHTML = ''; 
+
+        const variantKeys = Object.keys(currentProduct.variants);
+        
+        variantKeys.forEach((vName, index) => {
+            const btn = document.createElement('button');
+            btn.className = 'variant-btn';
+            btn.type = 'button';
+            btn.innerText = vName;
+            
+            if (vName === 'Średni' || index === Math.floor(variantKeys.length / 2)) {
+                btn.classList.add('active');
+                document.getElementById('modal-price').innerText = `${currentProduct.variants[vName]} PLN`;
+                setupAddToCartBtn(`${currentProduct.name} (${vName})`, currentProduct.variants[vName]);
+            }
+
+            btn.onclick = function() {
+                variantContainer.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                const price = currentProduct.variants[vName];
+                document.getElementById('modal-price').innerText = `${price} PLN`;
+                setupAddToCartBtn(`${currentProduct.name} (${vName})`, price);
             };
-            vCont.appendChild(b);
+            
+            variantContainer.appendChild(btn);
         });
-        vCont.firstChild.click();
-    } else {
-        mQty.classList.remove('hidden'); mSize.classList.add('hidden'); currentFlowerCount = currentProduct.defaultQty;
-        updateFlowerCount(0);
+
+        if(!variantContainer.querySelector('.active') && variantContainer.firstChild) {
+            variantContainer.firstChild.click();
+        }
+    } 
+    else if (currentProduct.type === 'quantity') {
+        methodQty.classList.remove('hidden');
+        methodSize.classList.add('hidden');
+        currentFlowerCount = currentProduct.defaultQty || 1;
+        updateFlowerCount(0); 
     }
+
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; 
 }
 
 function updateFlowerCount(delta) {
-    currentFlowerCount = Math.max(1, currentFlowerCount + delta);
-    document.getElementById('flower-count-display').innerText = currentFlowerCount + " szt.";
-    const p = currentFlowerCount * currentProduct.pricePerItem;
-    document.getElementById('modal-price').innerText = p + " PLN";
-    document.getElementById('modal-add-btn').onclick = () => { addToCart(`${currentProduct.name} (${currentFlowerCount} szt.)`, p); closeModal(); };
+    if (!currentProduct || currentProduct.type !== 'quantity') return;
+    
+    currentFlowerCount = Math.max(1, currentFlowerCount + delta); 
+    document.getElementById('flower-count-display').innerText = `${currentFlowerCount} szt.`;
+
+    const finalPrice = currentFlowerCount * currentProduct.pricePerItem;
+    document.getElementById('modal-price').innerText = `${finalPrice} PLN`;
+
+    setupAddToCartBtn(`${currentProduct.name} (${currentFlowerCount} szt.)`, finalPrice);
 }
 
-function toggleCart() { document.getElementById('cart-sidebar').classList.toggle('hidden'); }
-function closeModal() { document.getElementById('product-modal').classList.add('hidden'); }
-function showToast(m) { const t = document.createElement('div'); t.className = 'toast'; t.innerText = m; document.getElementById('toast-container').appendChild(t); setTimeout(() => t.remove(), 3000); }
-function toggleDarkMode() { document.body.classList.toggle('dark-theme'); localStorage.setItem('theme', document.body.classList.contains('dark-theme') ? 'dark' : 'light'); }
-function switchTab(e, id) { document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active')); document.getElementById(id).classList.add('active'); }
-function startFomoTimer() { setInterval(() => { const d = new Date(); const t = document.getElementById('fomo-timer'); if(t) t.innerText = (23-d.getHours())+":"+(59-d.getMinutes())+":"+(59-d.getSeconds()); }, 1000); }
+function setupAddToCartBtn(finalName, finalPrice) {
+    document.getElementById('modal-add-btn').onclick = () => {
+        addToCart(finalName, finalPrice);
+        closeModal();
+    };
+}
+
+function openGalleryModal(imgSrc, altText) {
+    const modal = document.getElementById('product-modal');
+    modal.classList.add('is-gallery');
+    document.getElementById('modal-img').src = imgSrc;
+    document.getElementById('modal-title').innerText = altText;
+    document.getElementById('modal-desc').innerText = "Realizacja Kwiaciarni Stokrotka";
+    modal.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    document.getElementById('product-modal').classList.add('hidden');
+    document.body.style.overflow = 'auto';
+}
+
+// --- 8. UI, TOASTY, ZAKŁADKI ---
+function switchTab(event, tabId) {
+    if (event) event.preventDefault();
+    document.querySelectorAll('.tab-content').forEach(c => { c.classList.remove('active'); c.style.display = 'none'; });
+    const activeContent = document.getElementById(tabId);
+    if (activeContent) { activeContent.classList.add('active'); activeContent.style.display = 'block'; }
+    document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('onclick').includes(`'${tabId}'`)) btn.classList.add('active');
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showToast(message) {
+    let container = document.getElementById('toast-container');
+    if (!container) return; 
+    const toast = document.createElement('div');
+    toast.className = 'toast'; toast.innerText = message;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 3000);
+}
+
+const revealElements = () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.card, .gallery-item, h2, #kontakt p').forEach(target => {
+        target.classList.add('reveal'); observer.observe(target);
+    });
+};
+
+function startFomoTimer() {
+    const timerElement = document.getElementById('fomo-timer');
+    if (!timerElement) return;
+    function updateTimer() {
+        const now = new Date();
+        const deadline = new Date();
+        deadline.setHours(12, 0, 0, 0);
+        let diff = deadline - now;
+        if (diff > 0) {
+            timerElement.innerText = `${Math.floor((diff / (1000 * 60 * 60)) % 24).toString().padStart(2, '0')}:${Math.floor((diff / (1000 * 60)) % 60).toString().padStart(2, '0')}:${Math.floor((diff / 1000) % 60).toString().padStart(2, '0')}`;
+        } else {
+            document.querySelector('.fomo-text').innerHTML = "🌿 Zamów teraz, a Twoje kwiaty dostarczymy <b>już jutro rano!</b>";
+        }
+    }
+    updateTimer(); setInterval(updateTimer, 1000);
+}
+
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-theme');
+    const btn = document.getElementById('dark-mode-toggle');
+    const isDark = document.body.classList.contains('dark-theme');
+    btn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        }
