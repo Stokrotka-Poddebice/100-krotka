@@ -800,3 +800,59 @@ body.dark-theme .footer-tab-btn { color: #ccc; }
     .form-grid { grid-template-columns: 1fr; }
     #cart-sidebar { max-width: 100%; padding: 15px; }
 }
+
+/* --- POPRAWKI DLA SMARTFONÓW (Poniżej 768px szerokości) --- */
+@media (max-width: 768px) {
+    /* 1. Przebudowa nagłówka - menu spada pod logo */
+    .nav-container {
+        flex-wrap: wrap;
+        padding: 10px 0;
+    }
+    
+    .logo-group {
+        flex: 1; /* Pozwala zachować logo po lewej, a koszyk po prawej */
+    }
+    
+    .logo img {
+        height: 40px; /* Nieco mniejsze logo na telefonach */
+    }
+
+    .cart-icon {
+        margin-left: auto;
+        padding: 5px 10px;
+    }
+
+    nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+        order: 3; /* Przenosi całą nawigację na dół nagłówka */
+    }
+
+    .nav-tabs {
+        width: 100%;
+        justify-content: space-around; /* Równomiernie rozkłada przyciski Menu */
+        gap: 5px;
+    }
+
+    .nav-tab-btn {
+        font-size: 0.95rem;
+        padding: 5px;
+    }
+
+    /* 2. Optymalizacja okna modalnego (produktu) na telefonach */
+    .modal-content {
+        padding: 20px; /* Zmniejszone marginesy wewnętrzne */
+        width: 95%;
+        max-height: 90vh; /* Zapobiega wychodzeniu poza ekran */
+        overflow-y: auto; /* Pozwala przewijać zawartość, jeśli opis jest długi */
+    }
+    
+    .close-modal {
+        top: 10px;
+        right: 10px;
+        width: 30px;
+        height: 30px;
+    }
+}
