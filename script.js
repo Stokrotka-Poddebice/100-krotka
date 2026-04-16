@@ -2,62 +2,61 @@
 // Rozbudowana baza do 10 produktów z unikalnymi opisami
 const products = [
     { 
-        id: 1, name: "Bukiet Letnie Harmonie", image: "assets/bukiet1.png", price: 210,
+        id: 1, name: "Bukiet Letnie Harmonie", image: "assets/bukiet1.webp", price: 210,
         description: "Radosna eksplozja kolorów lata! Kompozycja ze świeżych słoneczników, fioletowej eustomy i różowych róż. Idealny, by przynieść uśmiech i słońce do każdego domu.",
         type: "size", variants: { "Mały": 168, "Średni": 210, "Duży": 260 },
-        category: "bukiety"
+        category: {"Polecane", "bukiety"}
     },
     { 
-        id: 2, name: "Kompozycja Dziki Ogród", image: "assets/bukiet2.png", price: 180, 
+        id: 2, name: "Kompozycja Dziki Ogród", image: "assets/bukiet2.webp", price: 180, 
         description: "Stylowy, lekko niesforny bukiet w stylu rustykalnym. Łączy w sobie wdzięk polnych kwiatów z elegancją niszowych róż i dużą ilością eukaliptusa. Doskonały dla miłośników natury.",
         type: "size", variants: { "Standard": 180, "Premium": 240 },
         category: "bukiety"
     },
     { 
-        id: 3, name: "Roślina Leokasja", image: "assets/bukiet3.png", price: 110, 
+        id: 3, name: "Roślina Leokasja", image: "assets/bukiet3.webp", price: 110, 
         description: "Egzotyczna piękność (Alokazja) o spektakularnych, ciemnych liściach z wyraźnym białym unerwieniem. Wyjątkowa ozdoba nowoczesnego salonu lub biura. Roślina w komplecie z ceramiczną osłonką.",
-        type: "size", variants: { "Mniejsza": 85, "Standardowa": 110 },
+        type: "size", variants: { "Mniejszy": 85, "Standard": 110 },
         category: "doniczkowe"
     },
     { 
-        id: 4, name: "Flowerbox Letnia Łąka", image: "assets/bukiet4.png", price: 150, 
+        id: 4, name: "Flowerbox Letnia Łąka", image: "assets/bukiet4.webp", price: 150, 
         description: "Czarujące pastelowe pudełko wypełnione po brzegi sezonowymi kwiatami w odcieniach różu, bieli i fioletu. Piękna i trwała alternatywa dla tradycyjnego bukietu, nie wymaga wazonu.",
-        type: "size", variants: { "Średni": 150, "Duży": 200 },
+        type: "size", variants: { "Standard": 150, "Duży": 200 },
         category: "flowerboxy"
     },
     { 
-        id: 5, name: "Czerwone Róże (Na sztuki)", image: "assets/bukiet5.png", price: 300, 
+        id: 5, name: "Czerwone Róże", image: "assets/bukiet5.webp", price: 300, 
         description: "Ponadczasowa klasyka, która mówi więcej niż tysiąc słów. Oferujemy najwyższej jakości czerwone róże premium o długich łodygach i aksamitnych płatkach. Skomponuj własną wielkość bukietu.",
         type: "quantity", pricePerItem: 20, defaultQty: 15,
-        category: "na-sztuki"
+        category: {"Polecane", "bukiety"}
     },
     { 
-        id: 6, name: "Bukiet Słoneczny", image: "assets/bukiet6.png", price: 120, 
+        id: 6, name: "Bukiet Słoneczny", image: "assets/bukiet6.webp", price: 120, 
         description: "Energetyczna kompozycja żółtych miniaturowych róż, radosnych margerytek i świeżej zieleni. Ten bukiet to czysta radość i optymizm, idealny na urodziny lub podziękowanie.",
         type: "size", variants: { "Mały": 90, "Średni": 120, "Wielki": 180 },
         category: "bukiety"
     },
     { 
-        id: 7, name: "Różowe Tulipany (Na sztuki)", image: "assets/bukiet7.png", price: 150, 
+        id: 7, name: "Różowe Tulipany", image: "assets/bukiet7.webp", price: 150, 
         description: "Świeże, chrupiące i pełne wiosennego uroku różowe tulipany sprzedawane na sztuki. Stwórz subtelny, jednokolorowy bukiet, który wniesie lekkość do każdego wnętrza.",
         type: "quantity", pricePerItem: 6, defaultQty: 25,
-        category: "na-sztuki"
+        category: {"Polecane", "bukiety"}
     },
-    // --- NOWE PRODUKTY ---
     { 
-        id: 8, name: "Flowerbox Romantyczny Pastel", image: "assets/bukiet8.png", price: 230, 
+        id: 8, name: "Flowerbox Romantyczny Pastel", image: "assets/bukiet8.webp", price: 230, 
         description: "Luksusowe, welurowe pudełko w kolorze pudrowego różu, skrywające misterną kompozycję z pełnych jaskrów (ranunculus), kremowych róż premium i delikatnej gipsówki. Idealny wybór na zaręczyny, rocznicę lub jako wyrafinowany prezent.",
         type: "size", variants: { "Mały": 180, "Średni": 230, "Duży": 290 },
         category: "flowerboxy"
     },
     { 
-        id: 9, name: "Aksamitna Monstera Deliciosa", image: "assets/bukiet9.png", price: 120, 
+        id: 9, name: "Aksamitna Monstera Deliciosa", image: "assets/bukiet9.webp", price: 120, 
         description: "Kultowa roślina doniczkowa, której nie może zabraknąć w domu miłośnika roślin! Monstera Deliciosa o wielkich, błyszczących, 'dziurawych' liściach. Roślina jest łatwa w pielęgnacji i stanowi mocny akcent dekoracyjny. Sprzedawana w minimalistycznej, szarej osłonce betonowej.",
-        type: "size", variants: { "Standardowa": 120, "Powiększona": 160 },
+        type: "size", variants: { "Mniejszy": 120, "Standard": 160 },
         category: "doniczkowe"
     },
     { 
-        id: 10, name: "Bukiet Awangarda", image: "assets/bukiet10.png", price: 220, 
+        id: 10, name: "Bukiet Awangarda", image: "assets/bukiet10.webp", price: 220, 
         description: "Nowoczesny, artystyczny bukiet dla osób szukających czegoś wyjątkowego. Główną rolę gra egzotyczna Protea, otoczona srebrzystym eukaliptusem, fioletowym ostropestem, pomarańczowymi różami i ozdobnymi trawami. Kompozycja dynamiczna, trwała i niezwykle efektowna.",
         type: "size", variants: { "Standard": 220, "Premium": 300 },
         category: "bukiety"
