@@ -99,6 +99,7 @@ footer .container img {
     height: 60px;
     width: auto;
     margin-bottom: 15px;
+    filter: brightness(0) invert(1); /* Zmienia logo na białe, by pasowało do ciemnego tła */
 }
 
 /* Sidebar Koszyka */
