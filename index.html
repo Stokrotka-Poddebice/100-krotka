@@ -39,13 +39,16 @@
     <header>
         <div class="container nav-container">
             <div class="logo-group">
-                <button id="dark-mode-toggle" class="dark-mode-btn" aria-label="Zmień motyw" onclick="toggleDarkMode()">
+                <button id="dark-mode-toggle" class="dark-mode-btn" aria-label="Zmień motyw na ciemny lub jasny" onclick="toggleDarkMode()">
                     <i class="fa-solid fa-moon"></i>
                 </button>
                 <div class="logo">
-                    <a href="index.html"><img src="assets/logo.png" alt="Logo Kwiaciarni Stokrotka"></a>
+                    <a href="index.html">
+                        <img src="assets/logo.png" alt="Logo Kwiaciarni Stokrotka">
+                    </a>
                 </div>
             </div>
+
             <nav>
                 <ul class="nav-tabs">
                     <li><button class="nav-tab-btn active" onclick="switchTab(event, 'produkty')">Oferta</button></li>
@@ -53,7 +56,8 @@
                     <li><button class="nav-tab-btn" onclick="switchTab(event, 'kontakt')">Kontakt</button></li>
                 </ul>
             </nav>
-            <div class="cart-icon" role="button" onclick="toggleCart()">
+            
+            <div class="cart-icon" role="button" aria-label="Otwórz koszyk" onclick="toggleCart()">
                 <i class="fa-solid fa-cart-shopping"></i> <span id="cart-count">(0)</span>
             </div>
         </div>
@@ -68,10 +72,22 @@
         <div class="cross-sell-section">
             <h4>Dopasuj piękny dodatek:</h4>
             <div class="addon-grid">
-                <div class="addon-item" onclick="addAddon('Bilecik z dedykacją', 5)"><span><i class="fa-solid fa-envelope-open-text"></i> Bilecik</span><b>+5 PLN</b></div>
-                <div class="addon-item" onclick="addAddon('Czekoladki Merci', 30)"><span><i class="fa-solid fa-candy-cane"></i> Merci</span><b>+30 PLN</b></div>
-                <div class="addon-item" onclick="addAddon('Maskotka Miś', 35)"><span><i class="fa-solid fa-paw"></i> Miś</span><b>+35 PLN</b></div>
-                <div class="addon-item" onclick="addAddon('Odżywka do kwiatów', 3)"><span><i class="fa-solid fa-seedling"></i> Odżywka</span><b>+3 PLN</b></div>
+                <div class="addon-item" onclick="addAddon('Bilecik z dedykacją', 5)">
+                    <span><i class="fa-solid fa-envelope-open-text"></i> Bilecik</span>
+                    <b>+5 PLN</b>
+                </div>
+                <div class="addon-item" onclick="addAddon('Czekoladki Merci', 30)">
+                    <span><i class="fa-solid fa-candy-cane"></i> Merci</span>
+                    <b>+30 PLN</b>
+                </div>
+                <div class="addon-item" onclick="addAddon('Maskotka Miś', 35)">
+                    <span><i class="fa-solid fa-paw"></i> Miś</span>
+                    <b>+35 PLN</b>
+                </div>
+                <div class="addon-item" onclick="addAddon('Odżywka do kwiatów', 3)">
+                    <span><i class="fa-solid fa-seedling"></i> Odżywka</span>
+                    <b>+3 PLN</b>
+                </div>
             </div>
         </div>
         <button class="btn" onclick="goToCheckout()">PRZEJDŹ DO KASY</button>
@@ -80,6 +96,7 @@
     <main>
         <section id="produkty" class="container tab-content active">
             <h2>Nasza Oferta</h2>
+            
             <div class="filter-buttons">
                 <button class="filter-btn product-filter-btn active" data-filter="Polecane">Polecane</button>
                 <button class="filter-btn product-filter-btn" data-filter="bukiety">Bukiety</button>
@@ -87,6 +104,7 @@
                 <button class="filter-btn product-filter-btn" data-filter="doniczkowe">Doniczkowe</button>
                 <button class="filter-btn product-filter-btn" data-filter="all">Wszystkie</button>
             </div>
+            
             <div id="products-container" class="products-grid"></div>
         </section>
 
@@ -107,6 +125,7 @@
             <h2>Twoje Zamówienie</h2>
             <div class="order-container">
                 <form id="order-form" action="https://formspree.io/f/xojpdrwz" method="POST">
+                    
                     <div class="form-section">
                         <h4><i class="fa-solid fa-user"></i> Twoje Dane</h4>
                         <div class="form-grid">
@@ -115,30 +134,34 @@
                         </div>
                         <input type="email" name="email" placeholder="Twój adres E-mail" required>
                     </div>
+
                     <div class="form-section">
                         <h4><i class="fa-solid fa-truck"></i> Szczegóły dostawy</h4>
                         <div class="form-grid">
-                            <input type="text" name="recipient_name" placeholder="Odbiorca" required>
-                            <input type="tel" name="recipient_phone" placeholder="Telefon odbiorcy" required>
+                            <input type="text" name="recipient_name" placeholder="Imię i nazwisko odbiorcy" required>
+                            <input type="tel" name="recipient_phone" placeholder="Telefon do odbiorcy" required>
                         </div>
-                        <input type="text" name="address" placeholder="Ulica i numer" required>
+                        <input type="text" name="address" placeholder="Ulica, numer domu i mieszkania" required>
                         <div class="form-grid">
                             <input type="text" name="city" placeholder="Miejscowość" required>
                             <input type="text" name="postal_code" placeholder="Kod pocztowy" required>
                         </div>
                     </div>
+
                     <div class="form-section">
-                        <h4><i class="fa-solid fa-envelope-open-text"></i> Bilecik</h4>
-                        <textarea name="message" rows="3" placeholder="Treść bileciku"></textarea>
+                        <h4><i class="fa-solid fa-envelope-open-text"></i> Bilecik i dodatki</h4>
+                        <textarea name="message" rows="3" placeholder="Treść bileciku (opcjonalnie)"></textarea>
                         <div class="date-picker">
                             <label for="delivery_date">Data dostawy:</label>
                             <input type="date" id="delivery_date" name="delivery_date" required>
                         </div>
                     </div>
+
                     <input type="hidden" name="cart_items" id="cart-items-input">
+
                     <div class="order-summary">
-                        <ul id="order-items"></ul>
-                        <p>Razem: <span id="order-total">0 PLN</span></p>
+                        <ul id="order-items" style="list-style: none; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 10px; text-align: left;"></ul>
+                        <p>Razem do zapłaty: <span id="order-total">0 PLN</span></p>
                         <button type="submit" class="btn btn-order">POTWIERDZAM I PŁACĘ</button>
                     </div>
                 </form>
@@ -146,21 +169,39 @@
         </section>
 
         <section id="kontakt" class="container tab-content">
-            <h2>Kontakt</h2>
+            <h2>Skontaktuj się z nami</h2>
             <div class="contact-grid">
+                
                 <div class="contact-form-container">
-                    <h4>Napisz do nas</h4>
-                    <form action="https://formspree.io/f/xojpdrwz" method="POST">
-                        <div class="input-group"><input type="text" name="Imię" placeholder="Imię" required></div>
-                        <div class="input-group"><input type="email" name="Email" placeholder="Email" required></div>
-                        <div class="input-group"><textarea name="Wiadomość" rows="5" placeholder="Wiadomość" required></textarea></div>
-                        <button type="submit" class="btn">WYŚLIJ</button>
+                    <h4><span class="icon"><i class="fa-solid fa-envelope contact-icon"></i></span> Napisz do nas</h4>
+                    <form action="https://formspree.io/f/xojpdrwz" method="POST" id="contact-form">
+                        <div class="input-group">
+                            <select name="Temat" id="contact-subject">
+                                <option value="Zapytanie ogólne">Zapytanie ogólne</option>
+                                <option value="Wesele / Ślub">Wesele / Ślub</option>
+                                <option value="Zamówienie indywidualne">Zamówienie indywidualne</option>
+                                <option value="Inne">Inne</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" name="Imię_Nazwisko" id="contact-name" placeholder="Twoje imię i nazwisko" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="email" name="_replyto" placeholder="Twój e-mail" required>
+                        </div>
+                        <div class="input-group">
+                            <textarea name="Wiadomość" id="contact-message" rows="5" placeholder="W czym możemy pomóc?" required></textarea>
+                        </div>
+                        <button type="submit" class="btn send-btn">WYŚLIJ WIADOMOŚĆ</button>
                     </form>
                 </div>
+
                 <div class="contact-form-container">
-                    <h4>Mapa Dojazdu</h4>
-                    <div class="map-placeholder">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2454.444214811369!2d18.955642477103142!3d51.89266947190772!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ac390097746cb%3A0xe3780373df8996b2!2sZielona%206%2C%2099-200%20Podd%C4%99bice!5e0!3m2!1spl!2spl!4v1713240000000!5m2!1spl!2spl" width="100%" height="300" style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy"></iframe>
+                    <h4><span class="icon"><i class="fa-solid fa-map-marker-alt contact-icon"></i></span> Mapa Dojazdu</h4>
+                    <div class="contact-map">
+                        <div class="map-placeholder">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1231.1314536790258!2d18.957831052465423!3d51.89266607767898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471baa87bd3e13e3%3A0xebfbc8913c28c004!2sKWIACIARNIA%20STOKROTKA!5e0!3m2!1spl!2spl!4v1775976221857!5m2!1spl!2spl" width="100%" height="300" style="border:0; border-radius: 15px;" allowfullscreen="" loading="lazy"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -169,40 +210,82 @@
 
     <footer>
         <div class="container footer-grid">
-            <div><img src="assets/logo.png" alt="Stokrotka"><p>Tworzymy emocje ubrane w kwiaty.</p></div>
-            <div><h4>MENU</h4><ul class="footer-nav">
-                <li><button class="footer-tab-btn" onclick="switchTab(event, 'produkty')">Oferta</button></li>
-                <li><button class="footer-tab-btn" onclick="switchTab(event, 'galeria')">Galeria</button></li>
-                <li><button class="footer-tab-btn" onclick="switchTab(event, 'kontakt')">Kontakt</button></li>
-            </ul></div>
-            <div><h4>KONTAKT</h4>
-                <p><i class="fa-solid fa-map-location-dot"></i> ul. Zielona 6, Poddębice</p>
-                <p><i class="fa-solid fa-phone-alt"></i> +48 43 678 86 10</p>
+            <div>
+                <img src="assets/logo.png" alt="Stokrotka" onerror="this.src='assets/logo.png'" style="margin-bottom: 15px;">
+                <p>Tworzymy emocje ubrane w kwiaty.</p>
             </div>
-            <div><h4>GODZINY</h4><p>Pon - Sob: 9:00 - 17:00</p><p>Niedz: 11:00 - 15:00</p></div>
+            <div>
+                <h4>MENU</h4>
+                <ul class="footer-nav">
+                    <li><button class="footer-tab-btn" onclick="switchTab(event, 'produkty')">Oferta</button></li>
+                    <li><button class="footer-tab-btn" onclick="switchTab(event, 'galeria')">Galeria</button></li>
+                    <li><button class="footer-tab-btn" onclick="switchTab(event, 'kontakt')">Kontakt</button></li>
+                </ul>
+            </div>
+            <div>
+                <h4>KONTAKT</h4>
+                <p><i class="fa-solid fa-map-location-dot"></i> ul. Zielona 6, 99-200 Poddębice</p>
+                <p><i class="fa-solid fa-phone-alt"></i> <a href="tel:+48436788610">+48 43 678 86 10</a></p>
+                <p><i class="fa-solid fa-envelope contact-icon"></i> <a href="mailto:stokrotka.poddebice@gmail.com">stokrotka.poddebice@gmail.com</a></p>
+            </div>
+            <div>
+                 <h4>GODZINY OTWARCIA</h4>
+                 <p><i class="far fa-clock"></i> Pon - Sob : 9:00 - 17:00</p>
+                 <p><i class="far fa-clock"></i> Niedz. handlowa: 11:00 - 15:00</p>
+            </div>
         </div>
-        <div class="footer-bottom"><p>© <span id="current-year"></span> Kwiaciarnia Stokrotka.</p></div>
+        <div class="footer-bottom">
+            <p>© <span id="current-year"></span> Kwiaciarnia Stokrotka. Wszystkie prawa zastrzeżone.</p>
+            <script>
+                document.getElementById('current-year').textContent = new Date().getFullYear();
+            </script>
+        </div>
     </footer>
 
     <div id="product-modal" class="modal hidden">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">×</span>
-            <img id="modal-img" src="" alt="Produkt">
-            <h3 id="modal-title"></h3>
-            <p id="modal-desc"></p>
-            <div id="method-size" class="selection-method hidden"><div class="variant-selector" id="modal-variants"></div></div>
-            <div id="method-qty" class="selection-method hidden"><div class="qty-selector">
-                <button type="button" onclick="updateFlowerCount(-1)">-</button><span id="flower-count-display">15 szt.</span><button type="button" onclick="updateFlowerCount(1)">+</button>
-            </div></div>
+            <img id="modal-img" src="" alt="Zdjęcie produktu">
+            
+            <h3 id="modal-title">Nazwa Produktu</h3>
+            <p id="modal-desc" style="margin-bottom: 15px;">Opis...</p>
+
+            <div id="method-size" class="selection-method hidden">
+                <div class="variant-selector" id="modal-variants"></div>
+            </div>
+
+            <div id="method-qty" class="selection-method hidden">
+                <div class="qty-selector">
+                    <button type="button" onclick="updateFlowerCount(-1)">-</button>
+                    <span id="flower-count-display">15 szt.</span>
+                    <button type="button" onclick="updateFlowerCount(1)">+</button>
+                </div>
+            </div>
+            
             <p class="price" id="modal-price">0 PLN</p>
             <button class="btn" id="modal-add-btn">DODAJ DO KOSZYKA</button>
-            <div class="modal-footer"><span><i class="fa-solid fa-leaf"></i> Świeże</span><span><i class="fa-solid fa-truck"></i> Dzisiaj</span></div>
+
+            <div class="modal-footer"> 
+                <span><i class="fa-solid fa-leaf"></i> Zawsze świeże</span>
+                <span><i class="fa-solid fa-truck"></i> Dostawa dzisiaj</span>
+            </div>
         </div>
     </div>
     
     <div id="toast-container"></div>
-    <a href="https://wa.me/48436788610" class="whatsapp-btn" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"></a>
-    <div id="fomo-bar" class="fomo-bar"><span class="fomo-text">🌿 Zamów w <span id="fomo-timer">--:--:--</span> - dostawa <b>dzisiaj!</b></span></div>
+    
+    <a href="https://wa.me/48436788610" class="whatsapp-btn" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="Kontakt WhatsApp">
+    </a>
+
+    <div id="fomo-bar" class="fomo-bar">
+        <a href="#zamowienie" class="fomo-link" onclick="goToCheckout()">
+            <span class="fomo-text">
+                <i class="fa-solid fa-fan"></i> Zamów w ciągu <span id="fomo-timer">--:--:--</span>, a Twoje kwiaty dostarczymy <b>jeszcze dzisiaj!</b>
+            </span>
+         </a>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
