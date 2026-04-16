@@ -43,19 +43,19 @@ const products = [
         category: ["bukiety"] 
     },
     { 
-        id: 8, name: "Flowerbox Romantyczny Pastel", image: "assets/bukiet8_new.webp", price: 230, 
+        id: 8, name: "Flowerbox Romantyczny Pastel", image: "assets/bukiet8.webp", price: 230, 
         description: "Luksusowe welurowe pudełko z jaskrami, różami i gipsówką. Idealny wybór na zaręczyny lub rocznicę.",
         type: "size", variants: { "Mały": 180, "Średni": 230, "Duży": 290 },
         category: ["flowerboxy"]
     },
     { 
-        id: 9, name: "Monstera Deliciosa", image: "assets/bukiet9_new.webp", price: 120, 
+        id: 9, name: "Monstera Deliciosa", image: "assets/bukiet9.webp", price: 120, 
         description: "Kultowa roślina doniczkowa o wielkich, błyszczących liściach. Łatwa w pielęgnacji ozdoba salonu.",
         type: "size", variants: { "Standardowa": 120, "Powiększona": 160 },
         category: ["doniczkowe"]
     },
     { 
-        id: 10, name: "Bukiet Awangarda", image: "assets/bukiet10_new.webp", price: 220, 
+        id: 10, name: "Bukiet Awangarda", image: "assets/bukiet10.webp", price: 220, 
         description: "Artystyczny bukiet z egzotyczną Proteą w roli głównej. Kompozycja trwała i niezwykle efektowna.",
         type: "size", variants: { "Standard": 220, "Premium": 300 },
         category: ["Polecane", "bukiety"] 
