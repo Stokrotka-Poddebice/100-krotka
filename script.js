@@ -28,7 +28,7 @@ const products = [
         id: 5, name: "Czerwone Róże", image: "assets/bukiet5.webp", price: 300, 
         description: "Ponadczasowa klasyka premium. Skomponuj własną wielkość bukietu wybierając odpowiednią ilość sztuk.",
         type: "quantity", pricePerItem: 20, defaultQty: 15,
-        category: ["bukiety"] 
+        category: ["Polecane", "bukiety"] 
     },
     { 
         id: 6, name: "Bukiet Słoneczny", image: "assets/bukiet6.webp", price: 120, 
@@ -428,4 +428,4 @@ function toggleDarkMode() {
     const isDark = document.body.classList.contains('dark-theme');
     btn.innerHTML = isDark ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
-        }
+}
